@@ -1,0 +1,66 @@
+# Unity generated folders
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+AssetBundles/
+# Uncomment this line if you have Unity 2020+ and want to ignore the streaming assets folder
+# [Ss]treamingAssets/
+
+# Auto-generated VS/MD/JetBrains Rider project files
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.pidb.meta
+
+# Unity3D generated meta files
+*.pidb.meta
+
+# Unity3D generated file on crash reports
+sysinfo.txt
+
+# Builds
+*.apk
+*.aab
+*.unitypackage
+
+# Crashlytics generated files
+crashlytics-build.properties
+
+# Packages
+Packages/manifest.json
+Packages/packages-lock.json
+
+# Uncomment if you have a custom physics engine integration
+# Physics2DSettings.asset
+# PhysicsSettings.asset
+
+# TextMeshPro
+[Tt]extMesh Pro/
+
+# Logs and crash reports
+*.log
+*.stacktrace
+
+# Asset meta data should only be ignored when the corresponding asset is also ignored
+!*.meta
+
+# Ignore Asset Store tools
+[Aa]ssets/AssetStoreTools*
+
+# ScriptableObject caches
+[Oo]cclusion[Cc]ulling[Dd]ata/

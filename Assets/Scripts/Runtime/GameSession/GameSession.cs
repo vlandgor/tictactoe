@@ -48,7 +48,7 @@ namespace Runtime.GameSession
             _match = new Match(GameBoardConfig.BoardSize);
         }
         
-        public void Restart()
+        private void Restart()
         {
             _gameBoard.Clear();
             _match.Restart();

@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameBoardConfig: {fileID: 11400000, guid: 3f2debb001648124786975a3625d7c0b, type: 2}
+  _loadingConfig: {fileID: 11400000, guid: 11e50566aeb4b4c4bba34d5d91551d08, type: 2}

@@ -1,0 +1,58 @@
+.unity-progress-bar {
+    min-height: 42px;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+}
+
+.unity-progress-bar__container {
+    min-height: 42px;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+    background-color: rgba(255, 255, 255, 0);
+    opacity: 1;
+}
+
+.unity-progress-bar__background {
+    min-height: 42px;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+    background-color: rgba(255, 255, 255, 0);
+    opacity: 1;
+    background-image: url("project://database/Assets/Plugins/FlatCartoonGUI/png/progressbar/progressbar_background_long_oval_2.png?fileID=21300000&guid=2c78003852a260742936b03cef341230&type=3#progressbar_background_long_oval_2");
+    -unity-background-scale-mode: stretch-to-fill;
+}
+
+.unity-progress-bar__progress {
+    min-height: 42px;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+    background-color: rgba(255, 255, 255, 0);
+    opacity: 1;
+    background-image: url("project://database/Assets/Plugins/FlatCartoonGUI/png/progressbar/progressbar_foreground_oval_green.png?fileID=21300000&guid=f88dbea3b7fe2b14aa38bb82c4e3c1a9&type=3#progressbar_foreground_oval_green");
+    -unity-background-scale-mode: stretch-to-fill;
+}
+
+.unity-progress-bar__title-container {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+}
+
+.unity-progress-bar__title {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+}

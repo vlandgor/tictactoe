@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Runtime.UI
@@ -7,19 +8,19 @@ namespace Runtime.UI
     {
         [SerializeField] private UIDocument _uiDocument;
 
-        private VisualElement container;
-        
+        protected VisualElement _root;
         protected VisualElement _visual;
-        
-        public void Awake()
+
+        private void Start()
         {
             InitializeVisuals();
+            Hide();
         }
 
-        protected void InitializeVisuals()
+        public virtual void InitializeVisuals()
         {
-            container = _uiDocument.rootVisualElement;
-            _visual = container.Q<VisualElement>("Visual");
+            _root = _uiDocument.rootVisualElement;
+            _visual = _root.Q<VisualElement>("Visual");
         }
         
         public virtual void Show() => _visual.style.display = DisplayStyle.Flex;

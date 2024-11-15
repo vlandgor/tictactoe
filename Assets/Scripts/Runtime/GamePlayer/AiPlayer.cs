@@ -1,14 +1,15 @@
-﻿using Runtime.BoardTokens;
+﻿using Runtime.Marks;
 
 namespace Runtime.GamePlayer
 {
     public class AiPlayer : IPlayer
     {
-        public Token Token { get; set; }
+        public string Name => "Comp. AI";   
+        public Mark Mark { get; }
         
-        public AiPlayer(Token token)
+        public AiPlayer(Mark mark)
         {
-            Token = token;
+            Mark = mark;
         }
     }
 }

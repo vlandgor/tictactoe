@@ -1,40 +1,76 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using Runtime.GameSession;
+using Runtime.MatchService;
 using Runtime.UI;
-using Runtime.UI.Screens;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Zenject;
 
 namespace Runtime.LoadingProvider.LoadingOperations
 {
     public class LoadGameOperation : ILoadingOperation
     {
-        private const string BOOT_SCENE_NAME = "Game_Scene";
-        private const string MENU_SCENE_NAME = "Menu_Scene";
-        
-        private IUIManager _uiManager;
+        private const string GAME_SCENE_NAME = "Game_Scene";
         
         public string Description => "Loading Game";
         
-        public LoadGameOperation(IUIManager uiManager)
+        private MatchData _matchData;
+        
+        public LoadGameOperation(MatchData matchData)
         {
-            _uiManager = uiManager;
+            _matchData = matchData;
         }
         
         public async UniTask Load(Action<float> onProgress)
         {
-            onProgress?.Invoke(10f);
-            
-            AsyncOperation loadOperation = SceneManager.LoadSceneAsync(BOOT_SCENE_NAME, LoadSceneMode.Additive);
-            await loadOperation.ToUniTask();
-            onProgress?.Invoke(50f);
+            onProgress?.Invoke(10);
 
-            await _uiManager.ShowScreen<GameHudScreen>();
-            onProgress?.Invoke(75f);
+            await LoadSceneAsync(GAME_SCENE_NAME);
+            onProgress?.Invoke(50);
+
+            await InitializeMatchService();
+            onProgress?.Invoke(100);
+        }
+        
+        private async UniTask LoadSceneAsync(string sceneName)
+        {
+            AsyncOperation loadOperation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
+            await loadOperation.ToUniTask();
+        }
+        
+        private async UniTask InitializeMatchService()
+        {
+            Debug.Log("Looking for SceneContext in the scene...");
+            SceneContext sceneContext = FindSceneContext(SceneManager.GetSceneByName(GAME_SCENE_NAME));
+            Debug.Log("SceneContext found: " + sceneContext);
             
-            AsyncOperation unloadOperation = SceneManager.UnloadSceneAsync(MENU_SCENE_NAME);
-            await unloadOperation.ToUniTask();
-            onProgress?.Invoke(100f);
+            if (sceneContext != null)
+            {
+                Debug.Log("Initializing MatchService...");
+                IMatchService matchService = sceneContext.Container.Resolve<IMatchService>();
+                Debug.Log("MatchService found in the scene.");
+                
+                await matchService.Initialize(_matchData);
+            }
+            else
+            {
+                Debug.LogWarning("SceneContext not found in the scene.");
+            }
+        }
+        
+        private SceneContext FindSceneContext(Scene scene)
+        {
+            // Search for the SceneContext in the loaded scene
+            foreach (var rootObject in scene.GetRootGameObjects())
+            {
+                var sceneContext = rootObject.GetComponent<SceneContext>();
+                if (sceneContext != null)
+                {
+                    return sceneContext;
+                }
+            }
+            return null;
         }
     }
 }

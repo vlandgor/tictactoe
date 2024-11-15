@@ -1,12 +1,12 @@
 ﻿using Cysharp.Threading.Tasks;
-using Runtime.BoardTokens;
+using Runtime.Marks;
 
 namespace Runtime.GameBoard
 {
     public interface IGameBoard
     {
-        public UniTask Initialize(int width, int height);
+        public UniTask Initialize();
         public UniTask Clear();
-        public UniTask PlaceToken(Coord coord, Token tokenPrefab);
+        public UniTask PlaceToken(Coord coord, Mark markPrefab);
     }
 }

@@ -1,6 +1,7 @@
+using System;
 using Cysharp.Threading.Tasks;
-using Runtime.BoardTokens;
 using Runtime.ConfigProvider;
+using Runtime.Marks;
 using UnityEngine;
 using Zenject;
 
@@ -12,10 +13,11 @@ namespace Runtime.GameBoard
         [SerializeField] private GameObject _linePrefab;
         
         private GameTile[,] tiles;
-        private Token[,] tokens;
+        private Mark[,] tokens;
         
         private GameBoardConfig _gameBoardConfig;
         
+        private Vector2Int BoardSize => _gameBoardConfig.BoardSize;
         private float BoardTileSize => _gameBoardConfig.BoardTileSize;
         private float BoardLineSize => _gameBoardConfig.BoardLineSize;
         private Vector3 BoardOffset => new Vector3( BoardTileSize / 2, BoardTileSize / 2, 0);
@@ -25,17 +27,16 @@ namespace Runtime.GameBoard
         {
             _gameBoardConfig = configProvider.GetConfig<GameBoardConfig>();
         }
-        
-        public async UniTask Initialize(int width, int height)
+
+        public async UniTask Initialize()
         {
-            
-            await InitializeBoard(width, height);
-            await InitializeLines(width, height);
+            await InitializeBoard(BoardSize.x, BoardSize.y);
+            await InitializeLines(BoardSize.x, BoardSize.y);
         }
         
         public async UniTask Clear()
         {
-            foreach (Token token in tokens)
+            foreach (Mark token in tokens)
             {
                 if (token != null)
                 {
@@ -44,16 +45,16 @@ namespace Runtime.GameBoard
             }
         }
         
-        public async UniTask PlaceToken(Coord coord, Token tokenPrefab)
+        public async UniTask PlaceToken(Coord coord, Mark markPrefab)
         {
-            Token token = tokens[coord.x, coord.y] = Instantiate(tokenPrefab, transform);
-            token.transform.localScale = new Vector3(BoardTileSize, BoardTileSize, 1);
-            token.transform.SetPositionAndRotation(new Vector3(coord.x * BoardTileSize, coord.y * BoardTileSize, 0) + BoardOffset, Quaternion.identity);
+            Mark mark = tokens[coord.x, coord.y] = Instantiate(markPrefab, transform);
+            mark.transform.localScale = new Vector3(BoardTileSize, BoardTileSize, 1);
+            mark.transform.SetPositionAndRotation(new Vector3(coord.x * BoardTileSize, coord.y * BoardTileSize, 0) + BoardOffset, Quaternion.identity);
         }
         
         private async UniTask InitializeBoard(int width, int height)
         {
-            tokens = new Token[width, height];
+            tokens = new Mark[width, height];
             tiles = new GameTile[width, height];
             for (int i = 0; i < width; i++)
             {

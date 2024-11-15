@@ -1,14 +1,16 @@
-﻿using Runtime.BoardTokens;
+﻿using Runtime.Marks;
 
 namespace Runtime.GamePlayer
 {
     public class PersonPlayer : IPlayer
     {
-        public Token Token { get; }
+        public string Name { get; }
+        public Mark Mark { get; }
         
-        public PersonPlayer(Token token)
+        public PersonPlayer(string name, Mark mark)
         {
-            Token = token;
+            Name = name;
+            Mark = mark;
         }
     }
 }

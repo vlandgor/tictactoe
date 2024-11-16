@@ -1,22 +1,22 @@
-﻿using Runtime.UI.MainMenu.Presenters;
+﻿using Runtime.UI.Menu.Presenters;
 using UnityEngine.UIElements;
 using Zenject;
 
-namespace Runtime.UI.MainMenu.Views
+namespace Runtime.UI.Menu.Views
 {
-    public class MainMenuView : View
+    public class MenuHudView : View
     {
         private Button _startButton;
         private Button _settingsButton;
         private Button _collectionButton;
         private Button _exitButton;
 
-        private MainMenuPresenter _mainMenuPresenter;
+        private MenuHudPresenter _menuHudPresenter;
         
         [Inject]
-        public void Construct(MainMenuPresenter mainMenuPresenter)
+        public void Construct(MenuHudPresenter menuHudPresenter)
         {
-            _mainMenuPresenter = mainMenuPresenter;
+            _menuHudPresenter = menuHudPresenter;
         }
         
         public override void InitializeVisuals()
@@ -46,7 +46,7 @@ namespace Runtime.UI.MainMenu.Views
 
         private void HandleStartButtonClicked()
         {
-            _mainMenuPresenter.OnStartGame();
+            _menuHudPresenter.OnStartGame();
         }
         
         private void HandleSettingsButtonClicked()

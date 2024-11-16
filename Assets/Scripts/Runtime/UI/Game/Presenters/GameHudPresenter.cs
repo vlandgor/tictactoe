@@ -1,10 +1,10 @@
 ﻿using Runtime.GamePlayer;
-using Runtime.UI.GameHud.Models;
-using Runtime.UI.GameHud.Views;
+using Runtime.UI.Game.Models;
+using Runtime.UI.Game.Views;
 
-namespace Runtime.UI.GameHud.Presenters
+namespace Runtime.UI.Game.Presenters
 {
-    public class GameHudPresenter
+    public class GameHudPresenter : Presenter
     {
         private GameHudModel _model;
         private GameHudView _view;
@@ -12,9 +12,13 @@ namespace Runtime.UI.GameHud.Presenters
         public GameHudPresenter(GameHudModel model, GameHudView view)
         {
             _model = model;
+            
             _view = view;
         }
-        
+
+        public override void EnableView() => _view.Show();
+        public override void DisableView() => _view.Hide();
+
         public void UpdateTurnLabel(IPlayer player)
         {
             _view.UpdateTurnLabel(player.Name);

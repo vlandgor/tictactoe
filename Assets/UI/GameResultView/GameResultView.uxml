@@ -1,0 +1,15 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <engine:VisualElement name="Visual" style="flex-grow: 1; display: none;">
+        <engine:VisualElement name="ResultScreen" style="flex-grow: 1; position: absolute; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.98); align-items: stretch; justify-content: flex-start; align-content: auto;">
+            <engine:VisualElement name="TopPanel" style="flex-grow: 0;">
+                <engine:VisualElement name="ResultBlock" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Plugins/FlatCartoonGUI/png/titlebar/titlebar1_yellow.png?fileID=21300000&amp;guid=8ade1d8df008ed6459ea9bfeeec1f406&amp;type=3#titlebar1_yellow&quot;); margin-top: 0; align-self: center; align-items: stretch; align-content: auto; width: 840px; top: 140px;">
+                    <engine:Label text="Result" name="ResultLabel" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 56px; -unity-font-style: bold; color: rgb(255, 255, 255); -unity-text-align: middle-center; height: 196px; align-self: auto; align-content: auto; align-items: stretch;" />
+                </engine:VisualElement>
+            </engine:VisualElement>
+            <engine:VisualElement style="flex-grow: 1; align-content: auto; align-items: auto;" />
+            <engine:VisualElement name="BottomPanel" style="flex-grow: 0; bottom: auto; align-items: auto; align-self: auto; align-content: auto; margin-bottom: 140px;">
+                <engine:Button text="Menu" name="MenuButton" style="width: 420px; height: 140px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; background-image: url(&quot;project://database/Assets/Plugins/FlatCartoonGUI/png/button/button_big_square_green.png?fileID=21300000&amp;guid=07034f67bc4d6df4b8a77b6ac5b19a7b&amp;type=3#button_big_square_green&quot;); background-color: rgba(188, 188, 188, 0); font-size: 42px; color: rgb(255, 255, 255); -unity-font-style: bold; bottom: auto; justify-content: flex-start; align-content: auto; align-items: auto; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; align-self: center;" />
+            </engine:VisualElement>
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

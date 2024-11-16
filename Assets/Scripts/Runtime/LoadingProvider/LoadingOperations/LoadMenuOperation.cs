@@ -1,7 +1,6 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using Runtime.UI;
-using Runtime.UI.MainMenu.Views;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;

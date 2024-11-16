@@ -3,36 +3,36 @@
 namespace Runtime.GameBoard
 {
     [Serializable]
-    public struct Coord
+    public struct Crd
     {
         public int x;
         public int y;
         
-        public Coord(int x, int y)
+        public Crd(int x, int y)
         {
             this.x = x;
             this.y = y;
         }
         
-        public static bool operator ==(Coord a, Coord b)
+        public static bool operator ==(Crd a, Crd b)
         {
             return a.x == b.x && a.y == b.y;
         }
         
-        public static bool operator !=(Coord a, Coord b)
+        public static bool operator !=(Crd a, Crd b)
         {
             return !(a == b);
         }
         
         public override bool Equals(object obj)
         {
-            if (!(obj is Coord))
+            if (!(obj is Crd))
                 return false;
 
-            Coord coord = (Coord)obj;
-            return this == coord;
+            Crd crd = (Crd)obj;
+            return this == crd;
         }
         
-        public static readonly Coord Zero = new Coord(0, 0);
+        public static readonly Crd Zero = new Crd(0, 0);
     }
 }

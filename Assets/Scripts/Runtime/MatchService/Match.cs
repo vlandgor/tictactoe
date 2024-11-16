@@ -15,12 +15,12 @@ namespace Runtime.GameSession
             GenerateBoard(boardSize);
         }
         
-        public bool PlaceToken(Coord coord, IPlayer player)
+        public bool PlaceToken(Crd crd, IPlayer player)
         {
-            if(CheckIfCellIsTaken(coord))
+            if(CheckIfCellIsTaken(crd))
                 return false;
             
-            _board[coord.x, coord.y] = player;
+            _board[crd.x, crd.y] = player;
             return true;
         }
         
@@ -62,9 +62,9 @@ namespace Runtime.GameSession
             return true;
         }
         
-        private bool CheckIfCellIsTaken(Coord coord)
+        private bool CheckIfCellIsTaken(Crd crd)
         {
-            if(_board[coord.x, coord.y] != null)
+            if(_board[crd.x, crd.y] != null)
                 return true;
 
             return false;

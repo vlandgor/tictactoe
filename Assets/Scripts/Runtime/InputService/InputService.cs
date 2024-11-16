@@ -8,9 +8,11 @@ namespace Runtime.InputService
 {
     public class InputService : MonoBehaviour, IInputService
     {
-        public event Action<int, int> OnTileClicked;
+        public event Action<Crd> OnTileClicked;
         
         private GameBoardConfig _gameBoardConfig;
+        
+        public bool IsInputEnabled { get; private set; } = true;
 
         [Inject]
         public void Construct(IConfigProvider configProvider)
@@ -20,6 +22,9 @@ namespace Runtime.InputService
         
         private void Update()
         {
+            if (!IsInputEnabled)
+                return;
+            
             if (Input.GetMouseButtonDown(0))
             {
                 Vector3 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -33,8 +38,14 @@ namespace Runtime.InputService
                     return;
                 }
                 
-                OnTileClicked?.Invoke(x, y);
+                Crd crd = new Crd(x, y);
+                OnTileClicked?.Invoke(crd);
             }
+        }
+
+        public void SetInputEnabled(bool enable)
+        {
+            IsInputEnabled = enable;
         }
     }
 }

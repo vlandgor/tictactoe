@@ -7,6 +7,6 @@ namespace Runtime.GameBoard
     {
         public UniTask Initialize();
         public UniTask Clear();
-        public UniTask PlaceToken(Coord coord, Mark markPrefab);
+        public UniTask PlaceToken(Crd crd, Mark markPrefab);
     }
 }

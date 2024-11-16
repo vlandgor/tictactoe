@@ -5,14 +5,14 @@ using Runtime.LoadingProvider;
 using Runtime.Marks;
 using UnityEngine;
 
-namespace Runtime.UI.MainMenu.Models
+namespace Runtime.UI.Menu.Models
 {
-    public class MainMenuModel
+    public class MenuHudModel
     {
         private ILoadingProvider _loadingProvider;
         private IMarksProvider _marksProvider;
         
-        public MainMenuModel(ILoadingProvider loadingProvider, IMarksProvider marksProvider)
+        public MenuHudModel(ILoadingProvider loadingProvider, IMarksProvider marksProvider)
         {
             _loadingProvider = loadingProvider;
             _marksProvider = marksProvider;

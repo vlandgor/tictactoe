@@ -45,11 +45,11 @@ namespace Runtime.GameBoard
             }
         }
         
-        public async UniTask PlaceToken(Coord coord, Mark markPrefab)
+        public async UniTask PlaceToken(Crd crd, Mark markPrefab)
         {
-            Mark mark = tokens[coord.x, coord.y] = Instantiate(markPrefab, transform);
+            Mark mark = tokens[crd.x, crd.y] = Instantiate(markPrefab, transform);
             mark.transform.localScale = new Vector3(BoardTileSize, BoardTileSize, 1);
-            mark.transform.SetPositionAndRotation(new Vector3(coord.x * BoardTileSize, coord.y * BoardTileSize, 0) + BoardOffset, Quaternion.identity);
+            mark.transform.SetPositionAndRotation(new Vector3(crd.x * BoardTileSize, crd.y * BoardTileSize, 0) + BoardOffset, Quaternion.identity);
         }
         
         private async UniTask InitializeBoard(int width, int height)

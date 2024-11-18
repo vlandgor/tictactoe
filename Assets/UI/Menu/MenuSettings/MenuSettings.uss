@@ -1,0 +1,135 @@
+.settings-toggle {
+    align-items: center;
+    justify-content: center;
+    width: 98px;
+    height: 98px;
+    min-width: 98px;
+    min-height: 98px;
+}
+
+.settings-toggle .unity-toggle__input {
+    width: 98px;
+    height: 98px;
+    align-items: center;
+    justify-content: center;
+    background-image: url("project://database/Assets/Plugins/FlatCartoonGUI/psd/checkbox/checkbox_background.psd?fileID=21300000&guid=8e5a6c1510b59bc4abf8b37617a27080&type=3#checkbox_background");
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.settings-toggle .unity-toggle__checkmark {
+    width: 70px;
+    height: 70px;
+    background-color: rgba(255, 255, 255, 0);
+    background-image: url("project://database/Assets/Plugins/FlatCartoonGUI/png/checkbox/checkbox_foreground_orange.png?fileID=21300000&guid=09c9cd8fbb8a1f740bc59ac4a05deee7&type=3#checkbox_foreground_orange");
+    -unity-background-scale-mode: stretch-to-fill;
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+}
+
+.settings-slider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: auto;
+    height: auto;
+    margin: 0;
+    padding: 0;
+}
+
+.settings-slider .unity-slider__input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: auto;
+    height: auto;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.settings-slider .unity-base-slider__drag-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: auto;
+    margin: 0;
+    padding: 0;
+}
+
+.settings-slider .unity-base-slider__tracker {
+    height: 42px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-image: url("project://database/Assets/Plugins/FlatCartoonGUI/psd/slider/slider_background_oval.psd?fileID=21300000&guid=e5834b2be0a080f4b8969d2a381d25ad&type=3#slider_background_oval");
+    background-color: rgba(255, 255, 255, 0);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: none;
+    top: auto;
+    right: auto;
+    left: auto;
+    bottom: auto;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    position: absolute;
+}
+
+.settings-slider .unity-base-slider__dragger-border {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    height: 70px;
+    width: 70px;
+    margin: 0;
+    padding: 0;
+    flex-grow: 0;
+    bottom: auto;
+    top: auto;
+    align-self: stretch;
+    position: absolute;
+}
+
+.settings-slider .unity-base-slider__dragger {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    height: 70px;
+    width: 70px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+    background-image: url("project://database/Assets/Plugins/FlatCartoonGUI/png/slider/slider_button_square_orange.png?fileID=21300000&guid=ee32fd93b041797438e8c86ba5dff53a&type=3#slider_button_square_orange");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    bottom: auto;
+    top: auto;
+    left: auto;
+    right: auto;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    align-self: stretch;
+    position: absolute;
+}
+
+.settings-slider .unity-base-slider__fill {
+    background-image: url("project://database/Assets/Plugins/FlatCartoonGUI/png/slider/slider_foreground_oval_orange.png?fileID=21300000&guid=cb524a8db776b7e4f918efa12c7bda41&type=3#slider_foreground_oval_orange");
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    background-color: rgba(255, 255, 255, 0);
+    position: absolute;
+}

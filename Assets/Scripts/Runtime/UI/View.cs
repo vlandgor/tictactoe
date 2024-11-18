@@ -5,6 +5,9 @@ namespace Runtime.UI
 {
     public abstract class View : MonoBehaviour
     {
+        [SerializeField] private bool enableOnStart;
+        
+        [Space]
         [SerializeField] private UIDocument _uiDocument;
 
         protected VisualElement _root;
@@ -19,6 +22,11 @@ namespace Runtime.UI
         {
             _root = _uiDocument.rootVisualElement;
             _visual = _root.Q<VisualElement>("Visual");
+            
+            if (enableOnStart)
+                Show();
+            else
+                Hide();
         }
         
         public virtual void Show() => _visual.style.display = DisplayStyle.Flex;

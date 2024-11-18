@@ -6,12 +6,14 @@ namespace Runtime.UI.Menu.Views
 {
     public class MenuHudView : View
     {
-        private Button _startButton;
-        private Button _settingsButton;
-        private Button _collectionButton;
-        private Button _exitButton;
-
         private MenuHudPresenter _menuHudPresenter;
+        
+        private Button _playButton;
+        
+        private Button _shopButton;
+        private Button _collectionButton;
+        private Button _statsButton;
+        private Button _settingsButton;
         
         [Inject]
         public void Construct(MenuHudPresenter menuHudPresenter)
@@ -23,45 +25,29 @@ namespace Runtime.UI.Menu.Views
         {
             base.InitializeVisuals();
             
-            _startButton = _root.Q<Button>("StartButton");
-            _startButton.clicked += HandleStartButtonClicked;
+            _playButton = _root.Q<Button>("PlayButton");
+            _playButton.clicked += _menuHudPresenter.OnPlay;
             
-            _settingsButton = _root.Q<Button>("SettingsButton");
-            _settingsButton.clicked += HandleSettingsButtonClicked;
+            _shopButton = _root.Q<Button>("ShopButton");
+            //_shopButton.clicked += _menuHudPresenter.OnShop;
             
             _collectionButton = _root.Q<Button>("CollectionButton");
-            _collectionButton.clicked += HandleCollectionButtonClicked;
+            //_collectionButton.clicked += _menuHudPresenter.OnCollection;
             
-            _exitButton = _root.Q<Button>("ExitButton");
-            _exitButton.clicked += HandleExitButtonClicked;
+            _statsButton = _root.Q<Button>("StatsButton");
+            //_statsButton.clicked += _menuHudPresenter.OnStats;
+            
+            _settingsButton = _root.Q<Button>("SettingsButton");
+            _settingsButton.clicked += _menuHudPresenter.OnSettings;
         }
 
         private void OnDestroy()
         {
-            _startButton.clicked -= HandleStartButtonClicked;
-            _settingsButton.clicked -= HandleSettingsButtonClicked;
-            _collectionButton.clicked -= HandleCollectionButtonClicked;
-            _exitButton.clicked -= HandleExitButtonClicked;
-        }
-
-        private void HandleStartButtonClicked()
-        {
-            _menuHudPresenter.OnStartGame();
-        }
-        
-        private void HandleSettingsButtonClicked()
-        {
-            
-        }
-        
-        private void HandleCollectionButtonClicked()
-        {
-            
-        }
-        
-        private void HandleExitButtonClicked()
-        {
-            
+            //_playButton.clicked -= _menuHudPresenter.OnStartGame;
+            //_shopButton.clicked -= _menuHudPresenter.OnShop;
+            //_collectionButton.clicked -= _menuHudPresenter.OnCollection;
+            //_statsButton.clicked -= _menuHudPresenter.OnStats;
+            _settingsButton.clicked -= _menuHudPresenter.OnSettings;
         }
     }
 }

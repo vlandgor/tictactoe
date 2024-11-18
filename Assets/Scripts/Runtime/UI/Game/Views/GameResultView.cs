@@ -1,35 +1,55 @@
-﻿using Runtime.UI.Game.Presenters;
+﻿using System;
 using UnityEngine.UIElements;
-using Zenject;
 
 namespace Runtime.UI.Game.Views
 {
     public class GameResultView : View
     {
-        private GameResultPresenter _gameResultPresenter;
+        public event Action OnHomeButtonClicked;
+        public event Action OnRestartButtonClicked;
+        public event Action OnContinueButtonClicked;
         
-        private Label _resultLabel;
-        private Button _menuButton;
         
-        [Inject]
-        public void Construct(GameResultPresenter gameResultPresenter)
-        {
-            _gameResultPresenter = gameResultPresenter;
-        }
+        private VisualElement _winnerPanel;
+        private Label _winnerLabel;
+        
+        private VisualElement _drawPanel;
+        
+        private Button _homeButton;
+        private Button _restartButton;
+        private Button _continueButton;
         
         public override void InitializeVisuals()
         {
             base.InitializeVisuals();
             
-            _resultLabel = _root.Q<Label>("ResultLabel");
+            _winnerPanel = _visual.Q<VisualElement>("WinnerPanel");
+            _winnerLabel = _visual.Q<Label>("WinnerLabel");
             
-            _menuButton = _root.Q<Button>("MenuButton");
-            _menuButton.clicked += _gameResultPresenter.LoadMenu;
+            _drawPanel = _visual.Q<VisualElement>("DrawPanel");
+            
+            _homeButton = _visual.Q<Button>("HomeButton");
+            _homeButton.clicked += () => OnHomeButtonClicked?.Invoke();
+            
+            _restartButton = _visual.Q<Button>("RestartButton");
+            _restartButton.clicked += () => OnRestartButtonClicked?.Invoke();
+            
+            _continueButton = _visual.Q<Button>("ContinueButton");
+            _continueButton.clicked += () => OnContinueButtonClicked?.Invoke();
         }
         
-        public void SetResultText(string text)
+        public void ShowWinner(string winnerName)
         {
-            _resultLabel.text = text;
+            _winnerPanel.style.display = DisplayStyle.Flex;
+            _drawPanel.style.display = DisplayStyle.None;
+            
+            _winnerLabel.text = $"{winnerName} Won!";
+        }
+        
+        public void ShowDraw()
+        {
+            _winnerPanel.style.display = DisplayStyle.None;
+            _drawPanel.style.display = DisplayStyle.Flex;
         }
     }
 }

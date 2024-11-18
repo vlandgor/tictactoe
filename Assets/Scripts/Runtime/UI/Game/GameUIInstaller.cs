@@ -14,6 +14,8 @@ namespace Runtime.UI.Game
         
         public override void InstallBindings()
         {
+            BindMediator();
+            
             BindGameHud();
             BindGameResult();
         }
@@ -39,6 +41,14 @@ namespace Runtime.UI.Game
             Container
                 .Bind<GameResultPresenter>()
                 .FromInstance(presenter)
+                .AsSingle();
+        }
+        
+        private void BindMediator()
+        {
+            Container
+                .Bind<IGameMediator>()
+                .To<GameMediator>()
                 .AsSingle();
         }
     }

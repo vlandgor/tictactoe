@@ -12,9 +12,14 @@ namespace Runtime.UI.Game.Models
             _loadingProvider = loadingProvider;
         }
         
-        public void GoToMainMenu()
+        public void LoadMenu()
         {
             _loadingProvider.LoadMenu().Forget();
+        }
+        
+        public void RestartMatch()
+        {
+            
         }
     }
 }

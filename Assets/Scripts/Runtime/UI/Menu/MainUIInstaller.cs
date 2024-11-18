@@ -11,10 +11,14 @@ namespace Runtime.UI.Menu
     public class MainUIInstaller : MonoInstaller
     {
         [SerializeField] private MenuHudView _menuHudView;
+        [SerializeField] private MenuSettingsView _menuSettingsView;
         
         public override void InstallBindings()
         {
+            BindMediator();
+            
             BindMenuHud();
+            BindMenuSettings();
         }
 
         private void BindMenuHud()
@@ -23,11 +27,28 @@ namespace Runtime.UI.Menu
             IMarksProvider marksProvider = Container.Resolve<IMarksProvider>();
             
             MenuHudModel model = new MenuHudModel(loadingProvider, marksProvider);
-            MenuHudPresenter hudPresenter = new MenuHudPresenter(model, _menuHudView);
-            
+
             Container
                 .Bind<MenuHudPresenter>()
-                .FromInstance(hudPresenter)
+                .AsSingle()
+                .WithArguments(model, _menuHudView);
+        }
+        
+        private void BindMenuSettings()
+        {
+            MenuSettingsModel model = new MenuSettingsModel();
+
+            Container
+                .Bind<MenuSettingsPresenter>()
+                .AsSingle()
+                .WithArguments(model, _menuSettingsView);
+        }
+        
+        private void BindMediator()
+        {
+            Container
+                .Bind<IMenuMediator>()
+                .To<MenuMediator>()
                 .AsSingle();
         }
     }

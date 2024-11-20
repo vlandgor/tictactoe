@@ -6,5 +6,6 @@ namespace Runtime.MatchService
     public interface IMatchService
     {
         public UniTask Initialize(MatchData matchData);
+        public UniTask Restart();
     }
 }

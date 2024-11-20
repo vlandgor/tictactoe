@@ -5,20 +5,19 @@ namespace Runtime.MatchService
 {
     public class TurnManager
     {
-        private IPlayer _currentPlayer;
+        private readonly IPlayer _player1;
+        private readonly IPlayer _player2;
 
-        public IPlayer CurrentPlayer => _currentPlayer;
-        public event Action<IPlayer> OnTurnChanged;
+        public IPlayer CurrentPlayer { get; private set; }
 
-        public TurnManager(IPlayer startingPlayer)
+        public TurnManager(IPlayer player1, IPlayer player2, IPlayer startingPlayer)
         {
-            _currentPlayer = startingPlayer;
+            CurrentPlayer = startingPlayer;
         }
 
         public void NextTurn(IPlayer player1, IPlayer player2)
         {
-            _currentPlayer = _currentPlayer == player1 ? player2 : player1;
-            OnTurnChanged?.Invoke(_currentPlayer);
+            CurrentPlayer = CurrentPlayer == player1 ? player2 : player1;
         }
     }
 }

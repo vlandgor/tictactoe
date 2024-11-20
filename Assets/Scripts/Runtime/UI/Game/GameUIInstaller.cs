@@ -1,4 +1,5 @@
 ﻿using Runtime.LoadingProvider;
+using Runtime.MatchService;
 using Runtime.UI.Game.Models;
 using Runtime.UI.Game.Presenters;
 using Runtime.UI.Game.Views;
@@ -23,25 +24,24 @@ namespace Runtime.UI.Game
         private void BindGameHud()
         {
             GameHudModel model = new GameHudModel();
-            GameHudPresenter presenter = new GameHudPresenter(model, _gameHudView);
             
             Container
                 .Bind<GameHudPresenter>()
-                .FromInstance(presenter)
-                .AsSingle();
+                .AsSingle()
+                .WithArguments(model, _gameHudView);
         }
         
         private void BindGameResult()
         {
             ILoadingProvider loadingProvider = Container.Resolve<ILoadingProvider>();
+            IMatchService matchService = Container.Resolve<IMatchService>();
             
-            GameResultModel model = new GameResultModel(loadingProvider);
-            GameResultPresenter presenter = new GameResultPresenter(model, _gameResultView);
+            GameResultModel model = new GameResultModel(loadingProvider, matchService);
             
             Container
                 .Bind<GameResultPresenter>()
-                .FromInstance(presenter)
-                .AsSingle();
+                .AsSingle()
+                .WithArguments(model, _gameResultView);
         }
         
         private void BindMediator()

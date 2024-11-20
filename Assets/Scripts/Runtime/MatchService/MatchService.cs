@@ -5,8 +5,7 @@ using Runtime.GameBoard;
 using Runtime.GamePlayer;
 using Runtime.GameSession;
 using Runtime.InputService;
-using Runtime.UI.Game.Presenters;
-using UnityEngine;
+using Runtime.UI.Game;
 using Zenject;
 
 namespace Runtime.MatchService
@@ -16,32 +15,27 @@ namespace Runtime.MatchService
         private readonly IGameBoard _gameBoard;
         private readonly IInputService _inputService;
         private readonly IConfigProvider _configProvider;
-        
-        private readonly GameHudPresenter _gameHudPresenter;
-        private readonly GameResultPresenter _gameResultPresenter;
+        // private readonly IGameMediator _gameMediator;
         
         private MatchData _matchData;
         
         private Match _match;
         private TurnManager _turnManager;
         
-        public bool IsFinished { get; private set; }
         private GameBoardConfig GameBoardConfig => _configProvider.GetConfig<GameBoardConfig>();
         private IPlayer CurrentPlayer => _turnManager.CurrentPlayer; 
+        
+        public bool IsFinished { get; private set; }
         
         [Inject]
         public MatchService(
             IGameBoard gameBoard, 
             IInputService inputService, 
-            IConfigProvider configProvider,
-            GameHudPresenter gameHudPresenter,
-            GameResultPresenter gameResultPresenter)
+            IConfigProvider configProvider)
         {
             _gameBoard = gameBoard;
             _inputService = inputService;
-            _configProvider = configProvider; 
-            _gameHudPresenter = gameHudPresenter;
-            _gameResultPresenter = gameResultPresenter;
+            _configProvider = configProvider;
         }
         
         public async UniTask Initialize(MatchData matchData)
@@ -49,20 +43,14 @@ namespace Runtime.MatchService
             _matchData = matchData;
             
             _gameBoard.Initialize();
-            
-            _turnManager = new TurnManager(_matchData.Player1);
-            _match = new Match(GameBoardConfig.BoardSize);
-            
-            _gameHudPresenter.UpdateTurnLabel(CurrentPlayer);
+            StartMatch();
             
             _inputService.OnTileClicked += HandleTileClicked;
         }
-        
-        private void Restart()
+        public async UniTask Restart()
         {
             _gameBoard.Clear();
-            _match.Restart();
-            _turnManager = new TurnManager(_matchData.Player1);
+            StartMatch();
         }
         
         private void HandleTileClicked(Crd crd)
@@ -74,6 +62,14 @@ namespace Runtime.MatchService
                 return;
             
             NextTurn();
+        }
+        
+        private void StartMatch()
+        {
+            _turnManager = new TurnManager(_matchData.Player1, _matchData.Player2, _matchData.Player1);
+            _match = new Match(GameBoardConfig.BoardSize);
+            
+            //_gameMediator.UpdateTurnLabel(CurrentPlayer);
         }
 
         private void UpdateBoard(Crd crd)
@@ -88,27 +84,26 @@ namespace Runtime.MatchService
         
         private void CheckBoard()
         {
-            if(_match.CheckIfPlayerWon(CurrentPlayer))
-            {
-                _inputService.SetInputEnabled(false);
-                _gameResultPresenter.ShowResult(new MatchResult(CurrentPlayer));
-                IsFinished = true;
-                return;
-            }
-            
-            if(_match.IsBoardFull())
-            {
-                _inputService.SetInputEnabled(false);
-                _gameResultPresenter.ShowResult(new MatchResult(null));
-                IsFinished = true;
-                return;
-            }
+            // if(_match.CheckIfPlayerWon(CurrentPlayer))
+            // {
+            //     _inputService.SetInputEnabled(false);
+            //     _gameMediator.ShowGameResult(new MatchResult(CurrentPlayer));
+            //     IsFinished = true;
+            //     return;
+            // }
+            // if(_match.IsBoardFull())
+            // {
+            //     _inputService.SetInputEnabled(false);
+            //     _gameMediator.ShowGameResult(new MatchResult(null));
+            //     IsFinished = true;
+            //     return;
+            // }
         }
 
         private void NextTurn()
         {
             _turnManager.NextTurn(_matchData.Player1, _matchData.Player2);
-            _gameHudPresenter.UpdateTurnLabel(CurrentPlayer);
+            //_gameMediator.UpdateTurnLabel(CurrentPlayer);
         }
         
         public void Dispose()

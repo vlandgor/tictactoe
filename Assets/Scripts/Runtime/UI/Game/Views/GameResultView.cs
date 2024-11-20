@@ -43,7 +43,7 @@ namespace Runtime.UI.Game.Views
             _winnerPanel.style.display = DisplayStyle.Flex;
             _drawPanel.style.display = DisplayStyle.None;
             
-            _winnerLabel.text = $"{winnerName} Won!";
+            _winnerLabel.text = $"{winnerName}";
         }
         
         public void ShowDraw()

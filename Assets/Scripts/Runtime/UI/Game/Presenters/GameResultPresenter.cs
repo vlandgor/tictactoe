@@ -9,10 +9,8 @@ namespace Runtime.UI.Game.Presenters
     {
         private GameResultModel _model;
         private GameResultView _view;
-        
-        private IGameMediator _gameMediator;
 
-        public GameResultPresenter(GameResultModel model, GameResultView view, IGameMediator gameMediator)
+        public GameResultPresenter(GameResultModel model, GameResultView view)
         {
             _model = model;
             _view = view;

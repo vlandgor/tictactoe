@@ -1,4 +1,5 @@
-﻿using Runtime.LoadingProvider;
+﻿using Runtime.AudioService;
+using Runtime.LoadingProvider;
 using Runtime.Marks;
 using Runtime.UI.Menu.Models;
 using Runtime.UI.Menu.Presenters;
@@ -23,15 +24,17 @@ namespace Runtime.UI.Menu
 
         private void BindMenuHud()
         {
+            IMenuMediator mediator = Container.Resolve<IMenuMediator>();
             ILoadingProvider loadingProvider = Container.Resolve<ILoadingProvider>();
             IMarksProvider marksProvider = Container.Resolve<IMarksProvider>();
+            IAudioService audioService = Container.Resolve<IAudioService>();
             
-            MenuHudModel model = new MenuHudModel(loadingProvider, marksProvider);
+            MenuHudModel model = new MenuHudModel(loadingProvider, marksProvider, audioService);
 
             Container
                 .Bind<MenuHudPresenter>()
                 .AsSingle()
-                .WithArguments(model, _menuHudView);
+                .WithArguments(mediator, model, _menuHudView);
         }
         
         private void BindMenuSettings()

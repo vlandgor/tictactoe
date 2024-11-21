@@ -14,9 +14,6 @@ namespace Runtime.UI.Menu
             _settingsPresenter = settingsPresenter;
         }
 
-        public void ShowSettings()
-        {
-            _settingsPresenter.Value.EnableView();
-        }
+        public void ShowSettings() => _settingsPresenter.Value.EnableView();
     }
 }

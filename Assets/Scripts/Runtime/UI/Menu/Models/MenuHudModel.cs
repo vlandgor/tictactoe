@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using Runtime.AudioService;
 using Runtime.GamePlayer;
 using Runtime.GameSession;
 using Runtime.LoadingProvider;
@@ -11,11 +12,13 @@ namespace Runtime.UI.Menu.Models
     {
         private ILoadingProvider _loadingProvider;
         private IMarksProvider _marksProvider;
+        private IAudioService _audioService;
         
-        public MenuHudModel(ILoadingProvider loadingProvider, IMarksProvider marksProvider)
+        public MenuHudModel(ILoadingProvider loadingProvider, IMarksProvider marksProvider, IAudioService audioService)
         {
             _loadingProvider = loadingProvider;
             _marksProvider = marksProvider;
+            _audioService = audioService;
         }
 
         public void StartGame()
@@ -27,6 +30,11 @@ namespace Runtime.UI.Menu.Models
             _loadingProvider.LoadGame(matchData).Forget();
         }
 
+        public void EnableSettings()
+        {
+            _audioService.PlayButtonClickFX();
+        }
+        
         public void ExitGame()
         {
             Application.Quit();

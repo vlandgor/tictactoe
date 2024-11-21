@@ -1,32 +1,52 @@
-﻿using Runtime.UI.Menu.Models;
+﻿using System;
+using Runtime.UI.Menu.Models;
 using Runtime.UI.Menu.Views;
-using Zenject;
 
 namespace Runtime.UI.Menu.Presenters
 {
-    public class MenuHudPresenter
+    public class MenuHudPresenter : IDisposable
     {
-        private MenuHudModel _hudModel;
-        private MenuHudView _hudView;
-        
-        private readonly LazyInject<IMenuMediator> _mediator;
+        private IMenuMediator _mediator;
+        private MenuHudModel _model;
+        private MenuHudView _view;
 
-        public MenuHudPresenter(MenuHudModel hudModel, MenuHudView hudView, LazyInject<IMenuMediator> mediator)
+        public MenuHudPresenter(IMenuMediator mediator, MenuHudModel model, MenuHudView view)
         {
-            _hudModel = hudModel;
-            _hudView = hudView;
-            
             _mediator = mediator;
+            _model = model;
+            _view = view;
+            
+            _view.PlayButtonClicked += HandlePlayButtonClicked;
         }
-        
-        public void OnPlay()
+        public void Dispose()
         {
-            _hudModel.StartGame();
+            _view.PlayButtonClicked -= HandlePlayButtonClicked;
         }
 
-        public void OnSettings()
+        private void HandlePlayButtonClicked()
         {
-            _mediator.Value.ShowSettings();
+            _model.StartGame();
+        }
+        
+        public void EnableShop()
+        {
+            
+        }
+        
+        public void EnableCollection()
+        {
+            
+        }
+        
+        public void EnableStats()
+        {
+            
+        }
+        
+        public void EnableSettings()
+        {
+            _model.EnableSettings();
+            _mediator.ShowSettings();
         }
     }
 }

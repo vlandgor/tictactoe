@@ -1,0 +1,109 @@
+.menu-option--button {
+    border-left-color: rgba(255, 255, 255, 0);
+    border-right-color: rgba(255, 255, 255, 0);
+    border-top-color: rgba(255, 255, 255, 0);
+    border-bottom-color: rgba(255, 255, 255, 0);
+    overflow: visible;
+    align-items: center;
+    justify-content: center;
+    align-content: auto;
+    width: auto;
+    height: auto;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    background-color: rgba(255, 255, 255, 0);
+    font-size: 42px;
+    -unity-font-style: bold;
+    color: rgb(255, 255, 255);
+    -unity-font-definition: url("project://database/Library/unity%20default%20resources?fileID=10102&guid=0000000000000000e000000000000000&type=0#LegacyRuntime");
+    min-width: 112px;
+    min-height: 112px;
+    max-width: 168px;
+    max-height: 168px;
+    flex-grow: 1;
+    align-self: stretch;
+}
+
+.menu-option--button:active {
+    border-left-color: rgba(255, 255, 255, 0);
+    border-right-color: rgba(255, 255, 255, 0);
+    border-top-color: rgba(255, 255, 255, 0);
+    border-bottom-color: rgba(255, 255, 255, 0);
+    overflow: visible;
+    align-items: center;
+    justify-content: center;
+    align-content: auto;
+    width: 168px;
+    height: 168px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    background-color: rgba(255, 255, 255, 0);
+    font-size: 42px;
+    -unity-font-style: bold;
+    color: rgb(255, 255, 255);
+    -unity-font-definition: url("project://database/Library/unity%20default%20resources?fileID=10102&guid=0000000000000000e000000000000000&type=0#LegacyRuntime");
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    scale: 0.9 0.9;
+}
+
+.menu-play--button {
+    border-left-color: rgba(255, 255, 255, 0);
+    border-right-color: rgba(255, 255, 255, 0);
+    border-top-color: rgba(255, 255, 255, 0);
+    border-bottom-color: rgba(255, 255, 255, 0);
+    background-color: rgba(255, 255, 255, 0);
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    width: 240px;
+    height: 240px;
+    align-items: center;
+    justify-content: center;
+    align-content: auto;
+}
+
+.menu-play--button:active {
+    border-left-color: rgba(255, 255, 255, 0);
+    border-right-color: rgba(255, 255, 255, 0);
+    border-top-color: rgba(255, 255, 255, 0);
+    border-bottom-color: rgba(255, 255, 255, 0);
+    background-color: rgba(255, 255, 255, 0);
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    width: 240px;
+    height: 240px;
+    align-items: center;
+    justify-content: center;
+    align-content: auto;
+    scale: 0.9 0.9;
+}
+
+.title--label {
+    color: rgb(255, 255, 255);
+    -unity-text-align: middle-center;
+    -unity-font-style: bold;
+    /*font-size: 3vh;*/
+}

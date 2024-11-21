@@ -150,10 +150,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
   _monoInstallers:
-  - {fileID: 2108024580}
   - {fileID: 2013791533}
   - {fileID: 1161341231}
   - {fileID: 1007839717}
+  - {fileID: 2108024580}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -184,10 +184,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2108024579}
   - {fileID: 2013791534}
   - {fileID: 1161341230}
   - {fileID: 1007839718}
+  - {fileID: 2108024579}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &208174475

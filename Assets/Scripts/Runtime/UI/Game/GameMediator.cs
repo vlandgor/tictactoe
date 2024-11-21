@@ -16,7 +16,7 @@ namespace Runtime.UI.Game
             _resultPresenter = settingsPresenter;
         }
         
-        // public void UpdateTurnLabel(IPlayer player)             => _hudPresenter.Value.UpdateTurnLabel(player);
-        // public void ShowGameResult(MatchResult matchResult)     => _resultPresenter.Value.ShowResult(matchResult);
+        public void UpdateTurnLabel(IPlayer player)             => _hudPresenter.Value.UpdateTurnLabel(player);
+        public void ShowGameResult(MatchResult matchResult)     => _resultPresenter.Value.ShowResult(matchResult);
     }
 }

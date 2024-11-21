@@ -52,6 +52,7 @@ namespace Runtime.UI.Game.Presenters
         private void HandleRestartButtonClicked()
         {
             _model.RestartMatch();
+            _view.Hide();
         }
         
         private void HandleContinueButtonClicked()

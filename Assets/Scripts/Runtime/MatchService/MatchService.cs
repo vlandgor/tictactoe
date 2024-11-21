@@ -15,7 +15,7 @@ namespace Runtime.MatchService
         private readonly IGameBoard _gameBoard;
         private readonly IInputService _inputService;
         private readonly IConfigProvider _configProvider;
-        // private readonly IGameMediator _gameMediator;
+        private readonly IGameMediator _gameMediator;
         
         private MatchData _matchData;
         
@@ -31,11 +31,13 @@ namespace Runtime.MatchService
         public MatchService(
             IGameBoard gameBoard, 
             IInputService inputService, 
-            IConfigProvider configProvider)
+            IConfigProvider configProvider,
+            IGameMediator gameMediator)
         {
             _gameBoard = gameBoard;
             _inputService = inputService;
             _configProvider = configProvider;
+            _gameMediator = gameMediator;
         }
         
         public async UniTask Initialize(MatchData matchData)
@@ -69,7 +71,10 @@ namespace Runtime.MatchService
             _turnManager = new TurnManager(_matchData.Player1, _matchData.Player2, _matchData.Player1);
             _match = new Match(GameBoardConfig.BoardSize);
             
-            //_gameMediator.UpdateTurnLabel(CurrentPlayer);
+            _gameMediator.UpdateTurnLabel(CurrentPlayer);
+            _inputService.SetInputEnabled(true);
+            
+            IsFinished = false;
         }
 
         private void UpdateBoard(Crd crd)
@@ -84,26 +89,26 @@ namespace Runtime.MatchService
         
         private void CheckBoard()
         {
-            // if(_match.CheckIfPlayerWon(CurrentPlayer))
-            // {
-            //     _inputService.SetInputEnabled(false);
-            //     _gameMediator.ShowGameResult(new MatchResult(CurrentPlayer));
-            //     IsFinished = true;
-            //     return;
-            // }
-            // if(_match.IsBoardFull())
-            // {
-            //     _inputService.SetInputEnabled(false);
-            //     _gameMediator.ShowGameResult(new MatchResult(null));
-            //     IsFinished = true;
-            //     return;
-            // }
+            if(_match.CheckIfPlayerWon(CurrentPlayer))
+            {
+                _inputService.SetInputEnabled(false);
+                _gameMediator.ShowGameResult(new MatchResult(CurrentPlayer));
+                IsFinished = true;
+                return;
+            }
+            if(_match.IsBoardFull())
+            {
+                _inputService.SetInputEnabled(false);
+                _gameMediator.ShowGameResult(new MatchResult(null));
+                IsFinished = true;
+                return;
+            }
         }
 
         private void NextTurn()
         {
             _turnManager.NextTurn(_matchData.Player1, _matchData.Player2);
-            //_gameMediator.UpdateTurnLabel(CurrentPlayer);
+            _gameMediator.UpdateTurnLabel(CurrentPlayer);
         }
         
         public void Dispose()

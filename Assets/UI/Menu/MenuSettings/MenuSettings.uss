@@ -32,32 +32,41 @@
 .settings-slider {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     min-height: auto;
     height: auto;
     margin: 0;
     padding: 0;
+    flex-grow: 1;
+    align-self: stretch;
+    align-content: auto;
 }
 
 .settings-slider .unity-slider__input {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     min-height: auto;
     height: auto;
     width: 100%;
     margin: 0;
     padding: 0;
+    flex-grow: 1;
+    align-content: auto;
+    align-self: stretch;
 }
 
 .settings-slider .unity-base-slider__drag-container {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     height: auto;
-    width: auto;
+    width: 100%;
     margin: 0;
     padding: 0;
+    flex-grow: 1;
+    align-self: stretch;
+    align-content: auto;
 }
 
 .settings-slider .unity-base-slider__tracker {
@@ -69,7 +78,7 @@
     background-color: rgba(255, 255, 255, 0);
     background-repeat: no-repeat;
     background-position: center;
-    background-size: contain;
+    background-size: 100% 100%;
     border: none;
     top: auto;
     right: auto;
@@ -81,6 +90,7 @@
     border-left-width: 0;
     -unity-background-image-tint-color: rgb(255, 255, 255);
     position: absolute;
+    -unity-background-scale-mode: scale-and-crop;
 }
 
 .settings-slider .unity-base-slider__dragger-border {
@@ -130,6 +140,50 @@
     border-right-width: 0;
     border-bottom-width: 0;
     border-left-width: 0;
-    background-color: rgba(255, 255, 255, 0);
     position: absolute;
+    background-position-x: center 0;
+    -unity-background-scale-mode: stretch-to-fill;
+    background-color: rgba(255, 255, 255, 0);
+    background-size: 100% 100%;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    align-content: auto;
+    align-self: stretch;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.close--panel {
+    align-items: center;
+    justify-content: center;
+    align-content: auto;
+    height: 420px;
+}
+
+.close--button {
+    border-left-color: rgba(255, 255, 255, 0);
+    border-right-color: rgba(255, 255, 255, 0);
+    border-top-color: rgba(255, 255, 255, 0);
+    border-bottom-color: rgba(255, 255, 255, 0);
+    width: 420px;
+    height: 168px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    font-size: 42px;
+    color: rgb(255, 255, 255);
+    -unity-font-style: bold;
+    -unity-font-definition: url("project://database/Library/unity%20default%20resources?fileID=10102&guid=0000000000000000e000000000000000&type=0#LegacyRuntime");
+    background-color: rgba(255, 255, 255, 0);
 }

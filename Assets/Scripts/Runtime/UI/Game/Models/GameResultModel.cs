@@ -22,7 +22,7 @@ namespace Runtime.UI.Game.Models
         
         public void RestartMatch()
         {
-            
+            _matchService.Restart().Forget();
         }
     }
 }

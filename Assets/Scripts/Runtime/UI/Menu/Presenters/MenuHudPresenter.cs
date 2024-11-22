@@ -30,7 +30,7 @@ namespace Runtime.UI.Menu.Presenters
         
         public void EnableShop()
         {
-            
+            _mediator.ShowShop();
         }
         
         public void EnableCollection()

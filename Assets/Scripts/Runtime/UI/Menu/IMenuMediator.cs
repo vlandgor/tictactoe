@@ -2,6 +2,7 @@
 {
     public interface IMenuMediator
     {
+        public void ShowShop();
         public void ShowSettings();
     }
 }

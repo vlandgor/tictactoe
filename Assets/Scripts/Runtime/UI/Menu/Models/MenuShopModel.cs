@@ -2,6 +2,9 @@
 {
     public class MenuShopModel
     {
-        
+        public MenuShopModel()
+        {
+            
+        }
     }
 }

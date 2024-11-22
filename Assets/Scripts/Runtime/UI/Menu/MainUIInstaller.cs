@@ -13,6 +13,7 @@ namespace Runtime.UI.Menu
     {
         [SerializeField] private MenuHudView _menuHudView;
         [SerializeField] private MenuSettingsView _menuSettingsView;
+        [SerializeField] private MenuShopView _menuShopView;
         
         public override void InstallBindings()
         {
@@ -20,6 +21,15 @@ namespace Runtime.UI.Menu
             
             BindMenuHud();
             BindMenuSettings();
+            BindMenuShop();
+        }
+        
+        private void BindMediator()
+        {
+            Container
+                .Bind<IMenuMediator>()
+                .To<MenuMediator>()
+                .AsSingle();
         }
 
         private void BindMenuHud()
@@ -47,12 +57,14 @@ namespace Runtime.UI.Menu
                 .WithArguments(model, _menuSettingsView);
         }
         
-        private void BindMediator()
+        private void BindMenuShop()
         {
+            MenuShopModel model = new MenuShopModel();
+
             Container
-                .Bind<IMenuMediator>()
-                .To<MenuMediator>()
-                .AsSingle();
+                .Bind<MenuShopPresenter>()
+                .AsSingle()
+                .WithArguments(model, _menuShopView);
         }
     }
 }

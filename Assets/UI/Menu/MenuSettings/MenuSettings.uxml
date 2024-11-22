@@ -1,4 +1,5 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <engine:Template name="CloseButton" src="project://database/Assets/UI/Standart/CloseButton.uxml?fileID=9197481963319205126&amp;guid=eee8f314e392c19478e1e09047524846&amp;type=3#CloseButton" />
     <Style src="project://database/Assets/UI/Menu/MenuSettings/MenuSettings.uss?fileID=7433441132597879392&amp;guid=a1e953b9890e9fc47bda73fe18f78248&amp;type=3#MenuSettings" />
     <engine:VisualElement name="Visual" style="flex-grow: 1; display: flex; background-image: url(&quot;project://database/Assets/Art/Sprites/Background.png?fileID=3715637872456251105&amp;guid=f0feeaa1ee6139a4ebb6c74f7054834c&amp;type=3#background_9_0&quot;); background-color: rgba(255, 255, 255, 0);">
         <engine:VisualElement name="ResultScreen" style="flex-grow: 1; position: absolute; width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0); align-items: stretch; justify-content: flex-start; align-content: auto;">
@@ -32,9 +33,7 @@
                     <engine:Toggle name="NotificationCheckbox" toggle-on-label-click="true" value="false" class="settings-toggle" style="height: 98px; width: 98px; align-items: center; justify-content: center; position: relative; overflow: hidden;" />
                 </engine:VisualElement>
             </engine:VisualElement>
-            <engine:VisualElement name="CloseButtonPanel" class="close--panel">
-                <engine:Button text="Close" name="CloseButton" class="close--button" style="background-image: url(&quot;project://database/Assets/Plugins/FlatCartoonGUI/png/button/button_middle_oval_red.png?fileID=21300000&amp;guid=033141267be9ca149b87673faf2346e3&amp;type=3#button_middle_oval_red&quot;);" />
-            </engine:VisualElement>
+            <engine:Instance template="CloseButton" />
         </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>

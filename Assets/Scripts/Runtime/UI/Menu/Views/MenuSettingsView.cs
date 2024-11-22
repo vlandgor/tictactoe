@@ -1,10 +1,11 @@
-﻿using Runtime.UI.Menu.Presenters;
+﻿using System;
+using Runtime.UI.Menu.Presenters;
 using UnityEngine.UIElements;
 using Zenject;
 
 namespace Runtime.UI.Menu.Views
 {
-    public class MenuSettingsView : View
+    public class MenuSettingsView : View, IDisposable
     {
         private MenuSettingsPresenter _menuSettingsPresenter;
         
@@ -53,6 +54,14 @@ namespace Runtime.UI.Menu.Views
         {
             _soundOnIcon.style.display = isOn ? DisplayStyle.Flex : DisplayStyle.None;
             _soundOffIcon.style.display = isOn ? DisplayStyle.None : DisplayStyle.Flex;
+        }
+
+        public void Dispose()
+        {
+            _closeButton.clicked -= _menuSettingsPresenter.DisableView;
+            
+            _musicSlider.UnregisterValueChangedCallback(_menuSettingsPresenter.OnMusicValueChanged);
+            _soundSlider.UnregisterValueChangedCallback(_menuSettingsPresenter.OnSoundValueChanged);
         }
     }
 }

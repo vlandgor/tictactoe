@@ -25,7 +25,8 @@ namespace Runtime.UI.Menu.Presenters
 
         private void HandlePlayButtonClicked()
         {
-            _model.StartGame();
+            //_model.StartGame();
+            _model.CreateLobby();
         }
         
         public void EnableShop()

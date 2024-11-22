@@ -1,5 +1,6 @@
 ﻿using Runtime.AudioService;
 using Runtime.LoadingProvider;
+using Runtime.LobbyService;
 using Runtime.Marks;
 using Runtime.UI.Menu.Models;
 using Runtime.UI.Menu.Presenters;
@@ -28,8 +29,9 @@ namespace Runtime.UI.Menu
             ILoadingProvider loadingProvider = Container.Resolve<ILoadingProvider>();
             IMarksProvider marksProvider = Container.Resolve<IMarksProvider>();
             IAudioService audioService = Container.Resolve<IAudioService>();
+            ILobbyService lobbyService = Container.Resolve<ILobbyService>();
             
-            MenuHudModel model = new MenuHudModel(loadingProvider, marksProvider, audioService);
+            MenuHudModel model = new MenuHudModel(loadingProvider, marksProvider, audioService, lobbyService);
 
             Container
                 .Bind<MenuHudPresenter>()

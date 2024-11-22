@@ -3,6 +3,7 @@ using Runtime.AudioService;
 using Runtime.GamePlayer;
 using Runtime.GameSession;
 using Runtime.LoadingProvider;
+using Runtime.LobbyService;
 using Runtime.Marks;
 using UnityEngine;
 
@@ -13,12 +14,18 @@ namespace Runtime.UI.Menu.Models
         private ILoadingProvider _loadingProvider;
         private IMarksProvider _marksProvider;
         private IAudioService _audioService;
+        private ILobbyService _lobbyService;
         
-        public MenuHudModel(ILoadingProvider loadingProvider, IMarksProvider marksProvider, IAudioService audioService)
+        public MenuHudModel(
+            ILoadingProvider loadingProvider, 
+            IMarksProvider marksProvider, 
+            IAudioService audioService,
+            ILobbyService lobbyService)
         {
             _loadingProvider = loadingProvider;
             _marksProvider = marksProvider;
             _audioService = audioService;
+            _lobbyService = lobbyService;
         }
 
         public void StartGame()
@@ -28,6 +35,11 @@ namespace Runtime.UI.Menu.Models
             MatchData matchData = new MatchData(GameMode.PvP, player1, player2);
             
             _loadingProvider.LoadGame(matchData).Forget();
+        }
+
+        public void CreateLobby()
+        {
+            _lobbyService.QueryAndJoinLobby();
         }
 
         public void EnableSettings()

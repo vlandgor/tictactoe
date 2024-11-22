@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Runtime.AuthenticationService;
 using Runtime.GameSession;
 using Runtime.LoadingProvider.LoadingOperations;
 using Runtime.UI;
@@ -10,11 +11,24 @@ namespace Runtime.LoadingProvider
     public class LoadingProvider : ILoadingProvider
     {
         private ILoadingCurtain _loadingCurtain;
+        private IAuthenticationService _authenticationService;
         
         [Inject]
-        public LoadingProvider(ILoadingCurtain loadingCurtain)
+        public LoadingProvider(ILoadingCurtain loadingCurtain, IAuthenticationService authenticationService)
         {
             _loadingCurtain = loadingCurtain;
+            _authenticationService = authenticationService;
+        }
+        
+        public async UniTask LoadApp()
+        {
+            Queue<ILoadingOperation> loadingOperation = new Queue<ILoadingOperation>();
+            loadingOperation.Enqueue(new AuthenticationOperation(_authenticationService));
+            loadingOperation.Enqueue(new LoadMenuOperation());
+            
+            await _loadingCurtain.ShowCurtain();
+            await _loadingCurtain.Load(loadingOperation);
+            await _loadingCurtain.HideCurtain();
         }
         
         public async UniTask LoadMenu()

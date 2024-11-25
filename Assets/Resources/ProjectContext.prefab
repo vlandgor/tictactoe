@@ -135,6 +135,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audioServicePrefab: {fileID: 143569760248343152, guid: e1811850a4c759d49a354530de66873a, type: 3}
+--- !u!1 &1348449656775892770
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 321641319374859336}
+  - component: {fileID: 5603189299917825710}
+  m_Layer: 0
+  m_Name: ShopServiceInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &321641319374859336
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348449656775892770}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6252507361678391361}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5603189299917825710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348449656775892770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 155d6f869d104366a11e779723561168, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shopServicePrefab: {fileID: 6075873838447152456, guid: 43ffc4bcfa4627b498beed50f2f64588, type: 3}
 --- !u!1 &5542450377107673673
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,6 +211,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7957856775823287139}
+  - {fileID: 321641319374859336}
   - {fileID: 5489882365633237821}
   - {fileID: 5855083787051256005}
   - {fileID: 464015328940629491}
@@ -187,6 +233,7 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 5960110703206467460}
+  - {fileID: 5603189299917825710}
   - {fileID: 2272965886902617713}
   - {fileID: 5457776962884714161}
   - {fileID: 981108325898359498}

@@ -14,7 +14,16 @@ namespace Runtime.UI.Menu.Presenters
             _view = view;
         }
         
-        public override void EnableView() => _view.Show();
-        public override void DisableView() => _view.Hide();
+        public override void EnableView()
+        {
+            _view.Show();
+            _view.InitializeItems(_model.GetShopItems());
+        }
+
+        public override void DisableView()
+        {
+            _view.Hide();   
+            _view.ClearItems();
+        }
     }
 }

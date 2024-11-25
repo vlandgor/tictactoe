@@ -29,7 +29,16 @@ namespace Runtime.UI
                 Hide();
         }
         
-        public virtual void Show() => _visual.style.display = DisplayStyle.Flex;
-        public virtual void Hide() => _visual.style.display = DisplayStyle.None;
+        public virtual void Show()
+        {
+            Debug.Log("Showing view");
+            _visual.style.display = DisplayStyle.Flex;
+        }
+
+        public virtual void Hide()
+        {
+            Debug.Log("Hiding view");
+            _visual.style.display = DisplayStyle.None;
+        }
     }
 }

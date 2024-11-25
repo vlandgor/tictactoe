@@ -43,5 +43,14 @@ namespace Runtime.UI.Menu.Views
             _settingsButton = _root.Q<Button>("SettingsButton");
             _settingsButton.clicked += () => _presenter.EnableSettings();
         }
+        
+        public void OnDestroy()
+        {
+            _playButton.clicked -= () => PlayButtonClicked?.Invoke();
+            _shopButton.clicked -= () => _presenter.EnableShop();
+            _collectionButton.clicked -= () => _presenter.EnableCollection();
+            _statsButton.clicked -= () => _presenter.EnableStats();
+            _settingsButton.clicked -= () => _presenter.EnableSettings();
+        }
     }
 }

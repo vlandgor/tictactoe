@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb1afdc0fdeb4e28b16f2a3a2eb61803, type: 3}
+  m_Name: ShopItemsStorage
+  m_EditorClassIdentifier: 
+  _items:
+  - _name: Default
+    _crossIcon: {fileID: 21300000, guid: e4ddb534b49b184478fff27f5a014a03, type: 3}
+    _checkIcon: {fileID: 21300000, guid: fcbe4cc77b80d5140b96f4a7d304879a, type: 3}
+    _price: 0
+  - _name: X-Mas
+    _crossIcon: {fileID: 21300000, guid: fbce301899d58a54bab45b9da85b2c33, type: 3}
+    _checkIcon: {fileID: 21300000, guid: ff8cc79afa8f9ed448f77d217dd28ac8, type: 3}
+    _price: 200

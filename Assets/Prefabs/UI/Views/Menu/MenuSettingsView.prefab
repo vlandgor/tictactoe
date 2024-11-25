@@ -48,7 +48,7 @@ MonoBehaviour:
   m_PanelSettings: {fileID: 11400000, guid: c2d096eb443b9a949bf4a0f56c92a0ae, type: 2}
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 32baa3e5cdc84a44ab0a7709bce53ee3, type: 3}
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
   m_WorldSpaceHeight: 1080
@@ -64,4 +64,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f18fec32b11b4d7e922cacfbf5b847ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableOnStart: 0
   _uiDocument: {fileID: 2624864433080825733}

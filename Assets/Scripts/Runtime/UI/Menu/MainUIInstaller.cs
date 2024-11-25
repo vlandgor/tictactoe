@@ -1,6 +1,7 @@
 ﻿using Runtime.AudioService;
 using Runtime.LoadingProvider;
 using Runtime.Marks;
+using Runtime.ShopService;
 using Runtime.UI.Menu.Models;
 using Runtime.UI.Menu.Presenters;
 using Runtime.UI.Menu.Views;
@@ -59,7 +60,9 @@ namespace Runtime.UI.Menu
         
         private void BindMenuShop()
         {
-            MenuShopModel model = new MenuShopModel();
+            IShopService shopService = Container.Resolve<IShopService>();
+            
+            MenuShopModel model = new MenuShopModel(shopService);
 
             Container
                 .Bind<MenuShopPresenter>()

@@ -1,5 +1,4 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <engine:Template name="ShopItem" src="project://database/Assets/UI/Menu/MenuShop/ShopItem.uxml?fileID=9197481963319205126&amp;guid=1a8487623b8ed7a4384b4fe46970873e&amp;type=3#ShopItem" />
     <engine:Template name="CloseButton" src="project://database/Assets/UI/Standart/CloseButton.uxml?fileID=9197481963319205126&amp;guid=eee8f314e392c19478e1e09047524846&amp;type=3#CloseButton" />
     <Style src="project://database/Assets/UI/Menu/MenuShop/MenuShop.uss?fileID=7433441132597879392&amp;guid=12503012f2c15f74cbc7fa135528dd00&amp;type=3#MenuShop" />
     <Style src="project://database/Assets/UI/Standart/CloseButton.uss?fileID=7433441132597879392&amp;guid=2bd863255bd31c240adecf6764864eec&amp;type=3#CloseButton" />
@@ -11,10 +10,7 @@
                 </engine:VisualElement>
             </engine:VisualElement>
             <engine:VisualElement name="MiddlePanel" style="flex-grow: 1; align-items: center; justify-content: center; align-content: auto; align-self: stretch; flex-direction: row;">
-                <engine:ScrollView horizontal-scroller-visibility="Hidden" focusable="true" vertical-scroller-visibility="Hidden" touch-scroll-type="Elastic" name="ContentPanel" style="align-items: flex-start; justify-content: center; flex-direction: row; flex-grow: 1; flex-shrink: 0; align-self: stretch; align-content: auto; max-width: 1668px; min-width: 720px; margin-top: 56px; margin-right: 56px; margin-bottom: 56px; margin-left: 56px; padding-top: 84px; padding-right: 84px; padding-bottom: 84px; padding-left: 84px; background-image: url(&quot;project://database/Assets/Plugins/FlatCartoonGUI/png/window/window3_2_red.png?fileID=21300000&amp;guid=5509248ca9975dd47ab2572bc9518b37&amp;type=3#window3_2_red&quot;); background-color: rgba(255, 255, 255, 0);">
-                    <engine:Instance template="ShopItem" name="ShopItem" />
-                    <engine:Instance template="ShopItem" name="ShopItem" />
-                </engine:ScrollView>
+                <engine:ScrollView horizontal-scroller-visibility="Hidden" focusable="true" vertical-scroller-visibility="Hidden" touch-scroll-type="Elastic" name="ContentPanel" style="align-items: flex-start; justify-content: center; flex-direction: row; flex-grow: 1; flex-shrink: 0; align-self: stretch; align-content: auto; max-width: 1668px; min-width: 720px; margin-top: 56px; margin-right: 56px; margin-bottom: 56px; margin-left: 56px; padding-top: 84px; padding-right: 84px; padding-bottom: 84px; padding-left: 84px; background-image: url(&quot;project://database/Assets/Plugins/FlatCartoonGUI/png/window/window3_2_red.png?fileID=21300000&amp;guid=5509248ca9975dd47ab2572bc9518b37&amp;type=3#window3_2_red&quot;); background-color: rgba(255, 255, 255, 0);" />
             </engine:VisualElement>
             <engine:Instance template="CloseButton" style="min-height: 420px;">
                 <AttributeOverrides element-name="CloseButton" text="Close" />

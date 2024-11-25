@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Runtime.UI.Menu.Views
 {
-    public class MenuShopView : View, IDisposable
+    public class MenuShopView : View
     {
         [SerializeField] private VisualTreeAsset shopItemTemplate;
         
@@ -16,10 +16,19 @@ namespace Runtime.UI.Menu.Views
         private ScrollView _contentPanel;
         private Button _closeButton;
         
+        private ShopItemVisual[] _shopItemVisuals;
+        
         [Inject]
         public void Construct(MenuShopPresenter menuShopPresenter)
         {
             _menuShopPresenter = menuShopPresenter;
+        }
+        
+        public void OnDestroy()
+        {
+            _closeButton.clicked -= _menuShopPresenter.DisableView;
+
+            ClearItems();
         }
 
         public override void InitializeVisuals()
@@ -34,24 +43,41 @@ namespace Runtime.UI.Menu.Views
 
         public void InitializeItems(ShopItem[] items)
         {
-            foreach (ShopItem item in items)
+            _shopItemVisuals = new ShopItemVisual[items.Length];
+            for (var i = 0; i < items.Length; i++)
             {
+                var item = items[i];
                 VisualElement itemRoot = shopItemTemplate.CloneTree();
                 _contentPanel.Add(itemRoot);
 
-                ShopItemVisual itemVisual = new ShopItemVisual(item);
+                ShopItemVisual itemVisual = _shopItemVisuals[i] = new ShopItemVisual(item);
                 itemVisual.InitializeVisuals(itemRoot);
+
+                itemVisual.OnPriceButtonClicked += HandlePriceButtonClicked;
             }
         }
-        
+
         public void ClearItems()
         {
+            if (_shopItemVisuals != null)
+            {
+                foreach (var itemVisual in _shopItemVisuals)
+                {
+                    if (itemVisual != null)
+                    {
+                        itemVisual.OnPriceButtonClicked -= HandlePriceButtonClicked;
+                    }
+                }
+            }
+
             _contentPanel.Clear();
+            _shopItemVisuals = null;
         }
 
-        public void Dispose()
+        
+        private void HandlePriceButtonClicked()
         {
-            _closeButton.clicked -= _menuShopPresenter.DisableView;
+            Debug.Log("Price button clicked");
         }
     }
 }

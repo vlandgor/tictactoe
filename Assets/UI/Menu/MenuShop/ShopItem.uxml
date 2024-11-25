@@ -1,0 +1,15 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Menu/MenuShop/ShopItem.uss?fileID=7433441132597879392&amp;guid=784c4446bc0dcf44abe6e16174c3684c&amp;type=3#ShopItem" />
+    <engine:VisualElement name="ShopItemPanel" class="shop-item__panel">
+        <engine:VisualElement name="NamePanel" class="shop-item__name-panel">
+            <engine:Label text="Label" name="NameLabel" class="shop-item__name-label" style="-unity-text-align: middle-center; color: rgb(51, 51, 51); font-size: 28px; -unity-font-style: bold; -unity-font-definition: url(&quot;project://database/Library/unity%20default%20resources?fileID=10102&amp;guid=0000000000000000e000000000000000&amp;type=0#LegacyRuntime&quot;); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+        </engine:VisualElement>
+        <engine:VisualElement name="ObjectsPanel" class="shop-item__objects-panel">
+            <engine:VisualElement name="CirclePanel" class="shop-item__object" style="background-image: url(&quot;project://database/Assets/Plugins/FlatCartoonGUI/png/button/button_simple_big_circle_red.png?fileID=21300000&amp;guid=fa02d1d1c8dc53240b807102beaefb62&amp;type=3#button_simple_big_circle_red&quot;);" />
+            <engine:VisualElement name="CrossPanel" class="shop-item__object" style="background-image: url(&quot;project://database/Assets/Plugins/FlatCartoonGUI/psd/button/button_simple_middle_square.psd?fileID=21300000&amp;guid=b747ce705ef0d194aae3b05871fbb775&amp;type=3#button_simple_middle_square&quot;);" />
+        </engine:VisualElement>
+        <engine:VisualElement name="PricePanel" class="shop-item__price-panel">
+            <engine:Button text="500" name="PriceButton" class="shop-item__price-button" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

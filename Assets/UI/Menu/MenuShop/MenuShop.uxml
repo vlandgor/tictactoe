@@ -1,18 +1,22 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <engine:Template name="ShopItem" src="project://database/Assets/UI/Menu/MenuShop/ShopItem.uxml?fileID=9197481963319205126&amp;guid=1a8487623b8ed7a4384b4fe46970873e&amp;type=3#ShopItem" />
     <engine:Template name="CloseButton" src="project://database/Assets/UI/Standart/CloseButton.uxml?fileID=9197481963319205126&amp;guid=eee8f314e392c19478e1e09047524846&amp;type=3#CloseButton" />
     <Style src="project://database/Assets/UI/Menu/MenuShop/MenuShop.uss?fileID=7433441132597879392&amp;guid=12503012f2c15f74cbc7fa135528dd00&amp;type=3#MenuShop" />
     <Style src="project://database/Assets/UI/Standart/CloseButton.uss?fileID=7433441132597879392&amp;guid=2bd863255bd31c240adecf6764864eec&amp;type=3#CloseButton" />
     <engine:VisualElement name="Visual" style="flex-grow: 1; background-color: rgba(255, 255, 255, 0); background-image: url(&quot;project://database/Assets/Art/Sprites/Background.png?fileID=3715637872456251105&amp;guid=f0feeaa1ee6139a4ebb6c74f7054834c&amp;type=3#background_9_0&quot;);">
-        <engine:VisualElement style="flex-grow: 1; align-items: stretch; justify-content: center; align-self: stretch;">
-            <engine:VisualElement style="flex-grow: 0; height: 196px; background-image: url(&quot;project://database/Assets/Plugins/FlatCartoonGUI/png/titlebar/titlebar_ribbon1_red.png?fileID=21300000&amp;guid=884b59f2bd9270c438de6bdde7d01179&amp;type=3#titlebar_ribbon1_red&quot;); align-self: center; width: 700px; margin-top: 56px; margin-bottom: 56px;">
-                <engine:Label text="Shop" style="flex-grow: 1; color: rgb(255, 255, 255); font-size: 84%; -unity-text-align: middle-center; -unity-font-style: bold; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
-            </engine:VisualElement>
-            <engine:VisualElement style="flex-grow: 1; align-items: stretch; justify-content: center; align-content: auto; align-self: stretch;">
-                <engine:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Plugins/FlatCartoonGUI/png/window/window3_1_red.png?fileID=21300000&amp;guid=b56d5fd537671134a8ad6393b8130b38&amp;type=3#window3_1_red&quot;); margin-top: 56px; margin-right: 56px; margin-bottom: 56px; margin-left: 56px; padding-top: 84px; padding-right: 84px; padding-bottom: 84px; padding-left: 84px; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; align-self: stretch; align-content: stretch; align-items: auto; flex-shrink: 0; max-width: 1440px;">
-                    <engine:VisualElement style="flex-grow: 0; width: 224px; height: 224px; background-color: rgba(255, 255, 255, 0); background-image: url(&quot;project://database/Assets/Plugins/FlatCartoonGUI/png/grid/grid_rectangle.png?fileID=21300000&amp;guid=f3945e5b1ac52d040a3533798a83a28e&amp;type=3#grid_rectangle&quot;); align-self: stretch;" />
+        <engine:VisualElement style="flex-grow: 1; align-items: stretch; justify-content: center; align-self: stretch; align-content: auto;">
+            <engine:VisualElement style="flex-grow: 0; min-height: 336px;">
+                <engine:VisualElement name="TopPanel" style="flex-grow: 0; height: 224px; background-image: url(&quot;project://database/Assets/Plugins/FlatCartoonGUI/png/titlebar/titlebar_ribbon1_red.png?fileID=21300000&amp;guid=884b59f2bd9270c438de6bdde7d01179&amp;type=3#titlebar_ribbon1_red&quot;); align-self: center; width: 840px; margin-top: 56px; margin-bottom: 56px; flex-direction: row; justify-content: center; align-items: center;">
+                    <engine:Label text="Shop" style="flex-grow: 0; color: rgb(255, 255, 255); font-size: 84%; -unity-text-align: middle-center; -unity-font-style: bold; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
                 </engine:VisualElement>
             </engine:VisualElement>
-            <engine:Instance template="CloseButton">
+            <engine:VisualElement name="MiddlePanel" style="flex-grow: 1; align-items: center; justify-content: center; align-content: auto; align-self: stretch; flex-direction: row;">
+                <engine:ScrollView horizontal-scroller-visibility="Hidden" focusable="true" vertical-scroller-visibility="Hidden" touch-scroll-type="Elastic" name="ContentPanel" style="align-items: flex-start; justify-content: center; flex-direction: row; flex-grow: 1; flex-shrink: 0; align-self: stretch; align-content: auto; max-width: 1668px; min-width: 720px; margin-top: 56px; margin-right: 56px; margin-bottom: 56px; margin-left: 56px; padding-top: 84px; padding-right: 84px; padding-bottom: 84px; padding-left: 84px; background-image: url(&quot;project://database/Assets/Plugins/FlatCartoonGUI/png/window/window3_2_red.png?fileID=21300000&amp;guid=5509248ca9975dd47ab2572bc9518b37&amp;type=3#window3_2_red&quot;); background-color: rgba(255, 255, 255, 0);">
+                    <engine:Instance template="ShopItem" name="ShopItem" />
+                    <engine:Instance template="ShopItem" name="ShopItem" />
+                </engine:ScrollView>
+            </engine:VisualElement>
+            <engine:Instance template="CloseButton" style="min-height: 420px;">
                 <AttributeOverrides element-name="CloseButton" text="Close" />
             </engine:Instance>
         </engine:VisualElement>

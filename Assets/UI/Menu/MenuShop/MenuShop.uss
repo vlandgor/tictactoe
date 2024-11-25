@@ -1,0 +1,11 @@
+.unity-scroll-view {
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.unity-scroll-view__content-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}

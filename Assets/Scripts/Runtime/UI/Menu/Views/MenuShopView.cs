@@ -11,6 +11,8 @@ namespace Runtime.UI.Menu.Views
         
         private Button _closeButton;
         
+        
+        
         [Inject]
         public void Construct(MenuShopPresenter menuShopPresenter)
         {

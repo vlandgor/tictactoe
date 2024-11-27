@@ -1,4 +1,5 @@
 ﻿using Runtime.GamePlayer;
+using Runtime.MatchService;
 
 namespace Runtime.GameSession
 {

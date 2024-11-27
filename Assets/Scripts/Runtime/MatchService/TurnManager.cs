@@ -1,5 +1,4 @@
-﻿using System;
-using Runtime.GamePlayer;
+﻿using Runtime.GamePlayer;
 
 namespace Runtime.MatchService
 {

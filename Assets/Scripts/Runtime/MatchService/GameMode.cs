@@ -1,7 +1,8 @@
-﻿namespace Runtime.GameSession
+﻿namespace Runtime.MatchService
 {
     public enum GameMode
     {
-        PvP
+        PlayerVsPlayer,
+        PlayerVsBot,
     }
 }

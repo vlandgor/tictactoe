@@ -2,12 +2,14 @@
 using Runtime.GamePlayer;
 using UnityEngine;
 
-namespace Runtime.GameSession
+namespace Runtime.MatchService
 {
     public class Match
     {
         private IPlayer[,] _board;
         private Vector2Int _boardSize;
+        
+        public Vector2Int BoardSize => _boardSize;
         
         public Match(Vector2Int boardSize)
         {
@@ -33,6 +35,11 @@ namespace Runtime.GameSession
                     _board[i, j] = null;
                 }
             }
+        }
+        
+        public void UndoMove(Crd crd)
+        {
+            _board[crd.x, crd.y] = null;
         }
         
         public bool CheckIfPlayerWon(IPlayer player)
@@ -62,7 +69,7 @@ namespace Runtime.GameSession
             return true;
         }
         
-        private bool CheckIfCellIsTaken(Crd crd)
+        public bool CheckIfCellIsTaken(Crd crd)
         {
             if(_board[crd.x, crd.y] != null)
                 return true;

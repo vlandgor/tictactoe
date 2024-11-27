@@ -7,10 +7,10 @@ namespace Runtime.GamePlayer
         public string Name { get; }
         public Mark Mark { get; }
         
-        public PersonPlayer(string name, Mark mark)
+        public PersonPlayer(Mark mark, string name)
         {
-            Name = name;
             Mark = mark;
+            Name = name;
         }
     }
 }

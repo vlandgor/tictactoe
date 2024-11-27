@@ -1,5 +1,6 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using Runtime.BotService;
 using Runtime.ConfigProvider;
 using Runtime.GameBoard;
 using Runtime.GamePlayer;
@@ -14,6 +15,7 @@ namespace Runtime.MatchService
     {
         private readonly IGameBoard _gameBoard;
         private readonly IInputService _inputService;
+        private readonly IBotService _botService;
         private readonly IConfigProvider _configProvider;
         private readonly IGameMediator _gameMediator;
         
@@ -31,11 +33,13 @@ namespace Runtime.MatchService
         public MatchService(
             IGameBoard gameBoard, 
             IInputService inputService, 
+            IBotService botService,
             IConfigProvider configProvider,
             IGameMediator gameMediator)
         {
             _gameBoard = gameBoard;
             _inputService = inputService;
+            _botService = botService;
             _configProvider = configProvider;
             _gameMediator = gameMediator;
         }
@@ -54,16 +58,22 @@ namespace Runtime.MatchService
             _gameBoard.Clear();
             StartMatch();
         }
+
+        private void InitializePlayers(MatchData matchData)
+        {
+            
+        }
         
         private void HandleTileClicked(Crd crd)
         {
+            PlayTurn(crd);
+        }
+
+        private void PlayTurn(Crd crd)
+        {
             UpdateBoard(crd);
             CheckBoard();
-            
-            if(IsFinished)
-                return;
-            
-            NextTurn();
+            FinishTurn();
         }
         
         private void StartMatch()
@@ -105,8 +115,11 @@ namespace Runtime.MatchService
             }
         }
 
-        private void NextTurn()
+        private void FinishTurn()
         {
+            if(IsFinished)
+                return;
+            
             _turnManager.NextTurn(_matchData.Player1, _matchData.Player2);
             _gameMediator.UpdateTurnLabel(CurrentPlayer);
         }

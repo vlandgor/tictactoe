@@ -1,9 +1,11 @@
 ﻿using Cysharp.Threading.Tasks;
 using Runtime.AudioService;
+using Runtime.BotService;
 using Runtime.GamePlayer;
 using Runtime.GameSession;
 using Runtime.LoadingProvider;
 using Runtime.Marks;
+using Runtime.MatchService;
 using UnityEngine;
 
 namespace Runtime.UI.Menu.Models
@@ -23,9 +25,9 @@ namespace Runtime.UI.Menu.Models
 
         public void StartGame()
         {
-            IPlayer player1 = new PersonPlayer("Player 1", _marksProvider.GetRandomMarkSet().XMark);
-            IPlayer player2 = new PersonPlayer("Player 2", _marksProvider.GetRandomMarkSet().OMark);
-            MatchData matchData = new MatchData(GameMode.PvP, player1, player2);
+            IPlayer player1 = new PersonPlayer(_marksProvider.GetRandomMarkSet().XMark,"Player 1");
+            IPlayer player2 = new BotPlayer(_marksProvider.GetRandomMarkSet().OMark, BotLevel.Easy);
+            MatchData matchData = new MatchData(GameMode.PlayerVsBot, player1, player2);
             
             _loadingProvider.LoadGame(matchData).Forget();
         }

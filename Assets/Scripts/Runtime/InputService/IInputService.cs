@@ -7,8 +7,6 @@ namespace Runtime.InputService
     {
         public event Action<Crd> OnTileClicked;
         
-        public bool IsInputEnabled { get; }
-        
         public void SetInputEnabled(bool enable);
     }
 }

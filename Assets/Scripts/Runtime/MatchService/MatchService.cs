@@ -4,31 +4,33 @@ using Runtime.BotService;
 using Runtime.ConfigProvider;
 using Runtime.GameBoard;
 using Runtime.GamePlayer;
-using Runtime.GameSession;
 using Runtime.InputService;
+using Runtime.MatchService.States;
 using Runtime.UI.Game;
 using Zenject;
 
 namespace Runtime.MatchService
 {
-    public class MatchService : IMatchService, IDisposable
+    public class MatchService : ILocalMatchService
     {
-        private readonly IGameBoard _gameBoard;
-        private readonly IInputService _inputService;
-        private readonly IBotService _botService;
-        private readonly IConfigProvider _configProvider;
-        private readonly IGameMediator _gameMediator;
-        
         private MatchData _matchData;
-        
         private Match _match;
-        private TurnManager _turnManager;
         
-        private GameBoardConfig GameBoardConfig => _configProvider.GetConfig<GameBoardConfig>();
-        private IPlayer CurrentPlayer => _turnManager.CurrentPlayer; 
+        private IMatchState currentState;
+        private IMatchState _startMatchState;
+        private IMatchState _finishMatchState;
+        private IMatchState _player1MoveState;
+        private IMatchState _player2MoveState;
         
-        public bool IsFinished { get; private set; }
+        public IGameBoard GameBoard { get; }
+        public IInputService InputService { get; }
+        public IBotService BotService { get; }
+        public IConfigProvider ConfigProvider { get; }
+        public IGameMediator GameMediator { get; }
         
+        private GameBoardConfig GameBoardConfig => ConfigProvider.GetConfig<GameBoardConfig>();
+        public Match Match => _match;
+
         [Inject]
         public MatchService(
             IGameBoard gameBoard, 
@@ -37,96 +39,78 @@ namespace Runtime.MatchService
             IConfigProvider configProvider,
             IGameMediator gameMediator)
         {
-            _gameBoard = gameBoard;
-            _inputService = inputService;
-            _botService = botService;
-            _configProvider = configProvider;
-            _gameMediator = gameMediator;
+            GameBoard = gameBoard;
+            InputService = inputService;
+            BotService = botService;
+            ConfigProvider = configProvider;
+            GameMediator = gameMediator;
         }
         
         public async UniTask Initialize(MatchData matchData)
         {
             _matchData = matchData;
             
-            _gameBoard.Initialize();
-            StartMatch();
+            InitializeMatch();
+            InitializeBoard();
+            InitializeStates();
             
-            _inputService.OnTileClicked += HandleTileClicked;
+            ChangeState(_player1MoveState);
         }
+        
         public async UniTask Restart()
         {
-            _gameBoard.Clear();
-            StartMatch();
+            GameBoard.Clear();
         }
 
-        private void InitializePlayers(MatchData matchData)
+        public void ChangeTurn()
         {
-            
-        }
-        
-        private void HandleTileClicked(Crd crd)
-        {
-            PlayTurn(crd);
+            if(currentState == _player1MoveState)
+            {
+                ChangeState(_player2MoveState);
+            }
+            else if(currentState == _player2MoveState)
+            {
+                ChangeState(_player1MoveState);
+            }
         }
 
-        private void PlayTurn(Crd crd)
+        public IPlayer GetOpponent(IPlayer player)
         {
-            UpdateBoard(crd);
-            CheckBoard();
-            FinishTurn();
+            return player == _matchData.Player1 ? _matchData.Player2 : _matchData.Player1;
         }
-        
-        private void StartMatch()
+
+        public void ChangeState(IMatchState state)
         {
-            _turnManager = new TurnManager(_matchData.Player1, _matchData.Player2, _matchData.Player1);
+            currentState?.Exit();
+            currentState = state;
+            currentState.Enter();
+        }
+
+        private void InitializeMatch()
+        {
             _match = new Match(GameBoardConfig.BoardSize);
-            
-            _gameMediator.UpdateTurnLabel(CurrentPlayer);
-            _inputService.SetInputEnabled(true);
-            
-            IsFinished = false;
         }
 
-        private void UpdateBoard(Crd crd)
+        private void InitializeBoard()
         {
-            if(!_match.PlaceToken(crd, CurrentPlayer))
-            {
-                return;
-            }
-            
-            _gameBoard.PlaceToken(crd, CurrentPlayer.Mark);
+            GameBoard.Initialize();
         }
         
-        private void CheckBoard()
+        private void InitializeStates()
         {
-            if(_match.CheckIfPlayerWon(CurrentPlayer))
-            {
-                _inputService.SetInputEnabled(false);
-                _gameMediator.ShowGameResult(new MatchResult(CurrentPlayer));
-                IsFinished = true;
-                return;
-            }
-            if(_match.IsBoardFull())
-            {
-                _inputService.SetInputEnabled(false);
-                _gameMediator.ShowGameResult(new MatchResult(null));
-                IsFinished = true;
-                return;
-            }
-        }
-
-        private void FinishTurn()
-        {
-            if(IsFinished)
-                return;
+            _startMatchState = new StartMatchState(this);
+            _player1MoveState = GetStateForPlayer(_matchData.Player1);
+            _player2MoveState = GetStateForPlayer(_matchData.Player2);
             
-            _turnManager.NextTurn(_matchData.Player1, _matchData.Player2);
-            _gameMediator.UpdateTurnLabel(CurrentPlayer);
-        }
-        
-        public void Dispose()
-        {
-            _inputService.OnTileClicked -= HandleTileClicked;
+            IMatchState GetStateForPlayer(IPlayer player)
+            {
+                return player switch
+                {
+                    PersonPlayer => new PlayerMoveState(this, player),
+                    BotPlayer botPlayer  => new BotMoveState(this, player),
+                    _ => throw new InvalidOperationException("Unknown player type")
+                };
+            }
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
-using Runtime.GameSession;
+using Runtime.MatchService;
 
 namespace Runtime.LoadingProvider
 {

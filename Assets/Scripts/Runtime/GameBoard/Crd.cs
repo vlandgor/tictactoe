@@ -5,6 +5,16 @@ namespace Runtime.GameBoard
     [Serializable]
     public struct Crd
     {
+        public bool Equals(Crd other)
+        {
+            return x == other.x && y == other.y;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(x, y);
+        }
+
         public int x;
         public int y;
         

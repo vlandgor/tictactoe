@@ -9,6 +9,7 @@ namespace Runtime.MatchService
         private IPlayer[,] _board;
         private Vector2Int _boardSize;
         
+        public IPlayer[,] Board => _board;
         public Vector2Int BoardSize => _boardSize;
         
         public Match(Vector2Int boardSize)
@@ -26,6 +27,11 @@ namespace Runtime.MatchService
             return true;
         }
         
+        public void UndoPlaceToken(Crd crd)
+        {
+            _board[crd.x, crd.y] = null;
+        }
+        
         public void Restart()
         {
             for (int i = 0; i < _boardSize.x; i++)
@@ -35,11 +41,6 @@ namespace Runtime.MatchService
                     _board[i, j] = null;
                 }
             }
-        }
-        
-        public void UndoMove(Crd crd)
-        {
-            _board[crd.x, crd.y] = null;
         }
         
         public bool CheckIfPlayerWon(IPlayer player)
@@ -75,6 +76,19 @@ namespace Runtime.MatchService
                 return true;
 
             return false;
+        }
+        
+        public Match Clone()
+        {
+            var clonedMatch = new Match(_boardSize);
+            for (int i = 0; i < _boardSize.x; i++)
+            {
+                for (int j = 0; j < _boardSize.y; j++)
+                {
+                    clonedMatch._board[i, j] = _board[i, j];
+                }
+            }
+            return clonedMatch;
         }
         
         private void GenerateBoard(Vector2Int boardSize)

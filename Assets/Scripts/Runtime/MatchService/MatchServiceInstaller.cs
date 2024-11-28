@@ -8,7 +8,7 @@ namespace Runtime.MatchService
         {
             BindMatchService();
         }
-
+        
         private void BindMatchService()
         {
             Container

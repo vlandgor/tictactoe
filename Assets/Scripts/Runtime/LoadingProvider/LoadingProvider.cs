@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using Runtime.GameSession;
 using Runtime.LoadingProvider.LoadingOperations;
+using Runtime.MatchService;
 using Runtime.UI;
 using Zenject;
 

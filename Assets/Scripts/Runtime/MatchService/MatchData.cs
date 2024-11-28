@@ -1,7 +1,6 @@
 ﻿using Runtime.GamePlayer;
-using Runtime.MatchService;
 
-namespace Runtime.GameSession
+namespace Runtime.MatchService
 {
     public class MatchData
     {

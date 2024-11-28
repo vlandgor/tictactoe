@@ -17,8 +17,6 @@ namespace Runtime.MatchService
         private Match _match;
         
         private IMatchState currentState;
-        private IMatchState _startMatchState;
-        private IMatchState _finishMatchState;
         private IMatchState _player1MoveState;
         private IMatchState _player2MoveState;
         
@@ -59,7 +57,10 @@ namespace Runtime.MatchService
         
         public async UniTask Restart()
         {
+            InitializeMatch();
             GameBoard.Clear();
+            
+            ChangeState(_player1MoveState);
         }
 
         public void ChangeTurn()
@@ -98,7 +99,6 @@ namespace Runtime.MatchService
         
         private void InitializeStates()
         {
-            _startMatchState = new StartMatchState(this);
             _player1MoveState = GetStateForPlayer(_matchData.Player1);
             _player2MoveState = GetStateForPlayer(_matchData.Player2);
             

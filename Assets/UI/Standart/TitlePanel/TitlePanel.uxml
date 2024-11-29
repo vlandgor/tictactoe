@@ -1,0 +1,8 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Standart/TitlePanel/TilePanel.uss?fileID=7433441132597879392&amp;guid=cbcbe75a3572b334fbd919b3d2b31f0d&amp;type=3#TilePanel" />
+    <engine:VisualElement class="title-panel">
+        <engine:VisualElement name="Title" class="title-sprite">
+            <engine:Label text="Shop" class="title-label" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

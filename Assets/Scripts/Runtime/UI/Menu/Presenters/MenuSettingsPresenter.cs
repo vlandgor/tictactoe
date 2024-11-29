@@ -16,11 +16,7 @@ namespace Runtime.UI.Menu.Presenters
             _settingsView = settingsView;
         }
         
-        public override void EnableView()
-        {
-            Debug.Log($"Settings button clicked");
-            _settingsView.Show();
-        }
+        public override void EnableView() => _settingsView.Show();
         public override void DisableView() => _settingsView.Hide();
         
         public void OnMusicValueChanged(ChangeEvent<float> changedValue)

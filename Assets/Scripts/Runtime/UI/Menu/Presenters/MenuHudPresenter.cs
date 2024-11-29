@@ -18,6 +18,7 @@ namespace Runtime.UI.Menu.Presenters
             
             _view.PlayButtonClicked += HandlePlayButtonClicked;
         }
+        
         public void Dispose()
         {
             _view.PlayButtonClicked -= HandlePlayButtonClicked;
@@ -25,7 +26,7 @@ namespace Runtime.UI.Menu.Presenters
 
         private void HandlePlayButtonClicked()
         {
-            _model.StartGame();
+            _mediator.ShowCreateGame();
         }
         
         public void EnableShop()

@@ -15,6 +15,7 @@ namespace Runtime.UI.Menu
         [SerializeField] private MenuHudView _menuHudView;
         [SerializeField] private MenuSettingsView _menuSettingsView;
         [SerializeField] private MenuShopView _menuShopView;
+        [SerializeField] private MenuCreateGameView _menuCreateGameView;
         
         public override void InstallBindings()
         {
@@ -23,6 +24,7 @@ namespace Runtime.UI.Menu
             BindMenuHud();
             BindMenuSettings();
             BindMenuShop();
+            BingCreateGame();
         }
         
         private void BindMediator()
@@ -36,11 +38,9 @@ namespace Runtime.UI.Menu
         private void BindMenuHud()
         {
             IMenuMediator mediator = Container.Resolve<IMenuMediator>();
-            ILoadingProvider loadingProvider = Container.Resolve<ILoadingProvider>();
-            IMarksProvider marksProvider = Container.Resolve<IMarksProvider>();
             IAudioService audioService = Container.Resolve<IAudioService>();
             
-            MenuHudModel model = new MenuHudModel(loadingProvider, marksProvider, audioService);
+            MenuHudModel model = new MenuHudModel(audioService);
 
             Container
                 .Bind<MenuHudPresenter>()
@@ -68,6 +68,21 @@ namespace Runtime.UI.Menu
                 .Bind<MenuShopPresenter>()
                 .AsSingle()
                 .WithArguments(model, _menuShopView);
+        }
+
+        private void BingCreateGame()
+        {
+            IMenuMediator mediator = Container.Resolve<IMenuMediator>();
+            ILoadingProvider loadingProvider = Container.Resolve<ILoadingProvider>();
+            IMarksProvider marksService = Container.Resolve<IMarksProvider>();
+            IAudioService audioService = Container.Resolve<IAudioService>();
+            
+            MenuCreateGameModel model = new MenuCreateGameModel(loadingProvider, marksService, audioService);
+
+            Container
+                .Bind<MenuCreateGamePresenter>()
+                .AsSingle()
+                .WithArguments(mediator, model, _menuCreateGameView);
         }
     }
 }

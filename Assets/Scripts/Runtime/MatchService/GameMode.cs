@@ -4,5 +4,6 @@
     {
         PlayerVsPlayer,
         PlayerVsBot,
+        BotVsBot
     }
 }

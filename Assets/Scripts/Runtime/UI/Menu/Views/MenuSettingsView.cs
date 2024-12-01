@@ -7,7 +7,7 @@ namespace Runtime.UI.Menu.Views
 {
     public class MenuSettingsView : View, IDisposable
     {
-        private MenuSettingsPresenter _menuSettingsPresenter;
+        private MenuSettingsPresenter _presenter;
         
         private Button _closeButton;
         
@@ -23,7 +23,7 @@ namespace Runtime.UI.Menu.Views
         [Inject]
         public void Construct(MenuSettingsPresenter menuSettingsPresenter)
         {
-            _menuSettingsPresenter = menuSettingsPresenter;
+            _presenter = menuSettingsPresenter;
         }
         
         public override void InitializeVisuals()
@@ -31,15 +31,15 @@ namespace Runtime.UI.Menu.Views
             base.InitializeVisuals();
             
             _closeButton = _root.Q<Button>("CloseButton");
-            _closeButton.clicked += _menuSettingsPresenter.DisableView;
+            _closeButton.clicked += _presenter.DisableView;
             
             _musicSlider = _root.Q<Slider>("MusicSlider");
-            _musicSlider.RegisterValueChangedCallback(_menuSettingsPresenter.OnMusicValueChanged);
+            _musicSlider.RegisterValueChangedCallback(_presenter.OnMusicValueChanged);
             _musicOnIcon = _root.Q<VisualElement>("MusicOnIcon");
             _musicOffIcon = _root.Q<VisualElement>("MusicOffIcon");
             
             _soundSlider = _root.Q<Slider>("SoundSlider");
-            _soundSlider.RegisterValueChangedCallback(_menuSettingsPresenter.OnSoundValueChanged);
+            _soundSlider.RegisterValueChangedCallback(_presenter.OnSoundValueChanged);
             _soundOnIcon = _root.Q<VisualElement>("SoundOnIcon");
             _soundOffIcon = _root.Q<VisualElement>("SoundOffIcon");
         }
@@ -58,10 +58,10 @@ namespace Runtime.UI.Menu.Views
 
         public void Dispose()
         {
-            _closeButton.clicked -= _menuSettingsPresenter.DisableView;
+            _closeButton.clicked -= _presenter.DisableView;
             
-            _musicSlider.UnregisterValueChangedCallback(_menuSettingsPresenter.OnMusicValueChanged);
-            _soundSlider.UnregisterValueChangedCallback(_menuSettingsPresenter.OnSoundValueChanged);
+            _musicSlider.UnregisterValueChangedCallback(_presenter.OnMusicValueChanged);
+            _soundSlider.UnregisterValueChangedCallback(_presenter.OnSoundValueChanged);
         }
     }
 }

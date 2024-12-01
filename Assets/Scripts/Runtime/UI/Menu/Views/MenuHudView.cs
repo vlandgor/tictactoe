@@ -28,8 +28,8 @@ namespace Runtime.UI.Menu.Views
             _playButton = _root.Q<Button>("PlayButton");
             _playButton.clicked += _presenter.EnableGameSetup;
             
-            // _settingsButton = _root.Q<Button>("SettingsButton");
-            // _settingsButton.clicked += () => _presenter.EnableSettings();
+            _settingsButton = _root.Q<Button>("SettingsButton");
+            _settingsButton.clicked += () => _presenter.EnableSettings();
         }
     }
 }

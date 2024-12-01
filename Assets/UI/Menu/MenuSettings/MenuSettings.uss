@@ -1,18 +1,16 @@
 .settings-toggle {
     align-items: center;
     justify-content: center;
-    width: 98px;
+    width: 168px;
     height: 98px;
     min-width: 98px;
     min-height: 98px;
 }
 
 .settings-toggle .unity-toggle__input {
-    width: 98px;
-    height: 98px;
     align-items: center;
     justify-content: center;
-    background-image: url("project://database/Assets/Plugins/FlatCartoonGUI/psd/checkbox/checkbox_background.psd?fileID=21300000&guid=8e5a6c1510b59bc4abf8b37617a27080&type=3#checkbox_background");
+    background-image: url("project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/UI_Etc/Switch_Bg_Off.png?fileID=21300000&guid=a1e436d26683241d787e58854a040e63&type=3#Switch_Bg_Off");
     background-color: rgba(255, 255, 255, 0);
 }
 
@@ -20,13 +18,15 @@
     width: 70px;
     height: 70px;
     background-color: rgba(255, 255, 255, 0);
-    background-image: url("project://database/Assets/Plugins/FlatCartoonGUI/png/checkbox/checkbox_foreground_orange.png?fileID=21300000&guid=09c9cd8fbb8a1f740bc59ac4a05deee7&type=3#checkbox_foreground_orange");
+    background-image: url("project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/UI_Etc/Switch_Handle_Off.png?fileID=21300000&guid=d1b1739b99fa046a78d969b1957e55bb&type=3#Switch_Handle_Off");
     -unity-background-scale-mode: stretch-to-fill;
     -unity-background-image-tint-color: rgb(255, 255, 255);
     border-top-width: 0;
     border-right-width: 0;
     border-bottom-width: 0;
     border-left-width: 0;
+    align-items: stretch;
+    align-self: flex-start;
 }
 
 .settings-slider {
@@ -40,6 +40,7 @@
     flex-grow: 1;
     align-self: stretch;
     align-content: auto;
+    width: 140px;
 }
 
 .settings-slider .unity-slider__input {
@@ -48,7 +49,7 @@
     align-items: stretch;
     min-height: auto;
     height: auto;
-    width: 100%;
+    width: auto;
     margin: 0;
     padding: 0;
     flex-grow: 1;
@@ -61,7 +62,7 @@
     justify-content: center;
     align-items: stretch;
     height: auto;
-    width: 100%;
+    width: auto;
     margin: 0;
     padding: 0;
     flex-grow: 1;
@@ -74,7 +75,7 @@
     width: 100%;
     margin: 0;
     padding: 0;
-    background-image: url("project://database/Assets/Plugins/FlatCartoonGUI/psd/slider/slider_background_oval.psd?fileID=21300000&guid=e5834b2be0a080f4b8969d2a381d25ad&type=3#slider_background_oval");
+    background-image: url("project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Slider/Slider_Basic02_Bg.png?fileID=21300000&guid=46f04e55ae2a54be58c4b41c6b6fde49&type=3#Slider_Basic02_Bg");
     background-color: rgba(255, 255, 255, 0);
     background-repeat: no-repeat;
     background-position: center;
@@ -112,13 +113,13 @@
     display: flex;
     justify-content: center;
     align-items: stretch;
-    height: 70px;
-    width: 70px;
+    height: 98px;
+    width: 84px;
     margin: 0;
     padding: 0;
     border: none;
     background-color: rgba(255, 255, 255, 0);
-    background-image: url("project://database/Assets/Plugins/FlatCartoonGUI/png/slider/slider_button_square_orange.png?fileID=21300000&guid=ee32fd93b041797438e8c86ba5dff53a&type=3#slider_button_square_orange");
+    background-image: url("project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Slider/Slider_Handle_Icon.png?fileID=21300000&guid=6124341aca5a24f1c8ffa878bf205e93&type=3#Slider_Handle_Icon");
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -135,7 +136,7 @@
 }
 
 .settings-slider .unity-base-slider__fill {
-    background-image: url("project://database/Assets/Plugins/FlatCartoonGUI/png/slider/slider_foreground_oval_orange.png?fileID=21300000&guid=cb524a8db776b7e4f918efa12c7bda41&type=3#slider_foreground_oval_orange");
+    background-image: url("project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Slider/Slider_Basic02_Fill_Yellow.png?fileID=21300000&guid=41f68bec7506344f19c4a2960cda7eb0&type=3#Slider_Basic02_Fill_Yellow");
     border-top-width: 0;
     border-right-width: 0;
     border-bottom-width: 0;

@@ -3,7 +3,7 @@
     <engine:Template name="CloseButton" src="project://database/Assets/UI/Standart/ClosePanel/ClosePanel.uxml?fileID=9197481963319205126&amp;guid=eee8f314e392c19478e1e09047524846&amp;type=3#ClosePanel" />
     <Style src="project://database/Assets/UI/Menu/MenuShop/MenuShop.uss?fileID=7433441132597879392&amp;guid=12503012f2c15f74cbc7fa135528dd00&amp;type=3#MenuShop" />
     <Style src="project://database/Assets/UI/Standart/ClosePanel/ClosePanel.uss?fileID=7433441132597879392&amp;guid=2bd863255bd31c240adecf6764864eec&amp;type=3#ClosePanel" />
-    <engine:VisualElement name="Visual" style="flex-grow: 1; background-color: rgba(255, 255, 255, 0); background-image: url(&quot;project://database/Assets/Art/Sprites/Background.png?fileID=3715637872456251105&amp;guid=f0feeaa1ee6139a4ebb6c74f7054834c&amp;type=3#background_9_0&quot;);">
+    <engine:VisualElement name="Visual" style="flex-grow: 1; background-color: rgba(255, 255, 255, 0); background-image: url(&quot;project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Demo/Demo_Background/Background_06.png?fileID=21300000&amp;guid=96274b6f4982041558dfdc5471747076&amp;type=3#Background_06&quot;);">
         <engine:VisualElement style="flex-grow: 1; align-items: stretch; justify-content: center; align-self: stretch; align-content: auto;">
             <engine:Instance template="TitlePanel" name="TitlePanel" />
             <engine:VisualElement name="MiddlePanel" style="flex-grow: 1; align-items: center; justify-content: center; align-content: auto; align-self: stretch; flex-direction: row;">

@@ -1,44 +1,93 @@
-.menu-option--button {
-    border-left-color: rgba(255, 255, 255, 0);
-    border-right-color: rgba(255, 255, 255, 0);
-    border-top-color: rgba(255, 255, 255, 0);
-    border-bottom-color: rgba(255, 255, 255, 0);
-    overflow: visible;
-    align-items: center;
-    justify-content: center;
-    align-content: auto;
-    width: auto;
-    height: auto;
+.game-mode__panel {
+    width: 840px;
+    height: 840px;
+    background-image: url("project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Button/Button03_Blue.png?fileID=21300000&guid=43d850e9432604fbe9fc16c8c0fa806a&type=3#Button03_Blue");
+}
+
+.game-mode-title__panel {
+    height: 224px;
+}
+
+.game-mode-title__text {
+    flex-grow: 1;
     margin-top: 0;
     margin-right: 0;
-    margin-bottom: 0;
+    margin-bottom: 56px;
     margin-left: 0;
     padding-top: 0;
     padding-right: 0;
     padding-bottom: 0;
     padding-left: 0;
-    background-color: rgba(255, 255, 255, 0);
-    font-size: 42px;
-    -unity-font-style: bold;
+    -unity-font-definition: url("project://database/Assets/Fonts/LilitaOne-Regular.ttf?fileID=12800000&guid=9e85cee314c38b24ca27fdac2b487b74&type=3#LilitaOne-Regular");
+    -unity-text-align: middle-center;
     color: rgb(255, 255, 255);
-    -unity-font-definition: url("project://database/Library/unity%20default%20resources?fileID=10102&guid=0000000000000000e000000000000000&type=0#LegacyRuntime");
-    min-width: 112px;
-    min-height: 112px;
-    max-width: 168px;
-    max-height: 168px;
-    flex-grow: 1;
-    align-self: stretch;
+    font-size: 56px;
 }
 
-.menu-option--button:active {
-    border-left-color: rgba(255, 255, 255, 0);
-    border-right-color: rgba(255, 255, 255, 0);
-    border-top-color: rgba(255, 255, 255, 0);
-    border-bottom-color: rgba(255, 255, 255, 0);
-    overflow: visible;
-    align-items: center;
-    justify-content: center;
-    align-content: auto;
+.play__button {
+    width: 420px;
+    height: 168px;
+    margin-left: 28px;
+    margin-right: 28px;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    background-image: url("project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Button/Button01_Orange.Png?fileID=21300000&guid=2bc701b63b63f40e0893a9fabeaa0a78&type=3#Button01_Orange");
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    background-color: rgba(255, 255, 255, 0);
+    -unity-font-definition: url("project://database/Assets/Fonts/LilitaOne-Regular.ttf?fileID=12800000&guid=9e85cee314c38b24ca27fdac2b487b74&type=3#LilitaOne-Regular");
+    font-size: 84px;
+    color: rgb(255, 255, 255);
+    -unity-text-align: middle-center;
+    -unity-font-style: bold;
+    -unity-text-outline-width: 14px;
+    -unity-text-outline-color: rgb(0, 0, 0);
+    text-shadow: 0 0 0 rgba(255, 255, 255, 0);
+}
+
+.play__button:active {
+    width: 420px;
+    height: 168px;
+    margin-left: 28px;
+    margin-right: 28px;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    background-image: url("project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Button/Button01_Orange.Png?fileID=21300000&guid=2bc701b63b63f40e0893a9fabeaa0a78&type=3#Button01_Orange");
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    background-color: rgba(255, 255, 255, 0);
+    -unity-font-definition: url("project://database/Assets/Fonts/LilitaOne-Regular.ttf?fileID=12800000&guid=9e85cee314c38b24ca27fdac2b487b74&type=3#LilitaOne-Regular");
+    font-size: 84px;
+    color: rgb(255, 255, 255);
+    -unity-text-align: middle-center;
+    -unity-font-style: bold;
+    -unity-text-outline-width: 14px;
+    -unity-text-outline-color: rgb(0, 0, 0);
+    text-shadow: 0 0 0 rgba(255, 255, 255, 0);
+    scale: 0.9 0.9;
+}
+
+.change-game-mode__button {
     width: 168px;
     height: 168px;
     margin-top: 0;
@@ -50,20 +99,19 @@
     padding-bottom: 0;
     padding-left: 0;
     background-color: rgba(255, 255, 255, 0);
-    font-size: 42px;
-    -unity-font-style: bold;
-    color: rgb(255, 255, 255);
-    -unity-font-definition: url("project://database/Library/unity%20default%20resources?fileID=10102&guid=0000000000000000e000000000000000&type=0#LegacyRuntime");
-    -unity-background-image-tint-color: rgb(255, 255, 255);
-    scale: 0.9 0.9;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
 }
 
-.menu-play--button {
-    border-left-color: rgba(255, 255, 255, 0);
-    border-right-color: rgba(255, 255, 255, 0);
-    border-top-color: rgba(255, 255, 255, 0);
-    border-bottom-color: rgba(255, 255, 255, 0);
-    background-color: rgba(255, 255, 255, 0);
+.change-game-mode__button:active {
+    width: 168px;
+    height: 168px;
     margin-top: 0;
     margin-right: 0;
     margin-bottom: 0;
@@ -72,38 +120,61 @@
     padding-right: 0;
     padding-bottom: 0;
     padding-left: 0;
-    width: 240px;
-    height: 240px;
-    align-items: center;
-    justify-content: center;
-    align-content: auto;
+    background-color: rgba(255, 255, 255, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    scale: 0.9 0.9;
 }
 
-.menu-play--button:active {
-    border-left-color: rgba(255, 255, 255, 0);
-    border-right-color: rgba(255, 255, 255, 0);
-    border-top-color: rgba(255, 255, 255, 0);
-    border-bottom-color: rgba(255, 255, 255, 0);
-    background-color: rgba(255, 255, 255, 0);
+.settings__button {
+    width: 168px;
+    height: 140px;
     margin-top: 0;
     margin-right: 0;
     margin-bottom: 0;
     margin-left: 0;
     padding-top: 0;
     padding-right: 0;
-    padding-bottom: 0;
-    padding-left: 0;
-    width: 240px;
-    height: 240px;
-    align-items: center;
-    justify-content: center;
-    align-content: auto;
-    scale: 0.9 0.9;
+    padding-bottom: 14px;
+    padding-left: 14px;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    background-image: url("project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Button/Button_FlushRight_Gray.png?fileID=21300000&guid=f337ec50763134ed1bbb82848ae3b024&type=3#Button_FlushRight_Gray");
+    background-color: rgba(255, 255, 255, 0);
 }
 
-.title--label {
-    color: rgb(255, 255, 255);
-    -unity-text-align: middle-center;
-    -unity-font-style: bold;
-    /*font-size: 3vh;*/
+.settings__button:active {
+    width: 168px;
+    height: 140px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 14px;
+    padding-left: 14px;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    background-image: url("project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Button/Button_FlushRight_Gray.png?fileID=21300000&guid=f337ec50763134ed1bbb82848ae3b024&type=3#Button_FlushRight_Gray");
+    background-color: rgba(255, 255, 255, 0);
+    translate: 28px 0;
 }

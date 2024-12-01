@@ -6,6 +6,7 @@ using Runtime.UI.Menu.Models;
 using Runtime.UI.Menu.Presenters;
 using Runtime.UI.Menu.Views;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace Runtime.UI.Menu
@@ -15,7 +16,7 @@ namespace Runtime.UI.Menu
         [SerializeField] private MenuHudView _menuHudView;
         [SerializeField] private MenuSettingsView _menuSettingsView;
         [SerializeField] private MenuShopView _menuShopView;
-        [SerializeField] private MenuCreateGameView _menuCreateGameView;
+        [SerializeField] private MenuGameSetupView _menuGameSetupView;
         
         public override void InstallBindings()
         {
@@ -24,7 +25,7 @@ namespace Runtime.UI.Menu
             BindMenuHud();
             BindMenuSettings();
             BindMenuShop();
-            BingCreateGame();
+            BingGameSetup();
         }
         
         private void BindMediator()
@@ -34,18 +35,20 @@ namespace Runtime.UI.Menu
                 .To<MenuMediator>()
                 .AsSingle();
         }
-
-        private void BindMenuHud()
+        
+        private void BingGameSetup()
         {
             IMenuMediator mediator = Container.Resolve<IMenuMediator>();
+            ILoadingProvider loadingProvider = Container.Resolve<ILoadingProvider>();
+            IMarksProvider marksService = Container.Resolve<IMarksProvider>();
             IAudioService audioService = Container.Resolve<IAudioService>();
             
-            MenuHudModel model = new MenuHudModel(audioService);
+            MenuGameSetupModel setupModel = new MenuGameSetupModel(loadingProvider, marksService, audioService);
 
             Container
-                .Bind<MenuHudPresenter>()
+                .Bind<MenuGameSetupPresenter>()
                 .AsSingle()
-                .WithArguments(mediator, model, _menuHudView);
+                .WithArguments(mediator, setupModel, _menuGameSetupView);
         }
         
         private void BindMenuSettings()
@@ -69,20 +72,18 @@ namespace Runtime.UI.Menu
                 .AsSingle()
                 .WithArguments(model, _menuShopView);
         }
-
-        private void BingCreateGame()
+        
+        private void BindMenuHud()
         {
             IMenuMediator mediator = Container.Resolve<IMenuMediator>();
-            ILoadingProvider loadingProvider = Container.Resolve<ILoadingProvider>();
-            IMarksProvider marksService = Container.Resolve<IMarksProvider>();
             IAudioService audioService = Container.Resolve<IAudioService>();
             
-            MenuCreateGameModel model = new MenuCreateGameModel(loadingProvider, marksService, audioService);
+            MenuHudModel model = new MenuHudModel(audioService);
 
             Container
-                .Bind<MenuCreateGamePresenter>()
+                .Bind<MenuHudPresenter>()
                 .AsSingle()
-                .WithArguments(mediator, model, _menuCreateGameView);
+                .WithArguments(mediator, model, _menuHudView);
         }
     }
 }

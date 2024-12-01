@@ -1,10 +1,9 @@
-﻿using System;
-using Runtime.UI.Menu.Models;
+﻿using Runtime.UI.Menu.Models;
 using Runtime.UI.Menu.Views;
 
 namespace Runtime.UI.Menu.Presenters
 {
-    public class MenuHudPresenter : IDisposable
+    public class MenuHudPresenter : Presenter
     {
         private IMenuMediator _mediator;
         private MenuHudModel _model;
@@ -15,18 +14,11 @@ namespace Runtime.UI.Menu.Presenters
             _mediator = mediator;
             _model = model;
             _view = view;
-            
-            _view.PlayButtonClicked += HandlePlayButtonClicked;
-        }
-        
-        public void Dispose()
-        {
-            _view.PlayButtonClicked -= HandlePlayButtonClicked;
         }
 
-        private void HandlePlayButtonClicked()
+        public void EnableGameSetup()
         {
-            _mediator.ShowCreateGame();
+            _mediator.ShowGameSetup();
         }
         
         public void EnableShop()
@@ -48,6 +40,15 @@ namespace Runtime.UI.Menu.Presenters
         {
             _model.EnableSettings();
             _mediator.ShowSettings();
+        }
+
+        public override void EnableView()
+        {
+            
+        }
+        public override void DisableView()
+        {
+            
         }
     }
 }

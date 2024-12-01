@@ -8,13 +8,13 @@ using Runtime.MatchService;
 
 namespace Runtime.UI.Menu.Models
 {
-    public class MenuCreateGameModel : Model
+    public class MenuGameSetupModel : Model
     {
         private ILoadingProvider _loadingProvider;
         private IMarksProvider _marksProvider;
         private IAudioService _audioService;
         
-        public MenuCreateGameModel(ILoadingProvider loadingProvider, IMarksProvider marksProvider, IAudioService audioService)
+        public MenuGameSetupModel(ILoadingProvider loadingProvider, IMarksProvider marksProvider, IAudioService audioService)
         {
             _loadingProvider = loadingProvider;
             _marksProvider = marksProvider;
@@ -40,11 +40,11 @@ namespace Runtime.UI.Menu.Models
                     player1 = new PersonPlayer(_marksProvider.GetRandomMarkSet().XMark,"Player 1");
                     player2 = new PersonPlayer(_marksProvider.GetRandomMarkSet().OMark,"Player 2");
                     return (player1, player2);
-                case GameMode.PlayerVsBot:
+                case GameMode.PlayerVsComp:
                     player1 = new PersonPlayer(_marksProvider.GetRandomMarkSet().XMark,"Player 1");
                     player2 = new BotPlayer(_marksProvider.GetRandomMarkSet().OMark, BotLevel.Hard);
                     return (player1, player2);
-                case GameMode.BotVsBot:
+                case GameMode.CompVsComp:
                     player1 = new BotPlayer(_marksProvider.GetRandomMarkSet().XMark, BotLevel.Easy);
                     player2 = new BotPlayer(_marksProvider.GetRandomMarkSet().OMark, BotLevel.Hard);
                     return (player1, player2);

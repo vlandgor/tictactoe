@@ -8,22 +8,22 @@ namespace Runtime.UI.Menu
         private readonly LazyInject<MenuHudPresenter> _hudPresenter;
         private readonly LazyInject<MenuSettingsPresenter> _settingsPresenter;
         private readonly LazyInject<MenuShopPresenter> _shopPresenter;
-        private readonly LazyInject<MenuCreateGamePresenter> _createGamePresenter;
+        private readonly LazyInject<MenuGameSetupPresenter> _gameSetupPresenter;
 
         public MenuMediator(
             LazyInject<MenuHudPresenter> hudPresenter, 
             LazyInject<MenuSettingsPresenter> settingsPresenter,
             LazyInject<MenuShopPresenter> shopPresenter,
-            LazyInject<MenuCreateGamePresenter> createGamePresenter)
+            LazyInject<MenuGameSetupPresenter> gameSetupPresenter)
         {
             _hudPresenter = hudPresenter;
             _settingsPresenter = settingsPresenter;
             _shopPresenter = shopPresenter;
-            _createGamePresenter = createGamePresenter;
+            _gameSetupPresenter = gameSetupPresenter;
         }
 
         public void ShowShop() => _shopPresenter.Value.EnableView();
         public void ShowSettings() => _settingsPresenter.Value.EnableView();
-        public void ShowCreateGame() => _createGamePresenter.Value.EnableView();
+        public void ShowGameSetup() => _gameSetupPresenter.Value.EnableView();
     }
 }

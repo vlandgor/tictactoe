@@ -234,7 +234,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2760366761433046318, guid: 4d10445dbfbf5f740b59a1c9c63add65, type: 3}
       propertyPath: m_Name
-      value: MenuCreateGameView
+      value: MenuGameSetupView
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -289,7 +289,7 @@ MonoBehaviour:
   _menuHudView: {fileID: 1623955071}
   _menuSettingsView: {fileID: 875968350}
   _menuShopView: {fileID: 758452457}
-  _menuCreateGameView: {fileID: 494443248}
+  _menuGameSetupView: {fileID: 494443248}
 --- !u!4 &641992385
 Transform:
   m_ObjectHideFlags: 0

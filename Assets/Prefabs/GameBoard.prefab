@@ -46,5 +46,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tilePrefab: {fileID: -4695088341378277500, guid: d38f2d067b2006343988fcf2a361699a, type: 3}
   _linePrefab: {fileID: 4774107672307701878, guid: 328ba16051b54784ebbb353ef2e217ce, type: 3}
-  _playerTokenPrefab: {fileID: 6355166914704433105, guid: 544de28f3751bfd499080ea448cbcf9b, type: 3}
-  _opponentTokenPrefab: {fileID: 1506619615898131441, guid: 04f30e8b981d92b41ba23fdd2105e669, type: 3}

@@ -20,7 +20,7 @@
     padding-left: 0;
     -unity-font-definition: url("project://database/Assets/Fonts/LilitaOne-Regular.ttf?fileID=12800000&guid=9e85cee314c38b24ca27fdac2b487b74&type=3#LilitaOne-Regular");
     -unity-text-align: middle-center;
-    color: rgb(255, 255, 255);
+    color: rgb(255, 255, 0);
     font-size: 56px;
 }
 
@@ -177,4 +177,29 @@
     background-image: url("project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Button/Button_FlushRight_Gray.png?fileID=21300000&guid=f337ec50763134ed1bbb82848ae3b024&type=3#Button_FlushRight_Gray");
     background-color: rgba(255, 255, 255, 0);
     translate: 28px 0;
+}
+
+.menu-item__button {
+    flex-grow: 1;
+    background-image: none;
+    background-color: rgba(255, 255, 255, 0);
+    display: flex;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    width: 140px;
+    height: 140px;
 }

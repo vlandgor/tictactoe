@@ -2,23 +2,26 @@
     <Style src="project://database/Assets/UI/Menu/MenuHud/MenuHud.uss?fileID=7433441132597879392&amp;guid=1fdfa73552735a54d97c14ac755caa31&amp;type=3#MenuHud" />
     <engine:VisualElement name="Visual" style="flex-grow: 1; justify-content: flex-start; align-items: stretch; background-color: rgba(255, 255, 255, 0); background-image: url(&quot;project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Demo/Demo_Background/Background_06.png?fileID=21300000&amp;guid=96274b6f4982041558dfdc5471747076&amp;type=3#Background_06&quot;); align-content: auto;">
         <engine:VisualElement style="flex-grow: 1; justify-content: flex-end; bottom: auto; align-self: stretch;">
-            <engine:VisualElement name="TopPanel" style="flex-grow: 0; position: relative; align-self: flex-end; align-items: auto; justify-content: flex-end; top: auto; flex-direction: row; align-content: auto; width: 100%; margin-right: 0; padding-right: 0; margin-top: 14px; margin-bottom: 56px;">
-                <engine:Button icon-image="project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/IconMisc/Icon_PictoIcon_Setting02.png?fileID=21300000&amp;guid=221db54c6537e4c20bbbd4071f86e4fd&amp;type=3#Icon_PictoIcon_Setting02" name="SettingsButton" class="settings__button" />
-            </engine:VisualElement>
+            <engine:VisualElement name="TopPanel" style="flex-grow: 0; height: 280px;" />
             <engine:VisualElement name="GameModesPanel" style="flex-grow: 1; position: relative; align-items: center; justify-content: center;">
-                <engine:VisualElement name="SimpleGamePanel" class="game-mode__panel" style="display: flex;">
-                    <engine:VisualElement class="game-mode-title__panel" style="background-image: url(&quot;project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Label/Title_Flag01_Blue.png?fileID=21300000&amp;guid=5be23c1877e9a40e28a1f3e28352d894&amp;type=3#Title_Flag01_Blue&quot;);">
-                        <engine:Label text="Simple Game" class="game-mode-title__text" />
+                <engine:VisualElement name="GameModes" style="flex-grow: 0; align-items: center; justify-content: center;">
+                    <engine:VisualElement name="SimpleGamePanel" class="game-mode__panel" style="display: none;">
+                        <engine:VisualElement class="game-mode-title__panel" style="background-image: url(&quot;project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Label/Title_Flag01_Blue.png?fileID=21300000&amp;guid=5be23c1877e9a40e28a1f3e28352d894&amp;type=3#Title_Flag01_Blue&quot;); height: 196px;">
+                            <engine:Label text="You need to practice more" class="game-mode-title__text" style="font-size: 42px;" />
+                        </engine:VisualElement>
+                    </engine:VisualElement>
+                    <engine:VisualElement name="FallingGamePanel" class="game-mode__panel" style="display: flex;">
+                        <engine:VisualElement class="game-mode-title__panel" style="background-image: url(&quot;project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Label/Title_Flag01_Purple.png?fileID=21300000&amp;guid=53a1ea3f1d6424c05b8510d75554f3f5&amp;type=3#Title_Flag01_Purple&quot;);">
+                            <engine:Label text="You were great" class="game-mode-title__text" />
+                        </engine:VisualElement>
                     </engine:VisualElement>
                 </engine:VisualElement>
-                <engine:VisualElement name="FallingGamePanel" class="game-mode__panel" style="display: none;">
-                    <engine:VisualElement class="game-mode-title__panel" style="background-image: url(&quot;project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Label/Title_Flag01_Purple.png?fileID=21300000&amp;guid=53a1ea3f1d6424c05b8510d75554f3f5&amp;type=3#Title_Flag01_Purple&quot;);">
-                        <engine:Label text="Falling Game" class="game-mode-title__text" />
-                    </engine:VisualElement>
+                <engine:VisualElement name="GameModeLabel" style="flex-grow: 0; height: 84px; margin-top: 0; align-self: stretch; margin-right: 0; margin-bottom: 0; margin-left: 0; top: 42px;">
+                    <engine:Label text="Simple Game" style="padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; flex-grow: 1; -unity-text-align: middle-center; font-size: 70px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/LilitaOne-Regular.ttf?fileID=12800000&amp;guid=9e85cee314c38b24ca27fdac2b487b74&amp;type=3#LilitaOne-Regular&quot;); color: rgb(255, 255, 255);" />
                 </engine:VisualElement>
             </engine:VisualElement>
-            <engine:VisualElement name="BotPanel" style="flex-grow: 0; flex-direction: row; align-items: center; align-self: center; bottom: auto; position: relative;">
-                <engine:VisualElement style="flex-grow: 0; flex-direction: row; height: 420px; align-items: center;">
+            <engine:VisualElement name="StartGamePanel" style="flex-grow: 0; flex-direction: row; align-items: center; align-self: stretch; bottom: auto; position: relative; justify-content: center;">
+                <engine:VisualElement style="flex-grow: 1; flex-direction: row; height: 420px; align-items: center; align-self: center; justify-content: center;">
                     <engine:Button icon-image="project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/IconMisc/Icon_PictoIcon_Prev02.png?fileID=21300000&amp;guid=399c25c9dce384160839b459896c826e&amp;type=3#Icon_PictoIcon_Prev02" name="PrevButton" class="change-game-mode__button" />
                     <engine:Button text="PLAY" name="PlayButton" class="play__button" />
                     <engine:Button icon-image="project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/IconMisc/Icon_PictoIcon_Next02.png?fileID=21300000&amp;guid=0bca651f898f1479c957ebcc1fa23f88&amp;type=3#Icon_PictoIcon_Next02" name="NextButton" class="change-game-mode__button" />

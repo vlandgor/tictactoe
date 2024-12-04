@@ -1,4 +1,5 @@
-﻿using Runtime.UI.Menu.Presenters;
+﻿using Runtime.MatchService;
+using Runtime.UI.Menu.Presenters;
 using Zenject;
 
 namespace Runtime.UI.Menu
@@ -24,6 +25,6 @@ namespace Runtime.UI.Menu
 
         public void ShowShop() => _shopPresenter.Value.EnableView();
         public void ShowSettings() => _settingsPresenter.Value.EnableView();
-        public void ShowGameSetup() => _gameSetupPresenter.Value.EnableView();
+        public void ShowGameSetup(GameMode gameMode) => _gameSetupPresenter.Value.EnableView();
     }
 }

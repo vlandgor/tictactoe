@@ -17,7 +17,6 @@ namespace Runtime.LoadingProvider
         private VisualElement _visual;
         
         private ProgressBar _progressBar;
-        private Label _loadingInfo;
         
         private float _targetProgress;
         
@@ -54,7 +53,6 @@ namespace Runtime.LoadingProvider
             foreach (ILoadingOperation operation in loadingOperations)
             {
                 ResetFill();
-                _loadingInfo.text = operation.Description;
                 
                 await operation.Load(OnProgress);
                 await WaitForBarToFill();
@@ -67,7 +65,6 @@ namespace Runtime.LoadingProvider
             _visual = _root.Q<VisualElement>("Visual");
             
             _progressBar = _visual.Q<ProgressBar>("ProgressBar");
-            _loadingInfo = _visual.Q<Label>("LoadingInfo");
         }
         
         private void ResetFill()
@@ -98,6 +95,7 @@ namespace Runtime.LoadingProvider
                 if (_progressBar.value < _targetProgress)
                 {
                     _progressBar.value += Time.deltaTime * _loadingConfig.BarSpeed;
+                    _progressBar.title = $"Loading...{(int)_progressBar.value}%";
                 }
 
                 await UniTask.Yield();

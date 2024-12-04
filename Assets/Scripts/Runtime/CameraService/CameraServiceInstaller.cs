@@ -14,7 +14,7 @@ namespace Runtime.CameraService
 
         private void BindCameraService()
         {
-            CameraService gameBoard = Container
+            CameraService cameraService = Container
                 .InstantiatePrefabForComponent<CameraService>(_cameraServicePrefab, Vector3.zero, Quaternion.identity, null);
             
             Container

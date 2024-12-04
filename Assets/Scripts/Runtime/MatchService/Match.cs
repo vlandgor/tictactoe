@@ -9,7 +9,6 @@ namespace Runtime.MatchService
         private IPlayer[,] _board;
         private Vector2Int _boardSize;
         
-        public IPlayer[,] Board => _board;
         public Vector2Int BoardSize => _boardSize;
         
         public Match(Vector2Int boardSize)
@@ -30,17 +29,6 @@ namespace Runtime.MatchService
         public void UndoPlaceToken(Crd crd)
         {
             _board[crd.x, crd.y] = null;
-        }
-        
-        public void Restart()
-        {
-            for (int i = 0; i < _boardSize.x; i++)
-            {
-                for (int j = 0; j < _boardSize.y; j++)
-                {
-                    _board[i, j] = null;
-                }
-            }
         }
         
         public bool CheckIfPlayerWon(IPlayer player)

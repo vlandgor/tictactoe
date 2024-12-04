@@ -20,7 +20,7 @@ namespace Runtime.GameBoard
         private Vector2Int BoardSize => _gameBoardConfig.BoardSize;
         private float BoardTileSize => _gameBoardConfig.BoardTileSize;
         private float BoardLineSize => _gameBoardConfig.BoardLineSize;
-        private Vector3 BoardOffset => new Vector3( BoardTileSize / 2, BoardTileSize / 2, 0);
+        private Vector3 TileOffset => new Vector3( BoardTileSize / 2, BoardTileSize / 2, 0);
 
         [Inject]
         public void Construct(IConfigProvider configProvider)
@@ -49,7 +49,9 @@ namespace Runtime.GameBoard
         {
             Mark mark = tokens[crd.x, crd.y] = Instantiate(markPrefab, transform);
             mark.transform.localScale = new Vector3(BoardTileSize, BoardTileSize, 1);
-            mark.transform.SetPositionAndRotation(new Vector3(crd.x * BoardTileSize, crd.y * BoardTileSize, 0) + BoardOffset, Quaternion.identity);
+            mark.transform.SetPositionAndRotation(
+                new Vector3(crd.x * BoardTileSize, crd.y * BoardTileSize, 0) + TileOffset, 
+                Quaternion.identity);
         }
         
         private async UniTask InitializeBoard(int width, int height)
@@ -62,7 +64,9 @@ namespace Runtime.GameBoard
                 {
                     GameTile tile = tiles[i, j] = Instantiate(_tilePrefab, transform, true);
                     tile.transform.localScale = new Vector3(BoardTileSize, BoardTileSize, 1);
-                    tile.transform.SetPositionAndRotation(new Vector3(i * BoardTileSize, j * BoardTileSize, 0) + BoardOffset, Quaternion.identity);
+                    tile.transform.SetPositionAndRotation((
+                        new Vector3(i * BoardTileSize, j * BoardTileSize, 0) + TileOffset), 
+                        Quaternion.identity);
                 }
             }
         }
@@ -73,7 +77,7 @@ namespace Runtime.GameBoard
                 GameObject line = Instantiate(_linePrefab, transform, true);
                 line.transform.localScale = new Vector3(BoardLineSize, height * BoardTileSize, 1);
                 line.transform.SetPositionAndRotation(
-                    new Vector3((i * BoardTileSize) - (BoardLineSize / 2) - (BoardTileSize / 2), (height / 2f * BoardTileSize) - (BoardTileSize / 2), 0) + BoardOffset, 
+                    new Vector3((i * BoardTileSize) - (BoardLineSize / 2) - (BoardTileSize / 2), (height / 2f * BoardTileSize) - (BoardTileSize / 2), 0) + TileOffset, 
                     Quaternion.identity);
             }
 
@@ -82,7 +86,7 @@ namespace Runtime.GameBoard
                 GameObject line = Instantiate(_linePrefab, transform, true);
                 line.transform.localScale = new Vector3(width * BoardTileSize, BoardLineSize, 1);
                 line.transform.SetPositionAndRotation(
-                    new Vector3((width / 2f * BoardTileSize) - (BoardTileSize / 2), (j * BoardTileSize) - (BoardLineSize / 2) - (BoardTileSize / 2), 0) + BoardOffset, 
+                    new Vector3((width / 2f * BoardTileSize) - (BoardTileSize / 2), (j * BoardTileSize) - (BoardLineSize / 2) - (BoardTileSize / 2), 0) + TileOffset, 
                     Quaternion.identity);
             }
         }

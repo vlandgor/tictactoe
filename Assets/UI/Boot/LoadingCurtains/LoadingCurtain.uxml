@@ -1,9 +1,11 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI/LoadingCurtains/loading.uss?fileID=7433441132597879392&amp;guid=03738ede5fe11164284ca1913b7ea488&amp;type=3#loading" />
-    <engine:VisualElement name="Visual" style="flex-grow: 1; -unity-text-outline-color: rgba(255, 255, 255, 0); background-color: rgba(255, 255, 255, 0); background-image: url(&quot;project://database/Assets/Art/Sprites/Background.png?fileID=3715637872456251105&amp;guid=f0feeaa1ee6139a4ebb6c74f7054834c&amp;type=3#background_9_0&quot;);">
-        <engine:VisualElement style="flex-grow: 1; position: absolute; width: 840px; align-self: center; bottom: 280px;">
-            <engine:Label text="Label" name="LoadingInfo" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; height: 112px; color: rgb(255, 255, 255); -unity-text-align: middle-center; -unity-font-style: bold; font-size: 28px;" />
-            <engine:ProgressBar value="32.4" title="my-progress" name="ProgressBar" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; height: 42px; background-color: rgba(255, 255, 255, 0); background-image: url(&quot;project://database/Assets/Plugins/FlatCartoonGUI/png/progressbar/progressbar_background_long_oval_3.png?fileID=21300000&amp;guid=5d0e3e769771881458e41f1ba626c149&amp;type=3#progressbar_background_long_oval_3&quot;);" />
+    <Style src="project://database/Assets/UI/Boot/LoadingCurtains/LoadingCurtain.uss?fileID=7433441132597879392&amp;guid=03738ede5fe11164284ca1913b7ea488&amp;type=3#LoadingCurtain" />
+    <engine:VisualElement name="Visual" style="flex-grow: 1;">
+        <engine:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Demo/Demo_Background/Background_06.png?fileID=21300000&amp;guid=96274b6f4982041558dfdc5471747076&amp;type=3#Background_06&quot;);">
+            <engine:VisualElement style="flex-grow: 1; position: absolute; width: 840px; align-self: center; bottom: 280px;">
+                <engine:ProgressBar value="32.4" title="Loading...32.4%" name="ProgressBar" />
+            </engine:VisualElement>
         </engine:VisualElement>
+        <engine:VisualElement name="FadePanel" style="flex-grow: 1; position: absolute; width: 100%; height: 100%; background-image: none; -unity-background-image-tint-color: rgb(255, 255, 255); background-color: rgb(255, 255, 255); opacity: 0;" />
     </engine:VisualElement>
 </engine:UXML>

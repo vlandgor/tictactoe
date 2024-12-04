@@ -1,0 +1,85 @@
+.unity-progress-bar {
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.unity-progress-bar__container {
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+    background-color: rgba(255, 255, 255, 0);
+    opacity: 1;
+    min-height: 56px;
+}
+
+.unity-progress-bar__background {
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+    background-color: rgba(255, 255, 255, 0);
+    opacity: 1;
+    background-image: url("project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Slider/Slider_Basic02_Bg.png?fileID=21300000&guid=46f04e55ae2a54be58c4b41c6b6fde49&type=3#Slider_Basic02_Bg");
+    -unity-background-scale-mode: stretch-to-fill;
+    -unity-background-image-tint-color: rgb(12, 31, 84);
+    align-items: stretch;
+    justify-content: center;
+    align-self: stretch;
+}
+
+.unity-progress-bar__progress {
+    min-height: auto;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+    background-color: rgba(255, 255, 255, 0);
+    opacity: 1;
+    background-image: url("project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Slider/Slider_Basic02_Fill_Yellow.png?fileID=21300000&guid=41f68bec7506344f19c4a2960cda7eb0&type=3#Slider_Basic02_Fill_Yellow");
+    -unity-background-scale-mode: stretch-to-fill;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    bottom: 9px;
+    top: 3px;
+    left: 3px;
+    right: 3px;
+}
+
+.unity-progress-bar__title-container {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+    overflow: hidden;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 9px;
+    padding-left: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+}
+
+.unity-progress-bar__title {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+    overflow: hidden;
+    bottom: auto;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    -unity-font-definition: url("project://database/Assets/Fonts/LilitaOne-Regular.ttf?fileID=12800000&guid=9e85cee314c38b24ca27fdac2b487b74&type=3#LilitaOne-Regular");
+    color: rgb(255, 255, 255);
+    font-size: 28px;
+    -unity-text-outline-color: rgb(0, 0, 0);
+    -unity-text-outline-width: 2px;
+}

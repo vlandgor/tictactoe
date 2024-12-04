@@ -4,7 +4,7 @@ namespace Runtime.MatchService
 {
     public class MatchData
     {
-        public MatchType MatchType { get; set; }
+        public MatchType MatchType { get; }
         public IPlayer Player1 { get; }
         public IPlayer Player2 { get; }
 

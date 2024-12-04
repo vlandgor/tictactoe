@@ -21,30 +21,30 @@ namespace Runtime.UI.Menu.Models
             _audioService = audioService;
         }
         
-        public void StartGame(GameMode gameMode)
+        public void StartGame(MatchType matchType)
         {
-            (IPlayer, IPlayer) players = GetPlayers(gameMode);
-            MatchData matchData = new MatchData(gameMode, players.Item1, players.Item2);
+            (IPlayer, IPlayer) players = GetPlayers(matchType);
+            MatchData matchData = new MatchData(matchType, players.Item1, players.Item2);
             
             _loadingProvider.LoadGame(matchData).Forget();
         }
         
-        private (IPlayer, IPlayer) GetPlayers(GameMode gameMode)
+        private (IPlayer, IPlayer) GetPlayers(MatchType matchType)
         {
             IPlayer player1;
             IPlayer player2;
             
-            switch (gameMode)
+            switch (matchType)
             {
-                case GameMode.PlayerVsPlayer:
+                case MatchType.PlayerVsPlayer:
                     player1 = new PersonPlayer(_marksProvider.GetRandomMarkSet().XMark,"Player 1");
                     player2 = new PersonPlayer(_marksProvider.GetRandomMarkSet().OMark,"Player 2");
                     return (player1, player2);
-                case GameMode.PlayerVsComp:
+                case MatchType.PlayerVsComp:
                     player1 = new PersonPlayer(_marksProvider.GetRandomMarkSet().XMark,"Player 1");
                     player2 = new BotPlayer(_marksProvider.GetRandomMarkSet().OMark, BotLevel.Hard);
                     return (player1, player2);
-                case GameMode.CompVsComp:
+                case MatchType.CompVsComp:
                     player1 = new BotPlayer(_marksProvider.GetRandomMarkSet().XMark, BotLevel.Easy);
                     player2 = new BotPlayer(_marksProvider.GetRandomMarkSet().OMark, BotLevel.Hard);
                     return (player1, player2);

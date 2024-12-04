@@ -5,7 +5,7 @@
 }
 
 .game-mode-title__panel {
-    height: 224px;
+    height: 196px;
 }
 
 .game-mode-title__text {
@@ -20,8 +20,10 @@
     padding-left: 0;
     -unity-font-definition: url("project://database/Assets/Fonts/LilitaOne-Regular.ttf?fileID=12800000&guid=9e85cee314c38b24ca27fdac2b487b74&type=3#LilitaOne-Regular");
     -unity-text-align: middle-center;
-    color: rgb(255, 255, 0);
-    font-size: 56px;
+    color: rgb(255, 255, 255);
+    font-size: 70px;
+    -unity-text-outline-width: 2px;
+    -unity-text-outline-color: rgb(0, 0, 0);
 }
 
 .play__button {

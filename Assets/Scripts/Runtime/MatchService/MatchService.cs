@@ -27,6 +27,7 @@ namespace Runtime.MatchService
         public IGameMediator GameMediator { get; }
         
         private GameBoardConfig GameBoardConfig => ConfigProvider.GetConfig<GameBoardConfig>();
+        public MatchData MatchData => _matchData;
         public Match Match => _match;
 
         [Inject]

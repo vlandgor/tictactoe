@@ -2,26 +2,46 @@
     <Style src="project://database/Assets/UI/Menu/MenuHud/MenuHud.uss?fileID=7433441132597879392&amp;guid=1fdfa73552735a54d97c14ac755caa31&amp;type=3#MenuHud" />
     <engine:VisualElement name="Visual" style="flex-grow: 1; justify-content: flex-start; align-items: stretch; background-color: rgba(255, 255, 255, 0); background-image: url(&quot;project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Demo/Demo_Background/Background_06.png?fileID=21300000&amp;guid=96274b6f4982041558dfdc5471747076&amp;type=3#Background_06&quot;); align-content: auto;">
         <engine:VisualElement style="flex-grow: 1; justify-content: flex-end; bottom: auto; align-self: stretch;">
-            <engine:VisualElement name="TopPanel" style="flex-grow: 0; height: 280px;" />
-            <engine:VisualElement name="GameModesPanel" style="flex-grow: 1; position: relative; align-items: center; justify-content: center;">
-                <engine:VisualElement name="GameModes" style="flex-grow: 0; align-items: center; justify-content: center;">
-                    <engine:VisualElement name="SimpleGamePanel" class="game-mode__panel" style="display: none;">
-                        <engine:VisualElement class="game-mode-title__panel" style="background-image: url(&quot;project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Label/Title_Flag01_Blue.png?fileID=21300000&amp;guid=5be23c1877e9a40e28a1f3e28352d894&amp;type=3#Title_Flag01_Blue&quot;); height: 196px;">
-                            <engine:Label text="You need to practice more" class="game-mode-title__text" style="font-size: 42px;" />
+            <engine:VisualElement name="TopPanel" style="flex-grow: 0; height: 280px; padding-bottom: 0; padding-top: 0; padding-right: 0; padding-left: 0; background-image: none; align-items: center; justify-content: center;" />
+            <engine:VisualElement style="flex-grow: 0; height: 140px; align-items: stretch; justify-content: center; flex-direction: row; align-self: stretch; width: auto;">
+                <engine:VisualElement style="flex-grow: 0; width: 840px; flex-direction: row;">
+                    <engine:VisualElement name="Avatar" style="flex-grow: 0; width: 140px; overflow: visible; visibility: visible; align-items: center; justify-content: center;">
+                        <engine:VisualElement name="Background" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Frame/ProfileFrame01_Inner_Blue.png?fileID=21300000&amp;guid=427ac1f9e8f5d4fb6b2366559519f8fd&amp;type=3#ProfileFrame01_Inner_Blue&quot;); bottom: 14px; overflow: hidden; position: absolute; width: 120px; height: 120px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;">
+                            <engine:VisualElement name="Avatar" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Demo/Demo_Character/Character_Sample01_xl.png?fileID=21300000&amp;guid=b7d63ac926ed846f390d61c8832ea34c&amp;type=3#Character_Sample01_xl&quot;); overflow: visible; position: absolute; width: 112px; height: 112px; top: 19px; left: -5px;" />
                         </engine:VisualElement>
+                        <engine:VisualElement name="Frame" style="flex-grow: 0; align-self: stretch; width: 140px; background-image: url(&quot;project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Frame/ProfileFrame01_Border.png?fileID=21300000&amp;guid=c036f3de1f1584b6eb35aa03cce9964c&amp;type=3#ProfileFrame01_Border&quot;); padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; align-items: stretch; justify-content: center; overflow: hidden; position: absolute; height: 140px; display: flex;" />
                     </engine:VisualElement>
-                    <engine:VisualElement name="FallingGamePanel" class="game-mode__panel" style="display: flex;">
-                        <engine:VisualElement class="game-mode-title__panel" style="background-image: url(&quot;project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Label/Title_Flag01_Purple.png?fileID=21300000&amp;guid=53a1ea3f1d6424c05b8510d75554f3f5&amp;type=3#Title_Flag01_Purple&quot;);">
-                            <engine:Label text="You were great" class="game-mode-title__text" />
-                        </engine:VisualElement>
+                    <engine:VisualElement name="LastReview" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Frame/BubbleFrame02_Single_Left_OffWhite.png?fileID=21300000&amp;guid=1e8827561b5494e219159244927f087a&amp;type=3#BubbleFrame02_Single_Left_OffWhite&quot;); width: auto; height: 140px; justify-content: flex-start; align-items: stretch; -unity-font-definition: url(&quot;project://database/Assets/Fonts/LilitaOne-Regular.ttf?fileID=12800000&amp;guid=9e85cee314c38b24ca27fdac2b487b74&amp;type=3#LilitaOne-Regular&quot;); align-content: auto; align-self: stretch; margin-left: 28px;">
+                        <engine:Label text="What a looser!" name="Review__Label" style="flex-grow: 1; align-self: stretch; -unity-text-align: middle-center; font-size: 56px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
                     </engine:VisualElement>
-                </engine:VisualElement>
-                <engine:VisualElement name="GameModeLabel" style="flex-grow: 0; height: 84px; margin-top: 0; align-self: stretch; margin-right: 0; margin-bottom: 0; margin-left: 0; top: 42px;">
-                    <engine:Label text="Simple Game" style="padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; flex-grow: 1; -unity-text-align: middle-center; font-size: 70px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/LilitaOne-Regular.ttf?fileID=12800000&amp;guid=9e85cee314c38b24ca27fdac2b487b74&amp;type=3#LilitaOne-Regular&quot;); color: rgb(255, 255, 255);" />
                 </engine:VisualElement>
             </engine:VisualElement>
-            <engine:VisualElement name="StartGamePanel" style="flex-grow: 0; flex-direction: row; align-items: center; align-self: stretch; bottom: auto; position: relative; justify-content: center;">
-                <engine:VisualElement style="flex-grow: 1; flex-direction: row; height: 420px; align-items: center; align-self: center; justify-content: center;">
+            <engine:VisualElement name="GameModesPanel" style="flex-grow: 1; position: relative; align-items: center; justify-content: center;">
+                <engine:VisualElement name="GameModes" style="flex-grow: 0; align-items: center; justify-content: center;">
+                    <engine:VisualElement name="StandardModePanel" class="game-mode__panel" style="display: none;">
+                        <engine:VisualElement class="game-mode-title__panel" style="background-image: url(&quot;project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Label/Title_Flag01_Blue.png?fileID=21300000&amp;guid=5be23c1877e9a40e28a1f3e28352d894&amp;type=3#Title_Flag01_Blue&quot;);">
+                            <engine:Label text="Standart" class="game-mode-title__text" />
+                        </engine:VisualElement>
+                    </engine:VisualElement>
+                    <engine:VisualElement name="FallingTokensModePanel" class="game-mode__panel" style="display: none;">
+                        <engine:VisualElement class="game-mode-title__panel" style="background-image: url(&quot;project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Label/Title_Flag01_Purple.png?fileID=21300000&amp;guid=53a1ea3f1d6424c05b8510d75554f3f5&amp;type=3#Title_Flag01_Purple&quot;);">
+                            <engine:Label text="Falling" class="game-mode-title__text" />
+                        </engine:VisualElement>
+                    </engine:VisualElement>
+                    <engine:VisualElement name="BuildingTokensModePanel" class="game-mode__panel" style="display: none;">
+                        <engine:VisualElement class="game-mode-title__panel" style="background-image: url(&quot;project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Label/Title_Flag01_Red.png?fileID=21300000&amp;guid=9e60e4c19a24d4f9ab3b882467e3ff28&amp;type=3#Title_Flag01_Red&quot;);">
+                            <engine:Label text="Building" class="game-mode-title__text" />
+                        </engine:VisualElement>
+                    </engine:VisualElement>
+                    <engine:VisualElement name="DisappearingTokensModePanel" class="game-mode__panel" style="display: flex;">
+                        <engine:VisualElement class="game-mode-title__panel" style="background-image: url(&quot;project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Label/Title_Flag01_Green.png?fileID=21300000&amp;guid=f143e6b7f1ee14c9c8385475d718d2e6&amp;type=3#Title_Flag01_Green&quot;);">
+                            <engine:Label text="Disappearing" class="game-mode-title__text" />
+                        </engine:VisualElement>
+                    </engine:VisualElement>
+                </engine:VisualElement>
+            </engine:VisualElement>
+            <engine:VisualElement name="StartGamePanel" style="flex-grow: 0; flex-direction: row; align-items: center; align-self: stretch; bottom: auto; position: relative; justify-content: center; height: 420px;">
+                <engine:VisualElement style="flex-grow: 1; flex-direction: row; height: 420px; align-items: center; align-self: center; justify-content: center; display: flex;">
                     <engine:Button icon-image="project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/IconMisc/Icon_PictoIcon_Prev02.png?fileID=21300000&amp;guid=399c25c9dce384160839b459896c826e&amp;type=3#Icon_PictoIcon_Prev02" name="PrevButton" class="change-game-mode__button" />
                     <engine:Button text="PLAY" name="PlayButton" class="play__button" />
                     <engine:Button icon-image="project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/IconMisc/Icon_PictoIcon_Next02.png?fileID=21300000&amp;guid=0bca651f898f1479c957ebcc1fa23f88&amp;type=3#Icon_PictoIcon_Next02" name="NextButton" class="change-game-mode__button" />

@@ -1,55 +1,91 @@
-﻿using System;
+﻿using Runtime.UI.Game.Presenters;
+using UnityEngine;
 using UnityEngine.UIElements;
+using Zenject;
 
 namespace Runtime.UI.Game.Views
 {
     public class GameResultView : View
     {
-        public event Action OnHomeButtonClicked;
-        public event Action OnRestartButtonClicked;
-        public event Action OnContinueButtonClicked;
+        private GameResultPresenter _presenter;
         
+        private VisualElement _youWonPanel;
+        private VisualElement _youLostPanel;
         
-        private VisualElement _winnerPanel;
-        private Label _winnerLabel;
+        private VisualElement _playerWonPanel;
+        private Label _playerWonLabel;
         
         private VisualElement _drawPanel;
         
-        private Button _homeButton;
+        private Button _settingsButton;
         private Button _restartButton;
-        private Button _continueButton;
+        private Button _leaveButton;
+
+        [Inject]
+        public void Construct(GameResultPresenter presenter)
+        {
+            _presenter = presenter;
+        }
         
         public override void InitializeVisuals()
         {
             base.InitializeVisuals();
             
-            _winnerPanel = _visual.Q<VisualElement>("WinnerPanel");
-            _winnerLabel = _visual.Q<Label>("WinnerLabel");
+            _youWonPanel = _visual.Q<VisualElement>("YouWonPanel");
+            _youLostPanel = _visual.Q<VisualElement>("YouLostPanel");
+            
+            _playerWonPanel = _visual.Q<VisualElement>("PlayerWonPanel");
+            _playerWonLabel = _visual.Q<Label>("PlayerWonLabel");
             
             _drawPanel = _visual.Q<VisualElement>("DrawPanel");
             
-            _homeButton = _visual.Q<Button>("HomeButton");
-            _homeButton.clicked += () => OnHomeButtonClicked?.Invoke();
+            _settingsButton = _visual.Q<Button>("SettingsButton");
+            _settingsButton.clicked += _presenter.SettingsButtonPressed;
             
             _restartButton = _visual.Q<Button>("RestartButton");
-            _restartButton.clicked += () => OnRestartButtonClicked?.Invoke();
+            _restartButton.clicked += _presenter.RestartButtonPressed;
             
-            _continueButton = _visual.Q<Button>("ContinueButton");
-            _continueButton.clicked += () => OnContinueButtonClicked?.Invoke();
+            _leaveButton = _visual.Q<Button>("LeaveButton");
+            _leaveButton.clicked += _presenter.LeaveButtonPressed;
         }
         
-        public void ShowWinner(string winnerName)
+        public void ShowYouWon()
         {
-            _winnerPanel.style.display = DisplayStyle.Flex;
-            _drawPanel.style.display = DisplayStyle.None;
-            
-            _winnerLabel.text = $"{winnerName}";
+            HideAllPanels();
+            _youWonPanel.style.display = DisplayStyle.Flex;
+            Debug.Log("You won");
+        }
+        
+        public void ShowYouLost()
+        {
+            HideAllPanels();
+            _youLostPanel.style.display = DisplayStyle.Flex;
+            Debug.Log("You lost");
+        }
+        
+        public void ShowPlayerWon(string playerName)
+        {
+            HideAllPanels();
+            _playerWonPanel.style.display = DisplayStyle.Flex;
+            _playerWonLabel.text = playerName + " WON";
+            Debug.Log(playerName + " won");
         }
         
         public void ShowDraw()
         {
-            _winnerPanel.style.display = DisplayStyle.None;
+            HideAllPanels();
             _drawPanel.style.display = DisplayStyle.Flex;
+            Debug.Log("Draw");
+        }
+        
+        private void HideAllPanels()
+        {
+            Debug.Log("Hide all panels");
+            _youWonPanel.style.display = DisplayStyle.None;
+            _youLostPanel.style.display = DisplayStyle.None;
+            _playerWonPanel.style.display = DisplayStyle.None;
+            _drawPanel.style.display = DisplayStyle.None;
+            Debug.Log("Hide all panels");
         }
     }
 }

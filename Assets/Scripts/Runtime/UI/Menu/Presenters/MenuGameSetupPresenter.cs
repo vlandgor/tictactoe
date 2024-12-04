@@ -22,17 +22,17 @@ namespace Runtime.UI.Menu.Presenters
         
         public void PlayComp()
         {
-            _setupModel.StartGame(GameMode.PlayerVsComp);
+            _setupModel.StartGame(MatchType.PlayerVsComp);
         }
         
         public void PlayFriend()
         {
-            _setupModel.StartGame(GameMode.PlayerVsPlayer);
+            _setupModel.StartGame(MatchType.PlayerVsPlayer);
         }
         
         public void PlayCompVsComp()
         {
-            _setupModel.StartGame(GameMode.CompVsComp);
+            _setupModel.StartGame(MatchType.CompVsComp);
         }
     }
 }

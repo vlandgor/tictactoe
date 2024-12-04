@@ -48,14 +48,14 @@ namespace Runtime.MatchService.States
         {
             if(_localMatchService.Match.CheckIfPlayerWon(_player))
             {
-                MatchResult matchResult = new MatchResult(_player);
+                MatchResult matchResult = new MatchResult(_localMatchService.MatchData.MatchType, _player);
                 _localMatchService.ChangeState(new FinishMatchState(_localMatchService, matchResult));
                 return;
             }
             
             if(_localMatchService.Match.IsBoardFull())
             {
-                MatchResult matchResult = new MatchResult(null); 
+                MatchResult matchResult = new MatchResult(_localMatchService.MatchData.MatchType, null); 
                 _localMatchService.ChangeState(new FinishMatchState(_localMatchService, matchResult));
                 return;
             }

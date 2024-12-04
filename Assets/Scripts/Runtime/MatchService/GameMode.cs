@@ -2,8 +2,9 @@
 {
     public enum GameMode
     {
-        PlayerVsPlayer,
-        PlayerVsComp,
-        CompVsComp
+        Standard,
+        FallingTokens,
+        BuildingTokens,
+        DisappearingTokens,
     }
 }

@@ -4,13 +4,13 @@ namespace Runtime.MatchService
 {
     public class MatchData
     {
-        public GameMode GameMode { get; set; }
+        public MatchType MatchType { get; set; }
         public IPlayer Player1 { get; }
         public IPlayer Player2 { get; }
 
-        public MatchData(GameMode gameMode, IPlayer player1, IPlayer player2)
+        public MatchData(MatchType matchType, IPlayer player1, IPlayer player2)
         {
-            GameMode = gameMode;
+            MatchType = matchType;
             Player1 = player1;
             Player2 = player2;
         }

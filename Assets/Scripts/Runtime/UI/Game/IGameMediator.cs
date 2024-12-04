@@ -7,5 +7,6 @@ namespace Runtime.UI.Game
     {
         public void UpdateTurnLabel(IPlayer player);
         public void ShowGameResult(MatchResult matchResult);
+        public void ShowSettings();
     }
 }

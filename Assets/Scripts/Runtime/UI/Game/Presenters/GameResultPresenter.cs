@@ -1,21 +1,21 @@
-﻿using System;
+﻿using Runtime.GamePlayer;
 using Runtime.MatchService;
 using Runtime.UI.Game.Models;
 using Runtime.UI.Game.Views;
 
 namespace Runtime.UI.Game.Presenters
 {
-    public class GameResultPresenter : Presenter, IDisposable
+    public class GameResultPresenter : Presenter
     {
+        private IGameMediator _gameMediator;
         private GameResultModel _model;
         private GameResultView _view;
 
-        public GameResultPresenter(GameResultModel model, GameResultView view)
+        public GameResultPresenter(IGameMediator gameMediator, GameResultModel model, GameResultView view)
         {
+            _gameMediator = gameMediator;
             _model = model;
             _view = view;
-            
-            SubscribeToViewEvents();
         }
 
         public override void EnableView() => _view.Show();
@@ -23,46 +23,44 @@ namespace Runtime.UI.Game.Presenters
 
         public void ShowResult(MatchResult result)
         {
-            if (result.Winner == null)
+            if(result.Winner == null)
                 _view.ShowDraw();
             else
-                _view.ShowWinner(result.Winner.Name);
+            {
+                switch (result.Mode)
+                {
+                    case MatchType.PlayerVsComp:
+                        if (result.Winner is PersonPlayer)
+                            _view.ShowYouWon();
+                        else
+                            _view.ShowYouLost();
+                        break;
+                    case MatchType.PlayerVsPlayer:
+                        _view.ShowPlayerWon(result.Winner.Name);
+                        break;
+                    case MatchType.CompVsComp:
+                        _view.ShowPlayerWon(result.Winner.Name);
+                        break;
+                }
+            }
             
             EnableView();
         }
-
-        private void SubscribeToViewEvents()
+        
+        public void SettingsButtonPressed()
         {
-            _view.OnHomeButtonClicked += HandleHomeButtonClicked;
-            _view.OnRestartButtonClicked += HandleRestartButtonClicked;
-            _view.OnContinueButtonClicked += HandleContinueButtonClicked;
-        }
-        private void UnsubscribeFromViewEvents()
-        {
-            _view.OnHomeButtonClicked -= HandleHomeButtonClicked;
-            _view.OnRestartButtonClicked -= HandleRestartButtonClicked;
-            _view.OnContinueButtonClicked -= HandleContinueButtonClicked;
+            _gameMediator.ShowSettings();
         }
         
-        private void HandleHomeButtonClicked()
-        {
-            _model.LoadMenu();
-        }
-        
-        private void HandleRestartButtonClicked()
+        public void RestartButtonPressed()
         {
             _model.RestartMatch();
             _view.Hide();
         }
         
-        private void HandleContinueButtonClicked()
+        public void LeaveButtonPressed()
         {
             _model.LoadMenu();
-        }
-        
-        public void Dispose()
-        {
-            UnsubscribeFromViewEvents();
         }
     }
 }

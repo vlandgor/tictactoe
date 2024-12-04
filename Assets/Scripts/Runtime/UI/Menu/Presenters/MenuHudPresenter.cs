@@ -1,4 +1,5 @@
-﻿using Runtime.UI.Menu.Models;
+﻿using Runtime.MatchService;
+using Runtime.UI.Menu.Models;
 using Runtime.UI.Menu.Views;
 
 namespace Runtime.UI.Menu.Presenters
@@ -18,28 +19,19 @@ namespace Runtime.UI.Menu.Presenters
 
         public void EnableGameSetup()
         {
-            _mediator.ShowGameSetup();
+            _mediator.ShowGameSetup(_model.CurrentGameMode);
         }
         
-        public void EnableShop()
+        public void PrevGameMode()
         {
-            _mediator.ShowShop();
+            _model.PrevGameMode();
+            _view.UpdateGameModePanel(_model.CurrentGameMode, (int)_model.CurrentGameMode);
         }
         
-        public void EnableCollection()
+        public void NextGameMode()
         {
-            
-        }
-        
-        public void EnableStats()
-        {
-            
-        }
-        
-        public void EnableSettings()
-        {
-            _model.EnableSettings();
-            _mediator.ShowSettings();
+            _model.NextGameMode();
+            _view.UpdateGameModePanel(_model.CurrentGameMode, (int)_model.CurrentGameMode);
         }
 
         public override void EnableView()

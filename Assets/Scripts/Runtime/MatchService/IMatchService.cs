@@ -21,6 +21,7 @@ namespace Runtime.MatchService
         public IBotService BotService { get; }
         public IConfigProvider ConfigProvider { get; }
         public IGameMediator GameMediator { get; }
+        public MatchData MatchData { get; }
         public Match Match { get; }
         
         public void ChangeState(IMatchState state);

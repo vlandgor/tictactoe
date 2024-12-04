@@ -19,19 +19,19 @@ namespace Runtime.UI.Menu.Presenters
 
         public void EnableGameSetup()
         {
-            _mediator.ShowGameSetup(_model.CurrentGameMode);
+            _mediator.ShowGameSetup(_model.CurrentMatchMode);
         }
         
         public void PrevGameMode()
         {
             _model.PrevGameMode();
-            _view.UpdateGameModePanel(_model.CurrentGameMode, (int)_model.CurrentGameMode);
+            _view.UpdateGameModePanel((int)_model.CurrentMatchMode);
         }
         
         public void NextGameMode()
         {
             _model.NextGameMode();
-            _view.UpdateGameModePanel(_model.CurrentGameMode, (int)_model.CurrentGameMode);
+            _view.UpdateGameModePanel((int)_model.CurrentMatchMode);
         }
 
         public override void EnableView()

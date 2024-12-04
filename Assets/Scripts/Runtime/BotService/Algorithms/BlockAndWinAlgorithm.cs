@@ -1,6 +1,7 @@
 ﻿using Runtime.GameBoard;
 using Runtime.MatchService;
 using Runtime.GamePlayer;
+using Runtime.MatchService.MatchModes;
 using UnityEngine;
 using Random = System.Random;
 
@@ -15,7 +16,7 @@ namespace Runtime.BotService.Algorithms
 
         public BlockAndWinAlgorithm(Match match, IPlayer bot, IPlayer opponent)
         {
-            _match = match.Clone();
+            _match = match.Clone<StandardMatch>();
             _bot = bot;
             _opponent = opponent;
         }

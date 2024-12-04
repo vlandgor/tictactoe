@@ -17,22 +17,28 @@ namespace Runtime.UI.Menu.Presenters
             _setupView = setupView;
         }
 
+        public void StartSetup(MatchMode matchMode)
+        {
+            _setupModel.StartSetup(matchMode);
+            EnableView();
+        }
+        
         public override void EnableView() => _setupView.Show();
         public override void DisableView() => _setupView.Hide();
         
         public void PlayComp()
         {
-            _setupModel.StartGame(MatchType.PlayerVsComp);
+            _setupModel.StartGame(MatchType.PlayerVsComp, false);
         }
         
         public void PlayFriend()
         {
-            _setupModel.StartGame(MatchType.PlayerVsPlayer);
+            _setupModel.StartGame(MatchType.PlayerVsPlayer, false);
         }
         
         public void PlayCompVsComp()
         {
-            _setupModel.StartGame(MatchType.CompVsComp);
+            _setupModel.StartGame(MatchType.CompVsComp,  false);
         }
     }
 }

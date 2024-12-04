@@ -5,14 +5,16 @@ namespace Runtime.MatchService
     public class MatchData
     {
         public MatchType MatchType { get; }
-        public IPlayer Player1 { get; }
-        public IPlayer Player2 { get; }
+        public MatchMode MatchMode { get; } 
+        public IPlayer[] Players { get; }
+        public bool IsRanked { get; }
 
-        public MatchData(MatchType matchType, IPlayer player1, IPlayer player2)
+        public MatchData(MatchType matchType, MatchMode matchMode, IPlayer[] players, bool isRanked)
         {
             MatchType = matchType;
-            Player1 = player1;
-            Player2 = player2;
+            MatchMode = matchMode;
+            Players = players;
+            IsRanked = isRanked;
         }
     }
 }

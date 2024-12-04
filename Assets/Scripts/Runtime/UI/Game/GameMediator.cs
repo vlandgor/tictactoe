@@ -23,7 +23,7 @@ namespace Runtime.UI.Game
         }
         
         public void UpdateTurnLabel(IPlayer player)             => _hudPresenter.Value.UpdateTurnLabel(player);
-        public void ShowGameResult(MatchResult matchResult)     => _resultPresenter.Value.ShowResult(matchResult);
+        public void ShowRoundResult(RoundResult matchResult)     => _resultPresenter.Value.ShowResult(matchResult);
         public void ShowSettings()                              => _settingsPresenter.Value.EnableView();
     }
 }

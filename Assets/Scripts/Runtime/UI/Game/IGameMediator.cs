@@ -6,7 +6,7 @@ namespace Runtime.UI.Game
     public interface IGameMediator
     {
         public void UpdateTurnLabel(IPlayer player);
-        public void ShowGameResult(MatchResult matchResult);
+        public void ShowRoundResult(RoundResult matchResult);
         public void ShowSettings();
     }
 }

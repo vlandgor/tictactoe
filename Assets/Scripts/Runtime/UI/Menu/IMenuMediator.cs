@@ -6,6 +6,6 @@ namespace Runtime.UI.Menu
     {
         public void ShowShop();
         public void ShowSettings();
-        public void ShowGameSetup(GameMode gameMode);
+        public void ShowGameSetup(MatchMode matchMode);
     }
 }

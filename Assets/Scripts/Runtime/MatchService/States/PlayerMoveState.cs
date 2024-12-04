@@ -31,7 +31,7 @@ namespace Runtime.MatchService.States
         {
             UpdateBoard(crd);
             CheckBoard();
-            _localMatchService.ChangeTurn();
+            _localMatchService.NextTurn();
         }
         
         private void UpdateBoard(Crd crd)
@@ -48,15 +48,15 @@ namespace Runtime.MatchService.States
         {
             if(_localMatchService.Match.CheckIfPlayerWon(_player))
             {
-                MatchResult matchResult = new MatchResult(_localMatchService.MatchData.MatchType, _player);
-                _localMatchService.ChangeState(new FinishMatchState(_localMatchService, matchResult));
+                RoundResult roundResult = new RoundResult(_localMatchService.MatchData.MatchType, _player);
+                _localMatchService.ChangeState(new FinishRoundState(_localMatchService, roundResult));
                 return;
             }
             
             if(_localMatchService.Match.IsBoardFull())
             {
-                MatchResult matchResult = new MatchResult(_localMatchService.MatchData.MatchType, null); 
-                _localMatchService.ChangeState(new FinishMatchState(_localMatchService, matchResult));
+                RoundResult roundResult = new RoundResult(_localMatchService.MatchData.MatchType, null); 
+                _localMatchService.ChangeState(new FinishRoundState(_localMatchService, roundResult));
                 return;
             }
         }

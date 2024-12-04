@@ -14,8 +14,6 @@ namespace Runtime.UI.Menu.Views
         private VisualElement _buildingTokensModePanel;
         private VisualElement _disappearingTokensModePanel;
         
-        private Label _gameModeLabel;
-        
         private VisualElement[] _gameModePanels;
 
         private Button _prevButton;
@@ -45,8 +43,6 @@ namespace Runtime.UI.Menu.Views
                 _disappearingTokensModePanel,
             };
             
-            _gameModeLabel = _root.Q<Label>("GameModeLabel");
-            
             _playButton = _root.Q<Button>("PlayButton");
             _playButton.clicked += _presenter.EnableGameSetup;
             
@@ -55,13 +51,14 @@ namespace Runtime.UI.Menu.Views
             
             _nextButton = _root.Q<Button>("NextButton");
             _nextButton.clicked += _presenter.NextGameMode;
+            
+            UpdateGameModePanel(0);
         }
         
-        public void UpdateGameModePanel(GameMode gameMode, int index)
+        public void UpdateGameModePanel(int index)
         {
             HileAllGameModePanels();
             _gameModePanels[index].style.display = DisplayStyle.Flex;
-            _gameModeLabel.text = gameMode.ToString();
         }
         
         private void HileAllGameModePanels()

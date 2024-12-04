@@ -4,36 +4,25 @@ using UnityEngine;
 
 namespace Runtime.MatchService
 {
-    public class Match
+    public abstract class Match
     {
-        private IPlayer[,] _board;
-        private Vector2Int _boardSize;
+        protected IPlayer[,] _board;
         
-        public Vector2Int BoardSize => _boardSize;
+        public Vector2Int BoardSize { get; }
         
         public Match(Vector2Int boardSize)
         {
-            _boardSize = boardSize;
+            BoardSize = boardSize;
             GenerateBoard(boardSize);
         }
         
-        public bool PlaceToken(Crd crd, IPlayer player)
-        {
-            if(CheckIfCellIsTaken(crd))
-                return false;
-            
-            _board[crd.x, crd.y] = player;
-            return true;
-        }
+
+        public abstract bool PlaceToken(Crd crd, IPlayer player);
+        public abstract void UndoPlaceToken(Crd crd);
         
-        public void UndoPlaceToken(Crd crd)
+        public virtual bool CheckIfPlayerWon(IPlayer player)
         {
-            _board[crd.x, crd.y] = null;
-        }
-        
-        public bool CheckIfPlayerWon(IPlayer player)
-        {
-            for (int i = 0; i < _boardSize.x; i++)
+            for (int i = 0; i < BoardSize.x; i++)
             {
                 if (CheckRow(i, player) || CheckColumn(i, player))
                     return true;
@@ -45,11 +34,11 @@ namespace Runtime.MatchService
             return false;
         }
         
-        public bool IsBoardFull()
+        public virtual bool IsBoardFull()
         {
-            for (int i = 0; i < _boardSize.x; i++)
+            for (int i = 0; i < BoardSize.x; i++)
             {
-                for (int j = 0; j < _boardSize.y; j++)
+                for (int j = 0; j < BoardSize.y; j++)
                 {
                     if (_board[i, j] == null)
                         return false;
@@ -58,7 +47,7 @@ namespace Runtime.MatchService
             return true;
         }
         
-        public bool CheckIfCellIsTaken(Crd crd)
+        public virtual bool CheckIfCellIsTaken(Crd crd)
         {
             if(_board[crd.x, crd.y] != null)
                 return true;
@@ -66,12 +55,12 @@ namespace Runtime.MatchService
             return false;
         }
         
-        public Match Clone()
+        public T Clone<T>() where T : Match
         {
-            var clonedMatch = new Match(_boardSize);
-            for (int i = 0; i < _boardSize.x; i++)
+            T clonedMatch = (T)CreateInstance(BoardSize);
+            for (int i = 0; i < BoardSize.x; i++)
             {
-                for (int j = 0; j < _boardSize.y; j++)
+                for (int j = 0; j < BoardSize.y; j++)
                 {
                     clonedMatch._board[i, j] = _board[i, j];
                 }
@@ -79,7 +68,9 @@ namespace Runtime.MatchService
             return clonedMatch;
         }
         
-        private void GenerateBoard(Vector2Int boardSize)
+        protected abstract Match CreateInstance(Vector2Int boardSize);
+        
+        protected void GenerateBoard(Vector2Int boardSize)
         {
             _board = new IPlayer[boardSize.x, boardSize.y];
             
@@ -92,9 +83,9 @@ namespace Runtime.MatchService
             }
         }
         
-        private bool CheckRow(int row, IPlayer player)
+        protected bool CheckRow(int row, IPlayer player)
         {
-            for (int col = 0; col < _boardSize.x; col++)
+            for (int col = 0; col < BoardSize.x; col++)
             {
                 if (_board[row, col] != player)
                     return false;
@@ -102,9 +93,9 @@ namespace Runtime.MatchService
             return true;
         }
 
-        private bool CheckColumn(int col, IPlayer player)
+        protected bool CheckColumn(int col, IPlayer player)
         {
-            for (int row = 0; row < _boardSize.x; row++)
+            for (int row = 0; row < BoardSize.x; row++)
             {
                 if (_board[row, col] != player)
                     return false;
@@ -112,9 +103,9 @@ namespace Runtime.MatchService
             return true;
         }
 
-        private bool CheckDiagonal(IPlayer player)
+        protected bool CheckDiagonal(IPlayer player)
         {
-            for (int i = 0; i < _boardSize.x; i++)
+            for (int i = 0; i < BoardSize.x; i++)
             {
                 if (_board[i, i] != player)
                     return false;
@@ -122,11 +113,11 @@ namespace Runtime.MatchService
             return true;
         }
 
-        private bool CheckAntiDiagonal(IPlayer player)
+        protected bool CheckAntiDiagonal(IPlayer player)
         {
-            for (int i = 0; i < _boardSize.x; i++)
+            for (int i = 0; i < BoardSize.x; i++)
             {
-                if (_board[i, _boardSize.x - i - 1] != player)
+                if (_board[i, BoardSize.x - i - 1] != player)
                     return false;
             }
             return true;

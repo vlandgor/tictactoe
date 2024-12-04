@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using Runtime.BotService;
 using Runtime.ConfigProvider;
 using Runtime.GameBoard;
 using Runtime.GamePlayer;
 using Runtime.InputService;
+using Runtime.MatchService.MatchModes;
 using Runtime.MatchService.States;
 using Runtime.UI.Game;
 using Zenject;
@@ -14,11 +17,12 @@ namespace Runtime.MatchService
     public class MatchService : ILocalMatchService
     {
         private MatchData _matchData;
+        private MatchResult _matchResult;
         private Match _match;
         
         private IMatchState currentState;
-        private IMatchState _player1MoveState;
-        private IMatchState _player2MoveState;
+        
+        private Dictionary<IPlayer, IMatchState> _playerStates = new();
         
         public IGameBoard GameBoard { get; }
         public IInputService InputService { get; }
@@ -28,6 +32,7 @@ namespace Runtime.MatchService
         
         private GameBoardConfig GameBoardConfig => ConfigProvider.GetConfig<GameBoardConfig>();
         public MatchData MatchData => _matchData;
+        public MatchResult MatchResult => _matchResult;
         public Match Match => _match;
 
         [Inject]
@@ -48,12 +53,13 @@ namespace Runtime.MatchService
         public async UniTask Initialize(MatchData matchData)
         {
             _matchData = matchData;
+            _matchResult = new MatchResult(matchData.Players);
             
             InitializeMatch();
             InitializeBoard();
             InitializeStates();
             
-            ChangeState(_player1MoveState);
+            ChangeState(_playerStates.Values.First());
         }
         
         public async UniTask Restart()
@@ -61,24 +67,38 @@ namespace Runtime.MatchService
             InitializeMatch();
             GameBoard.Clear();
             
-            ChangeState(_player1MoveState);
+            ChangeState(_playerStates.Values.First());
         }
 
-        public void ChangeTurn()
+        public void NextTurn()
         {
-            if(currentState == _player1MoveState)
+            ChangeState(GetNextState(currentState));
+            
+            IMatchState GetNextState(IMatchState currentState)
             {
-                ChangeState(_player2MoveState);
-            }
-            else if(currentState == _player2MoveState)
-            {
-                ChangeState(_player1MoveState);
+                foreach (var kvp in _playerStates)
+                {
+                    if (kvp.Value != currentState)
+                    {
+                        return kvp.Value;
+                    }
+                }
+
+                throw new InvalidOperationException("No valid next state found.");
             }
         }
 
         public IPlayer GetOpponent(IPlayer player)
         {
-            return player == _matchData.Player1 ? _matchData.Player2 : _matchData.Player1;
+            foreach (var kvp in _playerStates)
+            {
+                if (kvp.Key != player)
+                {
+                    return kvp.Key;
+                }
+            }
+
+            return null;
         }
 
         public void ChangeState(IMatchState state)
@@ -90,7 +110,17 @@ namespace Runtime.MatchService
 
         private void InitializeMatch()
         {
-            _match = new Match(GameBoardConfig.BoardSize);
+            switch (_matchData.MatchMode)
+            {
+                case MatchMode.Standard:
+                    _match = new StandardMatch(GameBoardConfig.BoardSize);
+                    break;
+                case MatchMode.Falling:
+                    _match = new FallingMatch(GameBoardConfig.BoardSize);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         private void InitializeBoard()
@@ -100,8 +130,11 @@ namespace Runtime.MatchService
         
         private void InitializeStates()
         {
-            _player1MoveState = GetStateForPlayer(_matchData.Player1);
-            _player2MoveState = GetStateForPlayer(_matchData.Player2);
+            _playerStates.Clear();
+            foreach (IPlayer player in _matchData.Players)
+            {
+                _playerStates.Add(player, GetStateForPlayer(player));
+            }
             
             IMatchState GetStateForPlayer(IPlayer player)
             {

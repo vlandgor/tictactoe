@@ -22,10 +22,11 @@ namespace Runtime.MatchService
         public IConfigProvider ConfigProvider { get; }
         public IGameMediator GameMediator { get; }
         public MatchData MatchData { get; }
+        public MatchResult MatchResult { get; }
         public Match Match { get; }
         
         public void ChangeState(IMatchState state);
-        public void ChangeTurn();
+        public void NextTurn();
         public IPlayer GetOpponent(IPlayer player);
     }
 }

@@ -2,6 +2,7 @@
 using Runtime.GameBoard;
 using Runtime.GamePlayer;
 using Runtime.MatchService;
+using Runtime.MatchService.MatchModes;
 
 namespace Runtime.BotService.Algorithms
 {
@@ -13,7 +14,7 @@ namespace Runtime.BotService.Algorithms
 
         public MinimaxAlgorithm(Match match, IPlayer bot, IPlayer opponent)
         {
-            _match = match.Clone();
+            _match = match.Clone<StandardMatch>();
             _bot = bot;
             _opponent = opponent;
         }

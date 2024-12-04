@@ -9,15 +9,15 @@ namespace Runtime.UI.Menu.Models
     {
         private readonly IAudioService _audioService;
         
-        private readonly GameMode[] _gameModes;
+        private readonly MatchMode[] _gameModes;
         private int _currentGameModeIndex;
 
-        public GameMode CurrentGameMode => _gameModes[_currentGameModeIndex];
+        public MatchMode CurrentMatchMode => _gameModes[_currentGameModeIndex];
 
         public MenuHudModel(IAudioService audioService)
         {
             _audioService = audioService ?? throw new ArgumentNullException(nameof(audioService));
-            _gameModes = (GameMode[])Enum.GetValues(typeof(GameMode)); // Cache enum values
+            _gameModes = (MatchMode[])Enum.GetValues(typeof(MatchMode)); // Cache enum values
             _currentGameModeIndex = 0;
         }
 

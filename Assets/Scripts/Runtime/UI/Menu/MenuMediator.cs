@@ -25,6 +25,6 @@ namespace Runtime.UI.Menu
 
         public void ShowShop() => _shopPresenter.Value.EnableView();
         public void ShowSettings() => _settingsPresenter.Value.EnableView();
-        public void ShowGameSetup(GameMode gameMode) => _gameSetupPresenter.Value.EnableView();
+        public void ShowGameSetup(MatchMode matchMode) => _gameSetupPresenter.Value.StartSetup(matchMode);
     }
 }

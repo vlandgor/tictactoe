@@ -1,5 +1,6 @@
 ﻿using Runtime.GameBoard;
 using Runtime.MatchService;
+using Runtime.MatchService.MatchModes;
 using UnityEngine;
 
 namespace Runtime.BotService.Algorithms
@@ -10,7 +11,7 @@ namespace Runtime.BotService.Algorithms
         
         public RandomMoveAlgorithm(Match match)
         {
-            _match = match.Clone();
+            _match = match.Clone<StandardMatch>();
         }
         
         public Crd GetMove()

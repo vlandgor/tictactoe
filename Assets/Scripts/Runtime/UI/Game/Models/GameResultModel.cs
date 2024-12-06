@@ -1,18 +1,15 @@
 ﻿using Cysharp.Threading.Tasks;
 using Runtime.LoadingProvider;
-using Runtime.MatchService;
 
 namespace Runtime.UI.Game.Models
 {
     public class GameResultModel : Model
     {
         private ILoadingProvider _loadingProvider;
-        private IMatchService _matchService;
         
-        public GameResultModel(ILoadingProvider loadingProvider, IMatchService matchService)
+        public GameResultModel(ILoadingProvider loadingProvider)
         {
             _loadingProvider = loadingProvider;
-            _matchService = matchService;
         }
         
         public void LoadMenu()
@@ -22,7 +19,7 @@ namespace Runtime.UI.Game.Models
         
         public void RestartMatch()
         {
-            _matchService.Restart().Forget();
+            //_matchService.Restart().Forget();
         }
     }
 }

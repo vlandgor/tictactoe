@@ -1,126 +1,27 @@
-﻿using Runtime.GameBoard;
-using Runtime.GamePlayer;
-using UnityEngine;
+﻿using Runtime.MatchService.MatchProcessors;
 
 namespace Runtime.MatchService
 {
-    public abstract class Match
+    public class Match
     {
-        protected IPlayer[,] _board;
+        public MatchData MatchData { get; private set; }
+        public MatchResult MatchResult { get; private set; }
+        public MatchProcessor MatchProcessor { get; private set; }
         
-        public Vector2Int BoardSize { get; }
-        
-        public Match(Vector2Int boardSize)
+        public Match(MatchData matchData)
         {
-            BoardSize = boardSize;
-            GenerateBoard(boardSize);
-        }
-        
+            MatchData = matchData;
+            MatchResult = new MatchResult();
 
-        public abstract bool PlaceToken(Crd crd, IPlayer player);
-        public abstract void UndoPlaceToken(Crd crd);
-        
-        public virtual bool CheckIfPlayerWon(IPlayer player)
-        {
-            for (int i = 0; i < BoardSize.x; i++)
+            switch (matchData.MatchMode)
             {
-                if (CheckRow(i, player) || CheckColumn(i, player))
-                    return true;
+                case MatchMode.Standard:
+                    MatchProcessor = new StandardMatchProcessor(matchData.BoardSize);
+                    break;
+                case MatchMode.Falling:
+                    MatchProcessor = new FallingMatchProcessor(matchData.BoardSize);
+                    break;
             }
-            
-            if (CheckDiagonal(player) || CheckAntiDiagonal(player))
-                return true;
-
-            return false;
-        }
-        
-        public virtual bool IsBoardFull()
-        {
-            for (int i = 0; i < BoardSize.x; i++)
-            {
-                for (int j = 0; j < BoardSize.y; j++)
-                {
-                    if (_board[i, j] == null)
-                        return false;
-                }
-            }
-            return true;
-        }
-        
-        public virtual bool CheckIfCellIsTaken(Crd crd)
-        {
-            if(_board[crd.x, crd.y] != null)
-                return true;
-
-            return false;
-        }
-        
-        public T Clone<T>() where T : Match
-        {
-            T clonedMatch = (T)CreateInstance(BoardSize);
-            for (int i = 0; i < BoardSize.x; i++)
-            {
-                for (int j = 0; j < BoardSize.y; j++)
-                {
-                    clonedMatch._board[i, j] = _board[i, j];
-                }
-            }
-            return clonedMatch;
-        }
-        
-        protected abstract Match CreateInstance(Vector2Int boardSize);
-        
-        protected void GenerateBoard(Vector2Int boardSize)
-        {
-            _board = new IPlayer[boardSize.x, boardSize.y];
-            
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
-                    _board[i, j] = null;
-                }
-            }
-        }
-        
-        protected bool CheckRow(int row, IPlayer player)
-        {
-            for (int col = 0; col < BoardSize.x; col++)
-            {
-                if (_board[row, col] != player)
-                    return false;
-            }
-            return true;
-        }
-
-        protected bool CheckColumn(int col, IPlayer player)
-        {
-            for (int row = 0; row < BoardSize.x; row++)
-            {
-                if (_board[row, col] != player)
-                    return false;
-            }
-            return true;
-        }
-
-        protected bool CheckDiagonal(IPlayer player)
-        {
-            for (int i = 0; i < BoardSize.x; i++)
-            {
-                if (_board[i, i] != player)
-                    return false;
-            }
-            return true;
-        }
-
-        protected bool CheckAntiDiagonal(IPlayer player)
-        {
-            for (int i = 0; i < BoardSize.x; i++)
-            {
-                if (_board[i, BoardSize.x - i - 1] != player)
-                    return false;
-            }
-            return true;
         }
     }
 }

@@ -31,13 +31,11 @@ namespace Runtime.UI
         
         public virtual void Show()
         {
-            Debug.Log("Showing view");
             _visual.style.display = DisplayStyle.Flex;
         }
 
         public virtual void Hide()
         {
-            Debug.Log("Hiding view");
             _visual.style.display = DisplayStyle.None;
         }
     }

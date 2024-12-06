@@ -1,10 +1,13 @@
 ﻿using Cysharp.Threading.Tasks;
 using Runtime.AudioService;
 using Runtime.BotService;
+using Runtime.ConfigProvider;
+using Runtime.GameBoard;
 using Runtime.GamePlayer;
 using Runtime.LoadingProvider;
 using Runtime.Marks;
 using Runtime.MatchService;
+using UnityEngine;
 
 namespace Runtime.UI.Menu.Models
 {
@@ -13,14 +16,22 @@ namespace Runtime.UI.Menu.Models
         private ILoadingProvider _loadingProvider;
         private IMarksProvider _marksProvider;
         private IAudioService _audioService;
+        private IConfigProvider _configProvider;
         
         private MatchMode _matchMode;
         
-        public MenuGameSetupModel(ILoadingProvider loadingProvider, IMarksProvider marksProvider, IAudioService audioService)
+        private GameBoardConfig GameBoardConfig => _configProvider.GetConfig<GameBoardConfig>();
+        
+        public MenuGameSetupModel(
+            ILoadingProvider loadingProvider, 
+            IMarksProvider marksProvider, 
+            IAudioService audioService,
+            IConfigProvider configProvider)
         {
             _loadingProvider = loadingProvider;
             _marksProvider = marksProvider;
             _audioService = audioService;
+            _configProvider = configProvider;
         }
 
         public void StartSetup(MatchMode matchMode)
@@ -31,7 +42,7 @@ namespace Runtime.UI.Menu.Models
         public void StartGame(MatchType matchType, bool IsRanked)
         {
             IPlayer[] players = GetPlayers(matchType);
-            MatchData matchData = new MatchData(matchType, _matchMode, players, IsRanked);
+            MatchData matchData = new MatchData(matchType, _matchMode, players, IsRanked, GameBoardConfig.BoardSize);
             
             _loadingProvider.LoadGame(matchData).Forget();
         }

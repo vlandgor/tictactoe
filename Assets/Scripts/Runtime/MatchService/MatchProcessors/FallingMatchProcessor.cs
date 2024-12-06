@@ -2,11 +2,11 @@
 using Runtime.GamePlayer;
 using UnityEngine;
 
-namespace Runtime.MatchService.MatchModes
+namespace Runtime.MatchService.MatchProcessors
 {
-    public class FallingMatch : Match
+    public class FallingMatchProcessor : MatchProcessor
     {
-        public FallingMatch(Vector2Int boardSize) : base(boardSize)
+        public FallingMatchProcessor(Vector2Int boardSize) : base(boardSize)
         {
         }
 
@@ -41,9 +41,9 @@ namespace Runtime.MatchService.MatchModes
             }
         }
         
-        protected override Match CreateInstance(Vector2Int boardSize)
+        protected override MatchProcessor CreateInstance(Vector2Int boardSize)
         {
-            return new FallingMatch(boardSize);
+            return new FallingMatchProcessor(boardSize);
         }
     }
 }

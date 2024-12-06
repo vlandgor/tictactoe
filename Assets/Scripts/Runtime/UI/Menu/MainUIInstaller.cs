@@ -1,4 +1,5 @@
 ﻿using Runtime.AudioService;
+using Runtime.ConfigProvider;
 using Runtime.LoadingProvider;
 using Runtime.Marks;
 using Runtime.ShopService;
@@ -42,8 +43,9 @@ namespace Runtime.UI.Menu
             ILoadingProvider loadingProvider = Container.Resolve<ILoadingProvider>();
             IMarksProvider marksService = Container.Resolve<IMarksProvider>();
             IAudioService audioService = Container.Resolve<IAudioService>();
+            IConfigProvider configProvider = Container.Resolve<IConfigProvider>();
             
-            MenuGameSetupModel setupModel = new MenuGameSetupModel(loadingProvider, marksService, audioService);
+            MenuGameSetupModel setupModel = new MenuGameSetupModel(loadingProvider, marksService, audioService, configProvider);
 
             Container
                 .Bind<MenuGameSetupPresenter>()

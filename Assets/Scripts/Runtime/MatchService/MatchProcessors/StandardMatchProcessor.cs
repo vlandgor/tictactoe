@@ -2,11 +2,11 @@
 using Runtime.GamePlayer;
 using UnityEngine;
 
-namespace Runtime.MatchService.MatchModes
+namespace Runtime.MatchService.MatchProcessors
 {
-    public class StandardMatch : Match
+    public class StandardMatchProcessor : MatchProcessor
     {
-        public StandardMatch(Vector2Int boardSize) : base(boardSize)
+        public StandardMatchProcessor(Vector2Int boardSize) : base(boardSize)
         {
             
         }
@@ -25,9 +25,9 @@ namespace Runtime.MatchService.MatchModes
             _board[crd.x, crd.y] = null;
         }
         
-        protected override Match CreateInstance(Vector2Int boardSize)
+        protected override MatchProcessor CreateInstance(Vector2Int boardSize)
         {
-            return new StandardMatch(boardSize);
+            return new StandardMatchProcessor(boardSize);
         }
     }
 }

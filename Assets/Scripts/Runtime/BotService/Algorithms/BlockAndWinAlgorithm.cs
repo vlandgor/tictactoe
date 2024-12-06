@@ -1,7 +1,7 @@
 ﻿using Runtime.GameBoard;
 using Runtime.MatchService;
 using Runtime.GamePlayer;
-using Runtime.MatchService.MatchModes;
+using Runtime.MatchService.MatchProcessors;
 using UnityEngine;
 using Random = System.Random;
 
@@ -9,14 +9,14 @@ namespace Runtime.BotService.Algorithms
 {
     public class BlockAndWinAlgorithm : IBotAlgorithm
     {
-        private Match _match;
+        private MatchProcessor _matchProcessor;
         
         private IPlayer _bot;
         private IPlayer _opponent;
 
-        public BlockAndWinAlgorithm(Match match, IPlayer bot, IPlayer opponent)
+        public BlockAndWinAlgorithm(MatchProcessor matchProcessor, IPlayer bot, IPlayer opponent)
         {
-            _match = match.Clone<StandardMatch>();
+            _matchProcessor = matchProcessor.Clone<StandardMatchProcessor>();
             _bot = bot;
             _opponent = opponent;
         }
@@ -39,20 +39,20 @@ namespace Runtime.BotService.Algorithms
 
         private Crd? FindWinningMove(IPlayer player)
         {
-            for (int x = 0; x < _match.BoardSize.x; x++)
+            for (int x = 0; x < _matchProcessor.BoardSize.x; x++)
             {
-                for (int y = 0; y < _match.BoardSize.y; y++)
+                for (int y = 0; y < _matchProcessor.BoardSize.y; y++)
                 {
                     Crd crd = new Crd(x, y);
                     
-                    if (!_match.CheckIfCellIsTaken(crd))
+                    if (!_matchProcessor.CheckIfCellIsTaken(crd))
                     {
-                        _match.PlaceToken(crd, player);
+                        _matchProcessor.PlaceToken(crd, player);
                         
-                        bool playerWins = _match.CheckIfPlayerWon(player);
+                        bool playerWins = _matchProcessor.CheckIfPlayerWon(player);
                         Debug.Log($"Player {player.Name} wins: {playerWins}");
                         
-                        _match.UndoPlaceToken(crd);
+                        _matchProcessor.UndoPlaceToken(crd);
 
                         if (playerWins)
                         {
@@ -71,11 +71,11 @@ namespace Runtime.BotService.Algorithms
 
             do
             {
-                int x = random.Next(0, _match.BoardSize.x);
-                int y = random.Next(0, _match.BoardSize.y);
+                int x = random.Next(0, _matchProcessor.BoardSize.x);
+                int y = random.Next(0, _matchProcessor.BoardSize.y);
                 crd = new Crd(x, y);
             } 
-            while (_match.CheckIfCellIsTaken(crd));
+            while (_matchProcessor.CheckIfCellIsTaken(crd));
 
             return crd;
         }

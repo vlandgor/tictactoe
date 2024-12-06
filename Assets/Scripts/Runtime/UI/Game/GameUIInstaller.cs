@@ -1,5 +1,4 @@
 ﻿using Runtime.LoadingProvider;
-using Runtime.MatchService;
 using Runtime.UI.Game.Models;
 using Runtime.UI.Game.Presenters;
 using Runtime.UI.Game.Views;
@@ -34,9 +33,8 @@ namespace Runtime.UI.Game
         private void BindGameResult()
         {
             ILoadingProvider loadingProvider = Container.Resolve<ILoadingProvider>();
-            IMatchService matchService = Container.Resolve<IMatchService>();
             
-            GameResultModel model = new GameResultModel(loadingProvider, matchService);
+            GameResultModel model = new GameResultModel(loadingProvider);
             
             Container
                 .Bind<GameResultPresenter>()

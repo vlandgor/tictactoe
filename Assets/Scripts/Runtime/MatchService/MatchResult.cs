@@ -5,36 +5,24 @@ namespace Runtime.MatchService
 {
     public class MatchResult
     {
-        private Dictionary<IPlayer, int> _scores = new();
-        private int drawCount = 0;
+        private Dictionary<int, RoundResult> rounds = new();
         
-        public MatchResult(IPlayer[] players)
+        public RoundResult LastRound => rounds[rounds.Count - 1];
+
+        public void FinishRound(IPlayer winner)
         {
-            foreach (var player in players)
-            {
-                _scores.Add(player, 0);
-            }
-        }
-        
-        public void AddScore(IPlayer player)
-        {
-            _scores[player]++;
-        }
-        
-        public void AddDraw()
-        {
-            drawCount++;
+            rounds.Add(rounds.Count, new RoundResult(rounds.Count, winner));
         }
     }
 
     public class RoundResult
     {
-        public MatchType Type { get; }   
+        public int RoundNumber { get; }
         public IPlayer Winner { get; }
         
-        public RoundResult(MatchType type, IPlayer winner)
+        public RoundResult(int roundNumber, IPlayer winner)
         {
-            Type = type;
+            RoundNumber = roundNumber;
             Winner = winner;
         }
     }

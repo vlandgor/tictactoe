@@ -21,13 +21,13 @@ namespace Runtime.UI.Game.Presenters
         public override void EnableView() => _view.Show();
         public override void DisableView() => _view.Hide();
 
-        public void ShowResult(RoundResult result)
+        public void ShowResult(MatchType matchType, RoundResult result)
         {
             if(result.Winner == null)
                 _view.ShowDraw();
             else
             {
-                switch (result.Type)
+                switch (matchType)
                 {
                     case MatchType.PlayerVsComp:
                         if (result.Winner is PersonPlayer)

@@ -1,5 +1,6 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using Runtime.GameplayCoordinator;
 using Runtime.MatchService;
 using Runtime.UI;
 using UnityEngine;
@@ -40,17 +41,13 @@ namespace Runtime.LoadingProvider.LoadingOperations
         
         private async UniTask InitializeMatchService()
         {
-            Debug.Log("Looking for SceneContext in the scene...");
             SceneContext sceneContext = FindSceneContext(SceneManager.GetSceneByName(GAME_SCENE_NAME));
-            Debug.Log("SceneContext found: " + sceneContext);
             
             if (sceneContext != null)
             {
-                Debug.Log("Initializing MatchService...");
-                IMatchService matchService = sceneContext.Container.Resolve<IMatchService>();
-                Debug.Log("MatchService found in the scene.");
+                IGameplayCoordinator gameplayCoordinator = sceneContext.Container.Resolve<IGameplayCoordinator>();
                 
-                await matchService.Initialize(_matchData);
+                await gameplayCoordinator.InitializeMatch(_matchData);
             }
             else
             {

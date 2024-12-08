@@ -13,7 +13,6 @@ namespace Runtime.GameBoard
         
         public Token Get(Token prefab)
         {
-            Debug.Log("Get Token");
             Token instance = Instantiate(prefab);
             instance.OriginFactory = this;
             MoveToFactoryScene(instance.gameObject);

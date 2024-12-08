@@ -9,6 +9,7 @@ namespace Runtime.GameplayCoordinator.GameplayStates
     {
         private IInputService _inputService;
         
+        
         public PersonTurnState(
             IGameplayCoordinator gameplayCoordinator,
             IGameBoard gameBoard,
@@ -32,9 +33,9 @@ namespace Runtime.GameplayCoordinator.GameplayStates
             _inputService.SetInputEnabled(false);
         }
         
-        private void HandleTileClicked(Crd crd)
+        private async void HandleTileClicked(Crd crd)
         {
-            UpdateBoard(crd);
+            await UpdateBoard(crd);
             CheckBoard();
             _gameplayCoordinator.ChangeTurn();
         }

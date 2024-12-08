@@ -197,8 +197,8 @@ MonoBehaviour:
   - {fileID: 2013791533}
   - {fileID: 1161341231}
   - {fileID: 45526401}
-  - {fileID: 2108024580}
   - {fileID: 1081042776}
+  - {fileID: 2108024580}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -232,8 +232,8 @@ Transform:
   - {fileID: 2013791534}
   - {fileID: 1161341230}
   - {fileID: 45526402}
-  - {fileID: 2108024579}
   - {fileID: 1081042775}
+  - {fileID: 2108024579}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &208174475
@@ -535,7 +535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cd7e0dc797b475ca94ae93c58af6542, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameBoardPrefab: {fileID: 2231365995924052138, guid: 00f22d521592940469bfcf02198835ac, type: 3}
+  generatedGameBoardPrefab: {fileID: 2231365995924052138, guid: 00f22d521592940469bfcf02198835ac, type: 3}
 --- !u!4 &2013791534
 Transform:
   m_ObjectHideFlags: 0

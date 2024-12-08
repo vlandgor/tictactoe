@@ -45,7 +45,7 @@ namespace Runtime.GameBoard.GameBoards
         
         public async UniTask ClearTokens()
         {
-            
+            await _boardRenderer.ClearTokens();
         }
 
         private async UniTask GenerateBoard()

@@ -18,7 +18,6 @@ namespace Runtime.GameplayCoordinator.GameplayStates
 
         public override async UniTask Exit()
         {
-            throw new System.NotImplementedException();
         }
     }
 }

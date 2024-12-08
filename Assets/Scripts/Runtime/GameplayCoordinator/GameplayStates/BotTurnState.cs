@@ -30,7 +30,7 @@ namespace Runtime.GameplayCoordinator.GameplayStates
             
             await UniTask.Delay(500);
             
-            UpdateBoard(move);
+            await UpdateBoard(move);
             CheckBoard();
             _gameplayCoordinator.ChangeTurn();
         }

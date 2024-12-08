@@ -31,14 +31,14 @@ namespace Runtime.GameplayCoordinator.GameplayStates
             _player = player;
         }
         
-        protected virtual void UpdateBoard(Crd crd)
+        protected virtual async UniTask UpdateBoard(Crd crd)
         {
             if(!_match.MatchProcessor.PlaceToken(crd, _player))
             {
                 return;
             }
             
-            _gameBoard.PlaceToken(crd, _player.Token);
+            await _gameBoard.PlaceToken(crd, _player.Token);
         }
         protected virtual void CheckBoard()
         {

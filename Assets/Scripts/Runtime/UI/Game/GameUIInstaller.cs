@@ -1,4 +1,5 @@
-﻿using Runtime.LoadingProvider;
+﻿using Runtime.GameplayCoordinator;
+using Runtime.LoadingProvider;
 using Runtime.UI.Game.Models;
 using Runtime.UI.Game.Presenters;
 using Runtime.UI.Game.Views;
@@ -33,8 +34,9 @@ namespace Runtime.UI.Game
         private void BindGameResult()
         {
             ILoadingProvider loadingProvider = Container.Resolve<ILoadingProvider>();
+            IGameplayCoordinator gameplayCoordinator = Container.Resolve<IGameplayCoordinator>();
             
-            GameResultModel model = new GameResultModel(loadingProvider);
+            GameResultModel model = new GameResultModel(loadingProvider, gameplayCoordinator);
             
             Container
                 .Bind<GameResultPresenter>()

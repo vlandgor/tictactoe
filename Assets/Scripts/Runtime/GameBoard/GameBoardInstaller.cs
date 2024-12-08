@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+﻿using Runtime.GameBoard.GameBoards;
+using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace Runtime.GameBoard
 {
     public class GameBoardInstaller : MonoInstaller
     {
-        [SerializeField] private GameBoard _gameBoardPrefab;
+        [FormerlySerializedAs("_gameBoardPrefab")] [SerializeField] private GeneratedGameBoard generatedGameBoardPrefab;
         
         public override void InstallBindings()
         {
@@ -14,12 +16,12 @@ namespace Runtime.GameBoard
 
         private void BindGameBoard()
         {
-            GameBoard gameBoard = Container
-                .InstantiatePrefabForComponent<GameBoard>(_gameBoardPrefab, Vector3.zero, Quaternion.identity, null);
+            GeneratedGameBoard generatedGameBoard = Container
+                .InstantiatePrefabForComponent<GeneratedGameBoard>(generatedGameBoardPrefab, Vector3.zero, Quaternion.identity, null);
 
             Container
                 .Bind<IGameBoard>()
-                .FromInstance(gameBoard)
+                .FromInstance(generatedGameBoard)
                 .AsSingle();
         }
     }

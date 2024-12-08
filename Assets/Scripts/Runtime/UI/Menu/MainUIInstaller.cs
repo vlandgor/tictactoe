@@ -1,8 +1,8 @@
 ﻿using Runtime.AudioService;
 using Runtime.ConfigProvider;
 using Runtime.LoadingProvider;
-using Runtime.Marks;
 using Runtime.ShopService;
+using Runtime.Tokens;
 using Runtime.UI.Menu.Models;
 using Runtime.UI.Menu.Presenters;
 using Runtime.UI.Menu.Views;
@@ -41,11 +41,11 @@ namespace Runtime.UI.Menu
         {
             IMenuMediator mediator = Container.Resolve<IMenuMediator>();
             ILoadingProvider loadingProvider = Container.Resolve<ILoadingProvider>();
-            IMarksProvider marksService = Container.Resolve<IMarksProvider>();
+            ITokensProvider tokensService = Container.Resolve<ITokensProvider>();
             IAudioService audioService = Container.Resolve<IAudioService>();
             IConfigProvider configProvider = Container.Resolve<IConfigProvider>();
             
-            MenuGameSetupModel setupModel = new MenuGameSetupModel(loadingProvider, marksService, audioService, configProvider);
+            MenuGameSetupModel setupModel = new MenuGameSetupModel(loadingProvider, tokensService, audioService, configProvider);
 
             Container
                 .Bind<MenuGameSetupPresenter>()

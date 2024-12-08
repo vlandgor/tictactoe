@@ -2,7 +2,7 @@
 
 namespace Runtime.GameBoard
 {
-    public class GameTile : MonoBehaviour, IGameTile
+    public class BoardTile : MonoBehaviour
     {
         
     }

@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 5855083787051256005}
   - component: {fileID: 5457776962884714161}
   m_Layer: 0
-  m_Name: MarksProviderInstaller
+  m_Name: TokensProviderInstaller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 041b24be475d43efa291907ef5512fda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _marksProviderPrefab: {fileID: 5405316891232842713, guid: 92edbf2e6607ff646b7a3546b596eae3, type: 3}
+  tokensProviderPrefab: {fileID: 5405316891232842713, guid: 92edbf2e6607ff646b7a3546b596eae3, type: 3}
 --- !u!1 &1115951784225158855
 GameObject:
   m_ObjectHideFlags: 0

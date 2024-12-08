@@ -1,5 +1,5 @@
 ﻿using Runtime.BotService;
-using Runtime.Marks;
+using Runtime.Tokens;
 
 namespace Runtime.GamePlayer
 {
@@ -7,12 +7,12 @@ namespace Runtime.GamePlayer
     {
         public string Name => "Bot";   
         
-        public Mark Mark { get; }
+        public Token Token { get; }
         public BotLevel BotLevel { get; }
         
-        public BotPlayer(Mark mark, BotLevel botLevel)
+        public BotPlayer(Token token, BotLevel botLevel)
         {
-            Mark = mark;
+            Token = token;
             BotLevel = botLevel;
         }
     }

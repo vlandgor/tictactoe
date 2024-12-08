@@ -1,10 +1,10 @@
-﻿using Runtime.Marks;
+﻿using Runtime.Tokens;
 
 namespace Runtime.GamePlayer
 {
     public interface IPlayer
     {
         public string Name { get; }
-        public Mark Mark { get; }
+        public Token Token { get; }
     }
 }

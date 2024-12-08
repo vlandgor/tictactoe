@@ -38,7 +38,7 @@ namespace Runtime.GameplayCoordinator.GameplayStates
                 return;
             }
             
-            _gameBoard.PlaceToken(crd, _player.Mark);
+            _gameBoard.PlaceToken(crd, _player.Token);
         }
         protected virtual void CheckBoard()
         {

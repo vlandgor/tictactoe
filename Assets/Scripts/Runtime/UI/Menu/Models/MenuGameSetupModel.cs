@@ -5,8 +5,8 @@ using Runtime.ConfigProvider;
 using Runtime.GameBoard;
 using Runtime.GamePlayer;
 using Runtime.LoadingProvider;
-using Runtime.Marks;
 using Runtime.MatchService;
+using Runtime.Tokens;
 using UnityEngine;
 
 namespace Runtime.UI.Menu.Models
@@ -14,7 +14,7 @@ namespace Runtime.UI.Menu.Models
     public class MenuGameSetupModel : Model
     {
         private ILoadingProvider _loadingProvider;
-        private IMarksProvider _marksProvider;
+        private ITokensProvider _tokensProvider;
         private IAudioService _audioService;
         private IConfigProvider _configProvider;
         
@@ -24,12 +24,12 @@ namespace Runtime.UI.Menu.Models
         
         public MenuGameSetupModel(
             ILoadingProvider loadingProvider, 
-            IMarksProvider marksProvider, 
+            ITokensProvider tokensProvider, 
             IAudioService audioService,
             IConfigProvider configProvider)
         {
             _loadingProvider = loadingProvider;
-            _marksProvider = marksProvider;
+            _tokensProvider = tokensProvider;
             _audioService = audioService;
             _configProvider = configProvider;
         }
@@ -55,16 +55,16 @@ namespace Runtime.UI.Menu.Models
             switch (matchType)
             {
                 case MatchType.PlayerVsPlayer:
-                    player1 = new PersonPlayer(_marksProvider.GetRandomMarkSet().XMark,"Player 1");
-                    player2 = new PersonPlayer(_marksProvider.GetRandomMarkSet().OMark,"Player 2");
+                    player1 = new PersonPlayer(_tokensProvider.GetRandomMarkSet().XToken,"Player 1");
+                    player2 = new PersonPlayer(_tokensProvider.GetRandomMarkSet().OToken,"Player 2");
                     return new []{player1, player2};
                 case MatchType.PlayerVsComp:
-                    player1 = new PersonPlayer(_marksProvider.GetRandomMarkSet().XMark,"Player 1");
-                    player2 = new BotPlayer(_marksProvider.GetRandomMarkSet().OMark, BotLevel.Hard);
+                    player1 = new PersonPlayer(_tokensProvider.GetRandomMarkSet().XToken,"Player 1");
+                    player2 = new BotPlayer(_tokensProvider.GetRandomMarkSet().OToken, BotLevel.Hard);
                     return new []{player1, player2};
                 case MatchType.CompVsComp:
-                    player1 = new BotPlayer(_marksProvider.GetRandomMarkSet().XMark, BotLevel.Easy);
-                    player2 = new BotPlayer(_marksProvider.GetRandomMarkSet().OMark, BotLevel.Hard);
+                    player1 = new BotPlayer(_tokensProvider.GetRandomMarkSet().XToken, BotLevel.Easy);
+                    player2 = new BotPlayer(_tokensProvider.GetRandomMarkSet().OToken, BotLevel.Hard);
                     return new []{player1, player2};
             }
 

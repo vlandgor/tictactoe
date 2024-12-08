@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c74c10cb41c48528c4e3e96c8b77f10, type: 3}
+  m_Name: TokensStorage
+  m_EditorClassIdentifier: 
+  tokens:
+  - xToken: {fileID: 4338821730029715222, guid: 73ef44fe73c39284283a8cdca463646f, type: 3}
+    oToken: {fileID: 116607964311342272, guid: 520f785aefe99e944955ce0440b12208, type: 3}
+  - xToken: {fileID: 4338821730029715222, guid: e4fb03f4046b3b541b6abb54f122bb9e, type: 3}
+    oToken: {fileID: 116607964311342272, guid: 163bb6cf18dc6b14ca9f0f9992c2b888, type: 3}

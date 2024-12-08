@@ -1,12 +1,13 @@
 ﻿using Cysharp.Threading.Tasks;
-using Runtime.Marks;
+using Runtime.MatchService;
+using Runtime.Tokens;
 
 namespace Runtime.GameBoard
 {
     public interface IGameBoard
     {
-        public UniTask Initialize();
-        public UniTask Clear();
-        public UniTask PlaceToken(Crd crd, Mark markPrefab);
+        public UniTask Initialize(MatchMode matchMode);
+        public UniTask ClearTokens();
+        public UniTask PlaceToken(Crd crd, Token tokenPrefab);
     }
 }

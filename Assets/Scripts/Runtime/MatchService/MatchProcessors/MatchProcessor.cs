@@ -19,6 +19,11 @@ namespace Runtime.MatchService.MatchProcessors
 
         public abstract bool PlaceToken(Crd crd, IPlayer player);
         public abstract void UndoPlaceToken(Crd crd);
+
+        public void Reset()
+        {
+            GenerateBoard(BoardSize);
+        }
         
         public virtual bool CheckIfPlayerWon(IPlayer player)
         {

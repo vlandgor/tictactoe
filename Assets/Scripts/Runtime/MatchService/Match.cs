@@ -1,4 +1,5 @@
-﻿using Runtime.MatchService.MatchProcessors;
+﻿using Runtime.GamePlayer;
+using Runtime.MatchService.MatchProcessors;
 
 namespace Runtime.MatchService
 {
@@ -22,6 +23,12 @@ namespace Runtime.MatchService
                     MatchProcessor = new FallingMatchProcessor(matchData.BoardSize);
                     break;
             }
+        }
+        
+        public void EndRound(IPlayer winner)
+        {
+            MatchResult.FinishRound(winner);
+            MatchProcessor.Reset();
         }
     }
 }

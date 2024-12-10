@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
+using Runtime.GameBoard;
 using Runtime.GameplayCoordinator.GameplayStates;
 using Runtime.GamePlayer;
 using Runtime.MatchService;
@@ -12,6 +13,7 @@ namespace Runtime.GameplayCoordinator
     public class LocalGameplayCoordinator : IGameplayCoordinator
     {
         private DiContainer _container;
+        private IGameBoard _gameBoard;
         
         private List<GameplayState> _states;
         private GameplayState _currentState;
@@ -20,9 +22,12 @@ namespace Runtime.GameplayCoordinator
         private TurnManager _turnManager;
         
         [Inject]
-        public LocalGameplayCoordinator(DiContainer container)
+        public LocalGameplayCoordinator(
+            DiContainer container,
+            IGameBoard gameBoard)
         {
             _container = container;
+            _gameBoard = gameBoard;
         }
         
         public async UniTask InitializeMatch(MatchData matchData)
@@ -43,7 +48,7 @@ namespace Runtime.GameplayCoordinator
         
         public async UniTask RestartRound()
         {
-            
+            _gameBoard.ClearTokens();
         }
         
         public async UniTask ChangeState<T>() where T : GameplayState
@@ -63,10 +68,11 @@ namespace Runtime.GameplayCoordinator
         private void InitializeStates()
         {
             _states = new List<GameplayState>();
-            _states.Add(CreateState<InitializeMatchState>(_match));
-            _states.Add(CreateState<FinalizeMatchState>(_match));
-            _states.Add(CreateState<StartRoundState>(_match));
-            _states.Add(CreateState<EndRoundState>(_match));
+            
+            _states.Add(InitializeInitializeMatchState());
+            _states.Add(InitializeFinalizeMatchState());
+            _states.Add(InitializeStartRoundState());
+            _states.Add(InitializeEndRoundState());
         }
         
         private void InitializeTurnManager()
@@ -78,13 +84,11 @@ namespace Runtime.GameplayCoordinator
                 switch (player)
                 {
                     case PersonPlayer personPlayer:
-                        PersonTurnState personTurnState = CreateState<PersonTurnState>(_match);
-                        personTurnState.SetPlayer(personPlayer);
+                        PersonTurnState personTurnState = InitializePersonTurnState(personPlayer);
                         states.Add(personPlayer, personTurnState);
                         break;
                     case BotPlayer botPlayer:
-                        BotTurnState botTurnState = CreateState<BotTurnState>(_match);
-                        botTurnState.SetPlayer(botPlayer);
+                        BotTurnState botTurnState = InitializeBotTurnState(botPlayer);
                         states.Add(botPlayer, botTurnState);
                         break;
                 }
@@ -100,6 +104,44 @@ namespace Runtime.GameplayCoordinator
             }
             
             _turnManager = new TurnManager(states);
+        }
+        
+        private InitializeMatchState InitializeInitializeMatchState()
+        {
+            InitializeMatchState initializeMatchState = CreateState<InitializeMatchState>(_match);
+            return initializeMatchState;
+        }
+        
+        private FinalizeMatchState InitializeFinalizeMatchState()
+        {
+            FinalizeMatchState finalizeMatchState = CreateState<FinalizeMatchState>(_match);
+            return finalizeMatchState;
+        }
+        
+        private StartRoundState InitializeStartRoundState()
+        {
+            StartRoundState startRoundState = CreateState<StartRoundState>(_match);
+            return startRoundState;
+        }
+        
+        private EndRoundState InitializeEndRoundState()
+        {
+            EndRoundState endRoundState = CreateState<EndRoundState>(_match);
+            return endRoundState;
+        }
+        
+        private PersonTurnState InitializePersonTurnState(PersonPlayer personPlayer)
+        {
+            PersonTurnState personTurnState = CreateState<PersonTurnState>(_match);
+            personTurnState.SetPlayer(personPlayer);
+            return personTurnState;
+        }
+        
+        private BotTurnState InitializeBotTurnState(BotPlayer botPlayer)
+        {
+            BotTurnState botTurnState = CreateState<BotTurnState>(_match);
+            botTurnState.SetPlayer(botPlayer);
+            return botTurnState;
         }
         
         private T CreateState<T>(Match match) where T : GameplayState

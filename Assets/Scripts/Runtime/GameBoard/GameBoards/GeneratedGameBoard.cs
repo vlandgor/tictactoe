@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using Runtime.ConfigProvider;
 using Runtime.GameBoard.BoardRenderers;
+using Runtime.GameBoard.Boards;
 using Runtime.MatchService;
 using Runtime.Tokens;
 using UnityEngine;
@@ -32,10 +33,10 @@ namespace Runtime.GameBoard.GameBoards
             _gameBoardConfig = configProvider.GetConfig<GameBoardConfig>();
         }
 
-        public async UniTask Initialize(MatchMode matchMode)
+        public async UniTask Initialize(Board board)
         {
             await GenerateBoard();
-            await SetBoardRenderer(matchMode);
+            await SetBoardRenderer(board);
         }
         
         public async UniTask PlaceToken(Crd crd, Token tokenPrefab)
@@ -89,15 +90,15 @@ namespace Runtime.GameBoard.GameBoards
             }
         }
         
-        private async UniTask SetBoardRenderer(MatchMode matchMode)
+        private async UniTask SetBoardRenderer(Board board)
         {
-            switch (matchMode)
+            switch (board)
             {
-                case MatchMode.Standard:
-                    _boardRenderer = new StandardBoardRenderer(_tokensFactory, _gameBoardConfig);
+                case StandardBoard standardBoard:
+                    _boardRenderer = new StandardBoardRenderer(_tokensFactory, _gameBoardConfig, standardBoard);
                     break;
-                case MatchMode.Falling:
-                    _boardRenderer = new FallingBoardRenderer(_tokensFactory, _gameBoardConfig);
+                case FallingBoard fallingBoard:
+                    _boardRenderer = new FallingBoardRenderer(_tokensFactory, _gameBoardConfig, fallingBoard);
                     break;
             }
         }

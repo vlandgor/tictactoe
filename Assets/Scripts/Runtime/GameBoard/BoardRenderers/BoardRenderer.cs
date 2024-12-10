@@ -1,39 +1,50 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System;
+using Cysharp.Threading.Tasks;
+using Runtime.GameBoard.Boards;
 using Runtime.Tokens;
 using UnityEngine;
 
 namespace Runtime.GameBoard.BoardRenderers
 {
-    public abstract class BoardRenderer
+    public abstract class BoardRenderer : IDisposable
     {
         protected TokensFactory _tokensFactory;
         protected GameBoardConfig _gameBoardConfig;
         
-        protected Token[,] tokens;
+        protected Board _board; 
+        protected Token[,] _tokens;
 
         public BoardRenderer(
             TokensFactory tokensFactory,
-            GameBoardConfig gameBoardConfig)
+            GameBoardConfig gameBoardConfig,
+            Board board)
         {
             _tokensFactory = tokensFactory;
             _gameBoardConfig = gameBoardConfig;
             
-            tokens = new Token[gameBoardConfig.BoardSize.x, gameBoardConfig.BoardSize.y];
+            _board = board;
+            _tokens = new Token[gameBoardConfig.BoardSize.x, gameBoardConfig.BoardSize.y];
+            
+            SubscribeToEvents();
+        }
+
+        public virtual void Dispose()
+        {
+            UnsubscribeFromEvents();
         }
         
         public virtual async UniTask PlaceToken(Crd crd, Token tokenPrefab)
         {
-            Token token = tokens[crd.x, crd.y] = _tokensFactory.Get(tokenPrefab);
+            Token token = _tokens[crd.x, crd.y] = _tokensFactory.Get(tokenPrefab);
             token.transform.localScale = new Vector3(_gameBoardConfig.BoardTileSize, _gameBoardConfig.BoardTileSize, 1);
             token.transform.SetPositionAndRotation(
                 new Vector2(crd.x * _gameBoardConfig.BoardTileSize, crd.y * _gameBoardConfig.BoardTileSize) + 
                 new Vector2( _gameBoardConfig.BoardTileSize / 2, _gameBoardConfig.BoardTileSize / 2), 
                 Quaternion.identity);
         }
-        
         public virtual async UniTask ClearTokens()
         {
-            foreach (var token in tokens)
+            foreach (var token in _tokens)
             {
                 if (token != null)
                 {
@@ -41,5 +52,8 @@ namespace Runtime.GameBoard.BoardRenderers
                 }
             }
         }
+
+        protected abstract void SubscribeToEvents();
+        protected abstract void UnsubscribeFromEvents();
     }
 }

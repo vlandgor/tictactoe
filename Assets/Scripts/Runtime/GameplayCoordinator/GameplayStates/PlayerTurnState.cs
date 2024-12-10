@@ -33,19 +33,19 @@ namespace Runtime.GameplayCoordinator.GameplayStates
         
         protected virtual async UniTask UpdateBoard(Crd crd)
         {
-            _match.MatchProcessor.PlaceToken(crd, _player);
-            await _gameBoard.PlaceToken(crd, _player.Token);
+            _match.Board.PlaceToken(crd, _player);
+            //await _gameBoard.PlaceToken(crd, _player.Token);
         }
         protected virtual void CheckBoard()
         {
-            if(_match.MatchProcessor.CheckIfPlayerWon(_player))
+            if(_match.Board.CheckIfPlayerWon(_player))
             {
                 _match.EndRound(_player);
                 _gameplayCoordinator.ChangeState<EndRoundState>();
                 return;
             }
             
-            if(_match.MatchProcessor.IsBoardFull())
+            if(_match.Board.IsBoardFull())
             {
                 _match.EndRound(null);
                 _gameplayCoordinator.ChangeState<EndRoundState>();

@@ -38,7 +38,7 @@ namespace Runtime.GameplayCoordinator.GameplayStates
         
         private void InitializeBoard()
         {
-            _gameBoard.Initialize(_match.MatchData.MatchMode);
+            _gameBoard.Initialize(_match.Board);
         }
     }
 }

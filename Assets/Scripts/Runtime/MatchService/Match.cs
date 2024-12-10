@@ -1,5 +1,5 @@
-﻿using Runtime.GamePlayer;
-using Runtime.MatchService.MatchProcessors;
+﻿using Runtime.GameBoard.Boards;
+using Runtime.GamePlayer;
 
 namespace Runtime.MatchService
 {
@@ -7,7 +7,7 @@ namespace Runtime.MatchService
     {
         public MatchData MatchData { get; private set; }
         public MatchResult MatchResult { get; private set; }
-        public MatchProcessor MatchProcessor { get; private set; }
+        public Board Board { get; private set; }
         
         public Match(MatchData matchData)
         {
@@ -17,10 +17,10 @@ namespace Runtime.MatchService
             switch (matchData.MatchMode)
             {
                 case MatchMode.Standard:
-                    MatchProcessor = new StandardMatchProcessor(matchData.BoardSize);
+                    Board = new StandardBoard(matchData.BoardSize);
                     break;
                 case MatchMode.Falling:
-                    MatchProcessor = new FallingMatchProcessor(matchData.BoardSize);
+                    Board = new FallingBoard(matchData.BoardSize);
                     break;
             }
         }
@@ -28,7 +28,7 @@ namespace Runtime.MatchService
         public void EndRound(IPlayer winner)
         {
             MatchResult.FinishRound(winner);
-            MatchProcessor.Reset();
+            Board.Reset();
         }
     }
 }

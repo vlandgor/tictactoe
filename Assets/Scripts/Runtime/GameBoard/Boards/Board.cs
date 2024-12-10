@@ -1,16 +1,16 @@
-﻿using Runtime.GameBoard;
+﻿using System;
 using Runtime.GamePlayer;
 using UnityEngine;
 
-namespace Runtime.MatchService.MatchProcessors
+namespace Runtime.GameBoard.Boards
 {
-    public abstract class MatchProcessor
+    public abstract class Board
     {
         protected IPlayer[,] _board;
         
         public Vector2Int BoardSize { get; }
         
-        public MatchProcessor(Vector2Int boardSize)
+        public Board(Vector2Int boardSize)
         {
             BoardSize = boardSize;
             GenerateBoard(boardSize);
@@ -60,7 +60,7 @@ namespace Runtime.MatchService.MatchProcessors
             return false;
         }
         
-        public T Clone<T>() where T : MatchProcessor
+        public T Clone<T>() where T : Board
         {
             T clonedMatch = (T)CreateInstance(BoardSize);
             for (int i = 0; i < BoardSize.x; i++)
@@ -73,7 +73,7 @@ namespace Runtime.MatchService.MatchProcessors
             return clonedMatch;
         }
         
-        protected abstract MatchProcessor CreateInstance(Vector2Int boardSize);
+        protected abstract Board CreateInstance(Vector2Int boardSize);
         
         protected void GenerateBoard(Vector2Int boardSize)
         {

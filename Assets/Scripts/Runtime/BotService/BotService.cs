@@ -1,30 +1,30 @@
 ﻿using Runtime.BotService.Algorithms;
 using Runtime.GameBoard;
+using Runtime.GameBoard.Boards;
 using Runtime.GamePlayer;
 using Runtime.MatchService;
-using Runtime.MatchService.MatchProcessors;
 
 namespace Runtime.BotService
 {
     public class BotService : IBotService
     {
-        public Crd GetMove(MatchProcessor matchProcessor, BotPlayer bot, IPlayer opponent)
+        public Crd GetMove(Board board, BotPlayer bot, IPlayer opponent)
         {
-            IBotAlgorithm algorithm = GetAlgorithm(matchProcessor, bot, opponent);
+            IBotAlgorithm algorithm = GetAlgorithm(board, bot, opponent);
             
             return algorithm.GetMove();
         }
 
-        private IBotAlgorithm GetAlgorithm(MatchProcessor matchProcessor, BotPlayer bot, IPlayer opponent)
+        private IBotAlgorithm GetAlgorithm(Board board, BotPlayer bot, IPlayer opponent)
         {
             switch (bot.BotLevel)
             {
                 case BotLevel.Easy:
-                    return new RandomMoveAlgorithm(matchProcessor);
+                    return new RandomMoveAlgorithm(board);
                 case BotLevel.Medium:
-                    return new BlockAndWinAlgorithm(matchProcessor, bot, opponent);
+                    return new BlockAndWinAlgorithm(board, bot, opponent);
                 case BotLevel.Hard:
-                    return new MinimaxAlgorithm(matchProcessor, bot, opponent);
+                    return new MinimaxAlgorithm(board, bot, opponent);
             }
             
             return null;

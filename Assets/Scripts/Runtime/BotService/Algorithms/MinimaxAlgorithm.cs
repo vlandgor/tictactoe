@@ -1,20 +1,20 @@
 ﻿using System;
 using Runtime.GameBoard;
+using Runtime.GameBoard.Boards;
 using Runtime.GamePlayer;
 using Runtime.MatchService;
-using Runtime.MatchService.MatchProcessors;
 
 namespace Runtime.BotService.Algorithms
 {
     public class MinimaxAlgorithm : IBotAlgorithm
     {
-        private MatchProcessor _matchProcessor;
+        private Board _board;
         private IPlayer _bot;
         private IPlayer _opponent;
 
-        public MinimaxAlgorithm(MatchProcessor matchProcessor, IPlayer bot, IPlayer opponent)
+        public MinimaxAlgorithm(Board board, IPlayer bot, IPlayer opponent)
         {
-            _matchProcessor = matchProcessor.Clone<StandardMatchProcessor>();
+            _board = board.Clone<StandardBoard>();
             _bot = bot;
             _opponent = opponent;
         }
@@ -25,22 +25,22 @@ namespace Runtime.BotService.Algorithms
             Crd bestMove = new Crd();
 
             // Iterate through all cells to find the best move
-            for (int x = 0; x < _matchProcessor.BoardSize.x; x++)
+            for (int x = 0; x < _board.BoardSize.x; x++)
             {
-                for (int y = 0; y < _matchProcessor.BoardSize.y; y++)
+                for (int y = 0; y < _board.BoardSize.y; y++)
                 {
                     Crd currentCrd = new Crd(x, y);
 
-                    if (!_matchProcessor.CheckIfCellIsTaken(currentCrd))
+                    if (!_board.CheckIfCellIsTaken(currentCrd))
                     {
                         // Simulate placing the bot's token
-                        _matchProcessor.PlaceToken(currentCrd, _bot);
+                        _board.PlaceToken(currentCrd, _bot);
 
                         // Evaluate the move using Minimax
-                        int score = Minimax(_matchProcessor, depth: 0, isMaximizing: false);
+                        int score = Minimax(_board, depth: 0, isMaximizing: false);
 
                         // Undo the move
-                        _matchProcessor.UndoPlaceToken(currentCrd);
+                        _board.UndoPlaceToken(currentCrd);
 
                         // Update the best score and move
                         if (score > bestScore)
@@ -55,36 +55,36 @@ namespace Runtime.BotService.Algorithms
             return bestMove;
         }
 
-        private int Minimax(MatchProcessor matchProcessor, int depth, bool isMaximizing)
+        private int Minimax(Board board, int depth, bool isMaximizing)
         {
             // Check for terminal states
-            if (matchProcessor.CheckIfPlayerWon(_bot))
+            if (board.CheckIfPlayerWon(_bot))
                 return 10 - depth; // Prefer faster wins for the bot
-            if (matchProcessor.CheckIfPlayerWon(_opponent))
+            if (board.CheckIfPlayerWon(_opponent))
                 return depth - 10; // Prefer slower losses
-            if (matchProcessor.IsBoardFull())
+            if (board.IsBoardFull())
                 return 0; // Draw
 
             if (isMaximizing) // Bot's turn
             {
                 int bestScore = int.MinValue;
 
-                for (int x = 0; x < matchProcessor.BoardSize.x; x++)
+                for (int x = 0; x < board.BoardSize.x; x++)
                 {
-                    for (int y = 0; y < matchProcessor.BoardSize.y; y++)
+                    for (int y = 0; y < board.BoardSize.y; y++)
                     {
                         Crd currentCrd = new Crd(x, y);
 
-                        if (!matchProcessor.CheckIfCellIsTaken(currentCrd))
+                        if (!board.CheckIfCellIsTaken(currentCrd))
                         {
                             // Simulate the move
-                            matchProcessor.PlaceToken(currentCrd, _bot);
+                            board.PlaceToken(currentCrd, _bot);
 
                             // Recursively evaluate
-                            int score = Minimax(matchProcessor, depth + 1, isMaximizing: false);
+                            int score = Minimax(board, depth + 1, isMaximizing: false);
 
                             // Undo the move
-                            matchProcessor.UndoPlaceToken(currentCrd);
+                            board.UndoPlaceToken(currentCrd);
 
                             // Update the best score
                             bestScore = Math.Max(bestScore, score);
@@ -98,22 +98,22 @@ namespace Runtime.BotService.Algorithms
             {
                 int bestScore = int.MaxValue;
 
-                for (int x = 0; x < matchProcessor.BoardSize.x; x++)
+                for (int x = 0; x < board.BoardSize.x; x++)
                 {
-                    for (int y = 0; y < matchProcessor.BoardSize.y; y++)
+                    for (int y = 0; y < board.BoardSize.y; y++)
                     {
                         Crd currentCrd = new Crd(x, y);
 
-                        if (!matchProcessor.CheckIfCellIsTaken(currentCrd))
+                        if (!board.CheckIfCellIsTaken(currentCrd))
                         {
                             // Simulate the move
-                            matchProcessor.PlaceToken(currentCrd, _opponent);
+                            board.PlaceToken(currentCrd, _opponent);
 
                             // Recursively evaluate
-                            int score = Minimax(matchProcessor, depth + 1, isMaximizing: true);
+                            int score = Minimax(board, depth + 1, isMaximizing: true);
 
                             // Undo the move
-                            matchProcessor.UndoPlaceToken(currentCrd);
+                            board.UndoPlaceToken(currentCrd);
 
                             // Update the best score
                             bestScore = Math.Min(bestScore, score);

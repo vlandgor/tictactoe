@@ -2,6 +2,7 @@
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using Runtime.GameBoard;
+using Runtime.GameBoard.Boards;
 using Runtime.GameplayCoordinator.GameplayStates;
 using Runtime.GamePlayer;
 using Runtime.MatchService;
@@ -19,6 +20,7 @@ namespace Runtime.GameplayCoordinator
         private GameplayState _currentState;
         
         private Match _match;
+        
         private TurnManager _turnManager;
         
         [Inject]
@@ -32,7 +34,6 @@ namespace Runtime.GameplayCoordinator
         
         public async UniTask InitializeMatch(MatchData matchData)
         {
-            Debug.Log(matchData.BoardSize);
             _match = new Match(matchData);
             
             InitializeStates();

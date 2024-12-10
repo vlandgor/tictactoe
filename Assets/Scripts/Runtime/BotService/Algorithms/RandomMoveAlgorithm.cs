@@ -1,17 +1,17 @@
 ﻿using Runtime.GameBoard;
+using Runtime.GameBoard.Boards;
 using Runtime.MatchService;
-using Runtime.MatchService.MatchProcessors;
 using UnityEngine;
 
 namespace Runtime.BotService.Algorithms
 {
     public class RandomMoveAlgorithm : IBotAlgorithm
     {
-        private MatchProcessor _matchProcessor;
+        private Board _board;
         
-        public RandomMoveAlgorithm(MatchProcessor matchProcessor)
+        public RandomMoveAlgorithm(Board board)
         {
-            _matchProcessor = matchProcessor.Clone<StandardMatchProcessor>();
+            _board = board.Clone<StandardBoard>();
         }
         
         public Crd GetMove()
@@ -25,11 +25,11 @@ namespace Runtime.BotService.Algorithms
 
             do
             {
-                int x = Random.Range(0, _matchProcessor.BoardSize.x);
-                int y = Random.Range(0, _matchProcessor.BoardSize.y);
+                int x = Random.Range(0, _board.BoardSize.x);
+                int y = Random.Range(0, _board.BoardSize.y);
                 crd = new Crd(x, y);
             } 
-            while (_matchProcessor.CheckIfCellIsTaken(crd));
+            while (_board.CheckIfCellIsTaken(crd));
 
             return crd;
         }

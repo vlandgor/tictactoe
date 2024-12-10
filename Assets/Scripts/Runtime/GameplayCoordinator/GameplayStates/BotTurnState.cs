@@ -26,7 +26,7 @@ namespace Runtime.GameplayCoordinator.GameplayStates
         {
             Debug.Log("Enter BotTurnState");
             
-            Crd move = _botService.GetMove(_match.MatchProcessor, Bot, Opponent);
+            Crd move = _botService.GetMove(_match.Board, Bot, Opponent);
             
             await UniTask.Delay(500);
             

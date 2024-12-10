@@ -1,12 +1,15 @@
-﻿using Runtime.GameBoard;
+﻿using System;
 using Runtime.GamePlayer;
 using UnityEngine;
 
-namespace Runtime.MatchService.MatchProcessors
+namespace Runtime.GameBoard.Boards
 {
-    public class FallingMatchProcessor : MatchProcessor
+    public class FallingBoard : Board
     {
-        public FallingMatchProcessor(Vector2Int boardSize) : base(boardSize)
+        public event Action<Crd, IPlayer> OnTokenPlaced; 
+        public event Action<Crd, Crd> OnTokenMoved;
+        
+        public FallingBoard(Vector2Int boardSize) : base(boardSize)
         {
         }
 
@@ -16,12 +19,18 @@ namespace Runtime.MatchService.MatchProcessors
             {
                 return false;
             }
-
+            
+            _board[crd.x, crd.y] = player;
+            OnTokenPlaced?.Invoke(crd, player);
+            
+            
             for (int i = crd.y; i >= 0; i--)
             {
                 if (i == 0 || _board[crd.x, i - 1] != null)
                 {
+                    _board[crd.x, crd.y] = null;
                     _board[crd.x, i] = player;
+                    OnTokenMoved?.Invoke(crd, new Crd(crd.x, i));
                     return true;
                 }
             }
@@ -41,9 +50,9 @@ namespace Runtime.MatchService.MatchProcessors
             }
         }
         
-        protected override MatchProcessor CreateInstance(Vector2Int boardSize)
+        protected override Board CreateInstance(Vector2Int boardSize)
         {
-            return new FallingMatchProcessor(boardSize);
+            return new FallingBoard(boardSize);
         }
     }
 }

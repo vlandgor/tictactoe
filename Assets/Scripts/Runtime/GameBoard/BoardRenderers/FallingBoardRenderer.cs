@@ -1,4 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
+using Runtime.GameBoard.Boards;
+using Runtime.GamePlayer;
 using Runtime.Tokens;
 using UnityEngine;
 
@@ -6,26 +8,48 @@ namespace Runtime.GameBoard.BoardRenderers
 {
     public class FallingBoardRenderer : BoardRenderer
     {
+        private FallingBoard FallingBoard => _board as FallingBoard;
+        
         public FallingBoardRenderer(
             TokensFactory tokensFactory, 
-            GameBoardConfig gameBoardConfig) 
-            : base(tokensFactory, gameBoardConfig)
+            GameBoardConfig gameBoardConfig,
+            Board board) 
+            : base(tokensFactory, gameBoardConfig, board)
         {
-            
+        }
+        
+        protected override void SubscribeToEvents()
+        {
+            FallingBoard.OnTokenPlaced += HandleTokenPlaced;
+            FallingBoard.OnTokenMoved += HandleTokenMoved;
+        }
+
+        protected override void UnsubscribeFromEvents()
+        {
+            FallingBoard.OnTokenPlaced -= HandleTokenPlaced;
+            FallingBoard.OnTokenMoved -= HandleTokenMoved;
+        }
+        
+        private async void HandleTokenPlaced(Crd crd, IPlayer player)
+        {
+            await PlaceToken(crd, player.Token);
+        }
+        
+        private async void HandleTokenMoved(Crd from, Crd to)
+        {
+            await MoveToken(from, to);
         }
         
         public override async UniTask PlaceToken(Crd crd, Token tokenPrefab)
         {
             await base.PlaceToken(crd, tokenPrefab);
-            await MoveToken(crd, GetFallingCrd(crd));
         }
-        
+
         private async UniTask MoveToken(Crd from, Crd to)
         {
-            Debug.Log("MoveToken");
-            Token token = tokens[from.x, from.y];
-            tokens[from.x, from.y] = null;
-            tokens[to.x, to.y] = token;
+            Token token = _tokens[from.x, from.y];
+            _tokens[from.x, from.y] = null;
+            _tokens[to.x, to.y] = token;
 
             Vector3 startTransform = token.transform.position;
             Vector3 targetTransform = new Vector2(to.x * _gameBoardConfig.BoardTileSize, to.y * _gameBoardConfig.BoardTileSize) 
@@ -43,19 +67,6 @@ namespace Runtime.GameBoard.BoardRenderers
             }
 
             token.transform.position = targetTransform;
-        }
-
-        private Crd GetFallingCrd(Crd origin)
-        {
-            for (int i = origin.y; i >= 0; i--)
-            {
-                if (i == 0 || tokens[origin.x, i - 1] != null)
-                {
-                    return new Crd(origin.x, i);
-                }
-            }
-            
-            return origin;
         }
     }
 }

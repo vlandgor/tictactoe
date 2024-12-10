@@ -1,12 +1,14 @@
-﻿using Runtime.GameBoard;
+﻿using System;
 using Runtime.GamePlayer;
 using UnityEngine;
 
-namespace Runtime.MatchService.MatchProcessors
+namespace Runtime.GameBoard.Boards
 {
-    public class StandardMatchProcessor : MatchProcessor
+    public class StandardBoard : Board
     {
-        public StandardMatchProcessor(Vector2Int boardSize) : base(boardSize)
+        public event Action<Crd, IPlayer> OnTokenPlaced;
+        
+        public StandardBoard(Vector2Int boardSize) : base(boardSize)
         {
             
         }
@@ -17,6 +19,7 @@ namespace Runtime.MatchService.MatchProcessors
                 return false;
             
             _board[crd.x, crd.y] = player;
+            OnTokenPlaced?.Invoke(crd, player);
             return true;
         }
         
@@ -25,9 +28,9 @@ namespace Runtime.MatchService.MatchProcessors
             _board[crd.x, crd.y] = null;
         }
         
-        protected override MatchProcessor CreateInstance(Vector2Int boardSize)
+        protected override Board CreateInstance(Vector2Int boardSize)
         {
-            return new StandardMatchProcessor(boardSize);
+            return new StandardBoard(boardSize);
         }
     }
 }

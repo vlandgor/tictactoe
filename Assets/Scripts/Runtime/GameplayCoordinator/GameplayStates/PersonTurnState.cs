@@ -40,7 +40,7 @@ namespace Runtime.GameplayCoordinator.GameplayStates
         private async UniTask ProcessTurn(Crd crd)
         {
             _inputService.SetInputEnabled(false);
-            if (_match.MatchProcessor.CheckIfCellIsTaken(crd))
+            if (_match.Board.CheckIfCellIsTaken(crd))
             {
                 _inputService.SetInputEnabled(true);
                 return;

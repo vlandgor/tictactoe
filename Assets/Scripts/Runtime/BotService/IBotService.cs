@@ -1,12 +1,12 @@
 ﻿using Runtime.GameBoard;
+using Runtime.GameBoard.Boards;
 using Runtime.GamePlayer;
 using Runtime.MatchService;
-using Runtime.MatchService.MatchProcessors;
 
 namespace Runtime.BotService
 {
     public interface IBotService
     {
-        public Crd GetMove(MatchProcessor matchProcessor, BotPlayer bot, IPlayer opponent);
+        public Crd GetMove(Board board, BotPlayer bot, IPlayer opponent);
     }
 }

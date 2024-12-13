@@ -6,7 +6,7 @@ namespace Runtime.GameplayCoordinator
 {
     public interface IGameplayCoordinator
     {
-        public UniTask InitializeMatch(MatchData matchData);
+        public UniTask InitializeMatch(Match match);
         public UniTask FinalizeMatch();
 
         public UniTask RestartRound();

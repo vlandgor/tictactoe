@@ -16,7 +16,7 @@ namespace Runtime.Boot
 
         private async void Start()
         {
-            await _loadingProvider.LoadMenu();
+            await _loadingProvider.LoadApp();
         }
     }
 }

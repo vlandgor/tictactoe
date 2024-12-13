@@ -42,9 +42,11 @@ namespace Runtime.UI.Menu.Models
         public void StartGame(MatchType matchType, bool IsRanked)
         {
             IPlayer[] players = GetPlayers(matchType);
-            MatchData matchData = new MatchData(matchType, _matchMode, players, IsRanked, GameBoardConfig.BoardSize);
             
-            _loadingProvider.LoadGame(matchData).Forget();
+            MatchData matchData = new MatchData(matchType, _matchMode, players, IsRanked, GameBoardConfig.BoardSize);
+            Match match = new Match(matchData);
+            
+            _loadingProvider.LoadGame(match).Forget();
         }
         
         private IPlayer[] GetPlayers(MatchType matchType)

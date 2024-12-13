@@ -2,11 +2,9 @@
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using Runtime.GameBoard;
-using Runtime.GameBoard.Boards;
 using Runtime.GameplayCoordinator.GameplayStates;
 using Runtime.GamePlayer;
 using Runtime.MatchService;
-using UnityEngine;
 using Zenject;
 
 namespace Runtime.GameplayCoordinator
@@ -32,9 +30,9 @@ namespace Runtime.GameplayCoordinator
             _gameBoard = gameBoard;
         }
         
-        public async UniTask InitializeMatch(MatchData matchData)
+        public async UniTask InitializeMatch(Match match)
         {
-            _match = new Match(matchData);
+            _match = match;
             
             InitializeStates();
             InitializeTurnManager();

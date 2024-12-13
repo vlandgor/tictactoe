@@ -7,8 +7,6 @@ namespace Runtime.UI.Game.Views
 {
     public class GameResultView : View
     {
-        private GameResultPresenter _presenter;
-        
         private VisualElement _youWonPanel;
         private VisualElement _youLostPanel;
         
@@ -20,14 +18,10 @@ namespace Runtime.UI.Game.Views
         private Button _settingsButton;
         private Button _restartButton;
         private Button _leaveButton;
-
-        [Inject]
-        public void Construct(GameResultPresenter presenter)
-        {
-            _presenter = presenter;
-        }
         
-        public override void InitializeVisuals()
+        private GameResultPresenter GameResultPresenter => _presenter as GameResultPresenter;
+        
+        protected override void InitializeVisuals()
         {
             base.InitializeVisuals();
             
@@ -40,13 +34,13 @@ namespace Runtime.UI.Game.Views
             _drawPanel = _visual.Q<VisualElement>("DrawPanel");
             
             _settingsButton = _visual.Q<Button>("SettingsButton");
-            _settingsButton.clicked += _presenter.SettingsButtonPressed;
+            _settingsButton.clicked += GameResultPresenter.SettingsButtonPressed;
             
             _restartButton = _visual.Q<Button>("RestartButton");
-            _restartButton.clicked += _presenter.RestartButtonPressed;
+            _restartButton.clicked += GameResultPresenter.RestartButtonPressed;
             
             _leaveButton = _visual.Q<Button>("LeaveButton");
-            _leaveButton.clicked += _presenter.LeaveButtonPressed;
+            _leaveButton.clicked += GameResultPresenter.LeaveButtonPressed;
         }
         
         public void ShowYouWon()

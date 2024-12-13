@@ -1,20 +1,19 @@
-﻿using Runtime.MatchService;
-using Runtime.UI.Menu.Models;
+﻿using Runtime.UI.Menu.Models;
 using Runtime.UI.Menu.Views;
 
 namespace Runtime.UI.Menu.Presenters
 {
     public class MenuHudPresenter : Presenter
     {
-        private IMenuMediator _mediator;
         private MenuHudModel _model;
         private MenuHudView _view;
+        private IMenuMediator _mediator;
 
-        public MenuHudPresenter(IMenuMediator mediator, MenuHudModel model, MenuHudView view)
+        public MenuHudPresenter(MenuHudModel model, MenuHudView view, IMenuMediator mediator)
         {
-            _mediator = mediator;
             _model = model;
             _view = view;
+            _mediator = mediator;
         }
 
         public void EnableGameSetup()

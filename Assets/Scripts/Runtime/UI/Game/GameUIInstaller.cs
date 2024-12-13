@@ -1,6 +1,4 @@
-﻿using Runtime.GameplayCoordinator;
-using Runtime.LoadingProvider;
-using Runtime.UI.Game.Models;
+﻿using Runtime.UI.Game.Models;
 using Runtime.UI.Game.Presenters;
 using Runtime.UI.Game.Views;
 using UnityEngine;
@@ -10,8 +8,7 @@ namespace Runtime.UI.Game
 {
     public class GameUIInstaller : MonoInstaller
     {
-        [SerializeField] private GameHudView _gameHudView;
-        [SerializeField] private GameResultView _gameResultView;
+        [SerializeField] private ViewsFactory _viewsFactory;
         
         public override void InstallBindings()
         {
@@ -20,29 +17,6 @@ namespace Runtime.UI.Game
             BindGameHud();
             BindGameResult();
         }
-
-        private void BindGameHud()
-        {
-            GameHudModel model = new GameHudModel();
-            
-            Container
-                .Bind<GameHudPresenter>()
-                .AsSingle()
-                .WithArguments(model, _gameHudView);
-        }
-        
-        private void BindGameResult()
-        {
-            ILoadingProvider loadingProvider = Container.Resolve<ILoadingProvider>();
-            IGameplayCoordinator gameplayCoordinator = Container.Resolve<IGameplayCoordinator>();
-            
-            GameResultModel model = new GameResultModel(loadingProvider, gameplayCoordinator);
-            
-            Container
-                .Bind<GameResultPresenter>()
-                .AsSingle()
-                .WithArguments(model, _gameResultView);
-        }
         
         private void BindMediator()
         {
@@ -50,6 +24,32 @@ namespace Runtime.UI.Game
                 .Bind<IGameMediator>()
                 .To<GameMediator>()
                 .AsSingle();
+        }
+
+        private void BindGameHud()
+        {
+            GameHudModel model = Container.Instantiate<GameHudModel>();
+            GameHudView view = _viewsFactory.Get<GameHudView>();
+            
+            Container
+                .Bind<GameHudPresenter>()
+                .AsSingle()
+                .WithArguments(model, view);
+            
+            view.Initialize(Container.Resolve<GameHudPresenter>());
+        }
+        
+        private void BindGameResult()
+        {
+            GameResultModel model = Container.Instantiate<GameResultModel>();
+            GameResultView view = _viewsFactory.Get<GameResultView>();
+            
+            Container
+                .Bind<GameResultPresenter>()
+                .AsSingle()
+                .WithArguments(model, view);
+            
+            view.Initialize(Container.Resolve<GameResultPresenter>());
         }
     }
 }

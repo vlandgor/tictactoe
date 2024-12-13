@@ -7,7 +7,7 @@ namespace Runtime.UI.Game.Views
     {
         private Label _turnLabel;
 
-        public override void InitializeVisuals()
+        protected override void InitializeVisuals()
         {
             base.InitializeVisuals();
             

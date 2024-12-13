@@ -10,35 +10,29 @@ namespace Runtime.UI.Menu.Views
     public class MenuShopView : View
     {
         [SerializeField] private VisualTreeAsset shopItemTemplate;
-        
-        private MenuShopPresenter _menuShopPresenter;
 
         private ScrollView _contentPanel;
         private Button _closeButton;
         
         private ShopItemVisual[] _shopItemVisuals;
         
-        [Inject]
-        public void Construct(MenuShopPresenter menuShopPresenter)
-        {
-            _menuShopPresenter = menuShopPresenter;
-        }
+        private MenuShopPresenter MenuShopPresenter => _presenter as MenuShopPresenter;
         
         public void OnDestroy()
         {
-            _closeButton.clicked -= _menuShopPresenter.DisableView;
+            _closeButton.clicked -= MenuShopPresenter.DisableView;
 
             ClearItems();
         }
 
-        public override void InitializeVisuals()
+        protected override void InitializeVisuals()
         {
             base.InitializeVisuals();
 
             _contentPanel = _root.Q<ScrollView>("ContentPanel");
 
             _closeButton = _root.Q<Button>("CloseButton");
-            _closeButton.clicked += _menuShopPresenter.DisableView;
+            _closeButton.clicked += MenuShopPresenter.DisableView;
         }
 
         public void InitializeItems(ShopItem[] items)

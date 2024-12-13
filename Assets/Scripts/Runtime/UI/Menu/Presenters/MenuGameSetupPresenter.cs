@@ -1,44 +1,43 @@
 ﻿using Runtime.MatchService;
 using Runtime.UI.Menu.Models;
 using Runtime.UI.Menu.Views;
+using Zenject;
 
 namespace Runtime.UI.Menu.Presenters
 {
     public class MenuGameSetupPresenter : Presenter
     {
+        private MenuGameSetupModel _model;
+        private MenuGameSetupView _view;
         private IMenuMediator _mediator;
-        private MenuGameSetupModel _setupModel;
-        private MenuGameSetupView _setupView;
 
-        public MenuGameSetupPresenter(IMenuMediator mediator, MenuGameSetupModel setupModel, MenuGameSetupView setupView)
+        public MenuGameSetupPresenter(MenuGameSetupModel model, MenuGameSetupView view, IMenuMediator mediator)
         {
+            _model = model;
+            _view = view;
             _mediator = mediator;
-            _setupModel = setupModel;
-            _setupView = setupView;
         }
 
         public void StartSetup(MatchMode matchMode)
         {
-            _setupModel.StartSetup(matchMode);
+            _model.StartSetup(matchMode);
             EnableView();
         }
         
-        public override void EnableView() => _setupView.Show();
-        public override void DisableView() => _setupView.Hide();
+        public override void EnableView() => _view.Show();
+        public override void DisableView() => _view.Hide();
         
         public void PlayComp()
         {
-            _setupModel.StartGame(MatchType.PlayerVsComp, false);
+            _model.StartGame(MatchType.PlayerVsComp, false);
         }
-        
         public void PlayFriend()
         {
-            _setupModel.StartGame(MatchType.PlayerVsPlayer, false);
+            _model.StartGame(MatchType.PlayerVsPlayer, false);
         }
-        
         public void PlayCompVsComp()
         {
-            _setupModel.StartGame(MatchType.CompVsComp,  false);
+            _model.StartGame(MatchType.CompVsComp,  false);
         }
     }
 }

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee2e15c86cce4c25a42f5d1f99b24baf, type: 3}
+  m_Name: ViewsFactory
+  m_EditorClassIdentifier: 
+  _menuHudView: {fileID: 7340167221419172276, guid: 360a323c87429cf40bbd3af427c101ad, type: 3}
+  _menuSettingsView: {fileID: -8302393291850137859, guid: d1e1710377f19f24e972d59687d5e4fc, type: 3}
+  _menuShopView: {fileID: 5533418541672977332, guid: 202536a1af0676e4d9fc0b5b563df281, type: 3}
+  _menuGameSetupView: {fileID: 4632226725072204606, guid: 4d10445dbfbf5f740b59a1c9c63add65, type: 3}
+  _gameHudView: {fileID: 5606907586281977059, guid: a6f1598bfbabf654db375c0cb97a0e1c, type: 3}
+  _gameResultView: {fileID: 8718619387236196287, guid: 1c95201fc979f4240942b8001427abd5, type: 3}

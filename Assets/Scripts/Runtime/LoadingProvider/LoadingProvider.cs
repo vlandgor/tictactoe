@@ -11,7 +11,6 @@ namespace Runtime.LoadingProvider
         private const string MENU_SCENE_NAME = "Menu_Scene";
         private const string GAME_SCENE_NAME = "Game_Scene";
         
-        
         private ILoadingCurtain _loadingCurtain;
         
         [Inject]

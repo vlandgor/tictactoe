@@ -1,23 +1,14 @@
-﻿using Runtime.AudioService;
-using Runtime.ConfigProvider;
-using Runtime.LoadingProvider;
-using Runtime.ShopService;
-using Runtime.Tokens;
-using Runtime.UI.Menu.Models;
+﻿using Runtime.UI.Menu.Models;
 using Runtime.UI.Menu.Presenters;
 using Runtime.UI.Menu.Views;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace Runtime.UI.Menu
 {
     public class MainUIInstaller : MonoInstaller
     {
-        [SerializeField] private MenuHudView _menuHudView;
-        [SerializeField] private MenuSettingsView _menuSettingsView;
-        [SerializeField] private MenuShopView _menuShopView;
-        [SerializeField] private MenuGameSetupView _menuGameSetupView;
+        [SerializeField] private ViewsFactory _viewsFactory;
         
         public override void InstallBindings()
         {
@@ -26,7 +17,7 @@ namespace Runtime.UI.Menu
             BindMenuHud();
             BindMenuSettings();
             BindMenuShop();
-            BingGameSetup();
+            BindMatchSetup();
         }
         
         private void BindMediator()
@@ -37,55 +28,56 @@ namespace Runtime.UI.Menu
                 .AsSingle();
         }
         
-        private void BingGameSetup()
+        private void BindMatchSetup()
         {
-            IMenuMediator mediator = Container.Resolve<IMenuMediator>();
-            ILoadingProvider loadingProvider = Container.Resolve<ILoadingProvider>();
-            ITokensProvider tokensService = Container.Resolve<ITokensProvider>();
-            IAudioService audioService = Container.Resolve<IAudioService>();
-            IConfigProvider configProvider = Container.Resolve<IConfigProvider>();
+            MenuGameSetupModel model = Container.Instantiate<MenuGameSetupModel>();
+            MenuGameSetupView view = _viewsFactory.Get<MenuGameSetupView>();
             
-            MenuGameSetupModel setupModel = new MenuGameSetupModel(loadingProvider, tokensService, audioService, configProvider);
-
             Container
                 .Bind<MenuGameSetupPresenter>()
                 .AsSingle()
-                .WithArguments(mediator, setupModel, _menuGameSetupView);
+                .WithArguments(model, view);
+            
+            view.Initialize(Container.Resolve<MenuGameSetupPresenter>());
         }
         
         private void BindMenuSettings()
         {
-            MenuSettingsModel model = new MenuSettingsModel();
+            MenuSettingsModel model = Container.Instantiate<MenuSettingsModel>();
+            MenuSettingsView view = _viewsFactory.Get<MenuSettingsView>();
 
             Container
                 .Bind<MenuSettingsPresenter>()
                 .AsSingle()
-                .WithArguments(model, _menuSettingsView);
+                .WithArguments(model, view);
+            
+            view.Initialize(Container.Resolve<MenuSettingsPresenter>());
         }
         
         private void BindMenuShop()
         {
-            IShopService shopService = Container.Resolve<IShopService>();
-            
-            MenuShopModel model = new MenuShopModel(shopService);
+            MenuShopModel model = Container.Instantiate<MenuShopModel>();
+            MenuShopView view = _viewsFactory.Get<MenuShopView>();
 
             Container
                 .Bind<MenuShopPresenter>()
                 .AsSingle()
-                .WithArguments(model, _menuShopView);
+                .WithArguments(model, view);
+            
+            view.Initialize(Container.Resolve<MenuShopPresenter>());
         }
         
         private void BindMenuHud()
         {
-            IMenuMediator mediator = Container.Resolve<IMenuMediator>();
-            IAudioService audioService = Container.Resolve<IAudioService>();
-            
-            MenuHudModel model = new MenuHudModel(audioService);
+            MenuHudModel model = Container.Instantiate<MenuHudModel>();
+            MenuHudView view = _viewsFactory.Get<MenuHudView>();
 
             Container
                 .Bind<MenuHudPresenter>()
                 .AsSingle()
-                .WithArguments(mediator, model, _menuHudView);
+                .WithArguments(model, view);
+            
+            view.Initialize(Container.Resolve<MenuHudPresenter>());
         }
     }
 }

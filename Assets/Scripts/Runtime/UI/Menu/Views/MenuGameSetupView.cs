@@ -6,8 +6,6 @@ namespace Runtime.UI.Menu.Views
 {
     public class MenuGameSetupView : View
     {
-        private MenuGameSetupPresenter _setupPresenter;
-
         private Button _closeButton;
 
         private Button _playButton;
@@ -15,31 +13,26 @@ namespace Runtime.UI.Menu.Views
         private Button _playFriendButton;
         private Button _compVsCompButton;
         
+        private MenuGameSetupPresenter SetupPresenter => _presenter as MenuGameSetupPresenter;
         
-        [Inject]
-        public void Construct(MenuGameSetupPresenter setupPresenter)
-        {
-            _setupPresenter = setupPresenter;
-        }
-        
-        public override void InitializeVisuals()
+        protected override void InitializeVisuals()
         {
             base.InitializeVisuals();
             
             _closeButton = _root.Q<Button>("CloseButton");
-            _closeButton.clicked += _setupPresenter.DisableView;
+            _closeButton.clicked += SetupPresenter.DisableView;
             
             _playButton = _root.Q<Button>("PlayButton");
-            _playButton.clicked += _setupPresenter.PlayComp;
+            _playButton.clicked += SetupPresenter.PlayComp;
             
             _playCompButton = _root.Q<Button>("PlayCompButton");
-            _playCompButton.clicked += _setupPresenter.PlayComp;
+            _playCompButton.clicked += SetupPresenter.PlayComp;
             
             _playFriendButton = _root.Q<Button>("PlayFriendButton");
-            _playFriendButton.clicked += _setupPresenter.PlayFriend;
+            _playFriendButton.clicked += SetupPresenter.PlayFriend;
             
             _compVsCompButton = _root.Q<Button>("CompVsCompButton");
-            _compVsCompButton.clicked += _setupPresenter.PlayCompVsComp;
+            _compVsCompButton.clicked += SetupPresenter.PlayCompVsComp;
         }
     }
 }

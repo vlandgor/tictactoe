@@ -12,13 +12,16 @@ namespace Runtime.UI
 
         protected VisualElement _root;
         protected VisualElement _visual;
+        
+        protected Presenter _presenter;
 
-        private void Start()
+        public void Initialize(Presenter presenter)
         {
+            _presenter = presenter;
             InitializeVisuals();
         }
 
-        public virtual void InitializeVisuals()
+        protected virtual void InitializeVisuals()
         {
             _root = _uiDocument.rootVisualElement;
             _visual = _root.Q<VisualElement>("Visual");

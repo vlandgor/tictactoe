@@ -1,5 +1,4 @@
-﻿using Runtime.MatchService;
-using Runtime.UI.Menu.Presenters;
+﻿using Runtime.UI.Menu.Presenters;
 using UnityEngine.UIElements;
 using Zenject;
 
@@ -7,8 +6,6 @@ namespace Runtime.UI.Menu.Views
 {
     public class MenuHudView : View
     {
-        private MenuHudPresenter _presenter;
-
         private VisualElement _standardModePanel;
         private VisualElement _fallingTokensModePanel;
         private VisualElement _buildingTokensModePanel;
@@ -19,14 +16,10 @@ namespace Runtime.UI.Menu.Views
         private Button _prevButton;
         private Button _playButton;
         private Button _nextButton;
-
-        [Inject]
-        public void Construct(MenuHudPresenter presenter)
-        {
-            _presenter = presenter;
-        }
         
-        public override void InitializeVisuals()
+        private MenuHudPresenter MenuHudPresenter => _presenter as MenuHudPresenter;
+        
+        protected override void InitializeVisuals()
         {
             base.InitializeVisuals();
             
@@ -44,13 +37,13 @@ namespace Runtime.UI.Menu.Views
             };
             
             _playButton = _root.Q<Button>("PlayButton");
-            _playButton.clicked += _presenter.EnableGameSetup;
+            _playButton.clicked += MenuHudPresenter.EnableGameSetup;
             
             _prevButton = _root.Q<Button>("PrevButton");
-            _prevButton.clicked += _presenter.PrevGameMode;
+            _prevButton.clicked += MenuHudPresenter.PrevGameMode;
             
             _nextButton = _root.Q<Button>("NextButton");
-            _nextButton.clicked += _presenter.NextGameMode;
+            _nextButton.clicked += MenuHudPresenter.NextGameMode;
             
             UpdateGameModePanel(0);
         }

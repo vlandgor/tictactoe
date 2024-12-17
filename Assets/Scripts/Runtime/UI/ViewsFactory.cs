@@ -1,48 +1,59 @@
-﻿using Runtime.UI.Game.Views;
-using Runtime.UI.Menu.Views;
+﻿using Runtime.UI.GameHud;
+using Runtime.UI.GameResult;
+using Runtime.UI.MenuHud;
+using Runtime.UI.MenuMatchSetup;
+using Runtime.UI.MenuSettings;
+using Runtime.UI.MenuShop;
 using Runtime.Utilities;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Runtime.UI
 {
     [CreateAssetMenu(fileName = "ViewsFactory", menuName = "Playcbo/Factories/Views Factory", order = 0)]
     public class ViewsFactory : GenericFactory
     {
-        [SerializeField] private MenuHudBaseView menuHudBaseView;
-        [SerializeField] private MenuSettingsBaseView menuSettingsBaseView;
-        [SerializeField] private MenuShopBaseView menuShopBaseView;
-        [SerializeField] private MenuGameSetupBaseView menuGameSetupBaseView;
+        [Header("Boot Views")]
         
-        [SerializeField] private GameHudBaseView gameHudBaseView;
-        [SerializeField] private GameResultBaseView gameResultBaseView;
+        [Header("Menu Views")]
+        [SerializeField] private MenuHudView menuHudView;
+        [SerializeField] private MenuSettingsView menuSettingsView;
+        [SerializeField] private MenuShopView menuShopView;
+        [SerializeField] private MenuMatchSetupView menuMatchSetupView;
+        
+        [Header("Game Views")]
+        [SerializeField] private GameHudView gameHudView;
+        [SerializeField] private GameResultView gameResultView;
         
         public T Get<T>() where T : BaseView
         {
-            if(typeof(T) == typeof(MenuHudBaseView))
+            // Boot Views
+            
+            // Menu Views
+            if(typeof(T) == typeof(MenuHudView))
             {
-                return Get(menuHudBaseView) as T;
+                return Get(menuHudView) as T;
             }
-            if(typeof(T) == typeof(MenuSettingsBaseView))
+            if(typeof(T) == typeof(MenuSettingsView))
             {
-                return Get(menuSettingsBaseView) as T;
+                return Get(menuSettingsView) as T;
             }
-            if(typeof(T) == typeof(MenuShopBaseView))
+            if(typeof(T) == typeof(MenuShopView))
             {
-                return Get(menuShopBaseView) as T;
+                return Get(menuShopView) as T;
             }
-            if(typeof(T) == typeof(MenuGameSetupBaseView))
+            if(typeof(T) == typeof(MenuMatchSetupView))
             {
-                return Get(menuGameSetupBaseView) as T;
+                return Get(menuMatchSetupView) as T;
             }
             
-            if(typeof(T) == typeof(GameHudBaseView))
+            // Game Views
+            if(typeof(T) == typeof(GameHudView))
             {
-                return Get(gameHudBaseView) as T;
+                return Get(gameHudView) as T;
             }
-            if(typeof(T) == typeof(GameResultBaseView))
+            if(typeof(T) == typeof(GameResultView))
             {
-                return Get(gameResultBaseView) as T;
+                return Get(gameResultView) as T;
             }
             
             return null;

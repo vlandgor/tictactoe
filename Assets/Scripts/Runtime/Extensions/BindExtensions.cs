@@ -16,7 +16,8 @@ namespace Runtime.Extensions
             container
                 .Bind<TPresenter>()
                 .AsSingle()
-                .WithArguments(model, view);
+                .WithArguments(model, view)
+                .Lazy();
 
             view.Initialize(container.Resolve<TPresenter>());
         }

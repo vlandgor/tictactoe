@@ -1,21 +1,22 @@
 ﻿using Runtime.GamePlayer;
 using Runtime.MatchService;
-using Runtime.UI.Game.Presenters;
-using Runtime.UI.Menu.Presenters;
+using Runtime.UI.GameHud;
+using Runtime.UI.GameResult;
+using Runtime.UI.MenuSettings;
 using Zenject;
 
 namespace Runtime.UI.Game
 {
     public class GameMediator : IGameMediator
     {
-        private readonly LazyInject<GameHudBasePresenter> _hudPresenter;
-        private readonly LazyInject<GameResultBasePresenter> _resultPresenter;
-        private readonly LazyInject<MenuSettingsBasePresenter> _settingsPresenter;
+        private readonly LazyInject<GameHudPresenter> _hudPresenter;
+        private readonly LazyInject<GameResultPresenter> _resultPresenter;
+        private readonly LazyInject<MenuSettingsPresenter> _settingsPresenter;
 
         public GameMediator(
-            LazyInject<GameHudBasePresenter> hudPresenter, 
-            LazyInject<GameResultBasePresenter> resultPresenter,
-            LazyInject<MenuSettingsBasePresenter> settingsPresenter)
+            LazyInject<GameHudPresenter> hudPresenter, 
+            LazyInject<GameResultPresenter> resultPresenter,
+            LazyInject<MenuSettingsPresenter> settingsPresenter)
         {
             _hudPresenter = hudPresenter;
             _resultPresenter = resultPresenter;

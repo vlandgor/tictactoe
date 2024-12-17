@@ -1,7 +1,6 @@
 ﻿using Runtime.Extensions;
-using Runtime.UI.Game.Models;
-using Runtime.UI.Game.Presenters;
-using Runtime.UI.Game.Views;
+using Runtime.UI.GameHud;
+using Runtime.UI.GameResult;
 using UnityEngine;
 using Zenject;
 
@@ -14,11 +13,9 @@ namespace Runtime.UI.Game
         public override void InstallBindings()
         {
             BindMediator();
-            
-            BindGameHud();
-            BindGameResult();
+            BindPresenters();
         }
-        
+
         private void BindMediator()
         {
             Container
@@ -26,15 +23,11 @@ namespace Runtime.UI.Game
                 .To<GameMediator>()
                 .AsSingle();
         }
-
-        private void BindGameHud()
-        {
-            Container.BindUIPresenter<GameHudBasePresenter, GameHudBaseModel, GameHudBaseView>(_viewsFactory);
-        }
         
-        private void BindGameResult()
+        private void BindPresenters()
         {
-            Container.BindUIPresenter<GameResultBasePresenter, GameResultBaseModel, GameResultBaseView>(_viewsFactory);
+            Container.BindUIPresenter<GameHudPresenter, GameHudModel, GameHudView>(_viewsFactory);
+            Container.BindUIPresenter<GameResultPresenter, GameResultModel, GameResultView>(_viewsFactory);
         }
     }
 }

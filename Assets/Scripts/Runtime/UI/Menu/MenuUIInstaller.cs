@@ -1,7 +1,8 @@
 ﻿using Runtime.Extensions;
-using Runtime.UI.Menu.Models;
-using Runtime.UI.Menu.Presenters;
-using Runtime.UI.Menu.Views;
+using Runtime.UI.MenuHud;
+using Runtime.UI.MenuMatchSetup;
+using Runtime.UI.MenuSettings;
+using Runtime.UI.MenuShop;
 using UnityEngine;
 using Zenject;
 
@@ -14,11 +15,7 @@ namespace Runtime.UI.Menu
         public override void InstallBindings()
         {
             BindMediator();
-            
-            BindMenuHud();
-            BindMenuSettings();
-            BindMenuShop();
-            BindMatchSetup();
+            BindPresenters();
         }
         
         private void BindMediator()
@@ -29,24 +26,12 @@ namespace Runtime.UI.Menu
                 .AsSingle();
         }
         
-        private void BindMatchSetup()
+        private void BindPresenters()
         {
-            Container.BindUIPresenter<MenuGameSetupBasePresenter, MenuGameSetupBaseModel, MenuGameSetupBaseView>(_viewsFactory);
-        }
-        
-        private void BindMenuSettings()
-        {
-            Container.BindUIPresenter<MenuSettingsBasePresenter, MenuSettingsBaseModel, MenuSettingsBaseView>(_viewsFactory);
-        }
-        
-        private void BindMenuShop()
-        {
-            Container.BindUIPresenter<MenuShopBasePresenter, MenuShopModel, MenuShopBaseView>(_viewsFactory);
-        }
-        
-        private void BindMenuHud()
-        {
-            Container.BindUIPresenter<MenuHudBasePresenter, MenuHudModel, MenuHudBaseView>(_viewsFactory);
+            Container.BindUIPresenter<MenuHudPresenter, MenuHudModel, MenuHudView>(_viewsFactory);
+            Container.BindUIPresenter<MenuSettingsPresenter, MenuSettingsModel, MenuSettingsView>(_viewsFactory);
+            Container.BindUIPresenter<MenuShopPresenter, MenuShopModel, MenuShopView>(_viewsFactory);
+            Container.BindUIPresenter<MenuMatchSetupPresenter, MenuMatchSetupModel, MenuMatchSetupView>(_viewsFactory);
         }
     }
 }

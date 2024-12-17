@@ -2,7 +2,7 @@
 
 namespace Runtime.UI.Menu.Models
 {
-    public class MenuShopModel
+    public class MenuShopModel : BaseModel
     {
         private IShopService _shopService;
         

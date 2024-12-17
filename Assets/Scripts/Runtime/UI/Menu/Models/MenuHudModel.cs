@@ -5,7 +5,7 @@ using System;
 
 namespace Runtime.UI.Menu.Models
 {
-    public class MenuHudModel
+    public class MenuHudModel : BaseModel
     {
         private readonly IAudioService _audioService;
         

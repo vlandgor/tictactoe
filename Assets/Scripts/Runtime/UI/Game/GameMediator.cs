@@ -8,14 +8,14 @@ namespace Runtime.UI.Game
 {
     public class GameMediator : IGameMediator
     {
-        private readonly LazyInject<GameHudPresenter> _hudPresenter;
-        private readonly LazyInject<GameResultPresenter> _resultPresenter;
-        private readonly LazyInject<MenuSettingsPresenter> _settingsPresenter;
+        private readonly LazyInject<GameHudBasePresenter> _hudPresenter;
+        private readonly LazyInject<GameResultBasePresenter> _resultPresenter;
+        private readonly LazyInject<MenuSettingsBasePresenter> _settingsPresenter;
 
         public GameMediator(
-            LazyInject<GameHudPresenter> hudPresenter, 
-            LazyInject<GameResultPresenter> resultPresenter,
-            LazyInject<MenuSettingsPresenter> settingsPresenter)
+            LazyInject<GameHudBasePresenter> hudPresenter, 
+            LazyInject<GameResultBasePresenter> resultPresenter,
+            LazyInject<MenuSettingsBasePresenter> settingsPresenter)
         {
             _hudPresenter = hudPresenter;
             _resultPresenter = resultPresenter;

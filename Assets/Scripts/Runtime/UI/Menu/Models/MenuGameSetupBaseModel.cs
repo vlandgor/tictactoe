@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace Runtime.UI.Menu.Models
 {
-    public class MenuGameSetupModel : Model
+    public class MenuGameSetupBaseModel : BaseModel
     {
         private ILoadingProvider _loadingProvider;
         private ITokensProvider _tokensProvider;
@@ -22,7 +22,7 @@ namespace Runtime.UI.Menu.Models
         
         private GameBoardConfig GameBoardConfig => _configProvider.GetConfig<GameBoardConfig>();
         
-        public MenuGameSetupModel(
+        public MenuGameSetupBaseModel(
             ILoadingProvider loadingProvider, 
             ITokensProvider tokensProvider, 
             IAudioService audioService,

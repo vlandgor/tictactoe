@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Runtime.UI.Menu.Views
 {
-    public class MenuGameSetupView : View
+    public class MenuGameSetupBaseView : BaseView
     {
         private Button _closeButton;
 
@@ -13,26 +13,26 @@ namespace Runtime.UI.Menu.Views
         private Button _playFriendButton;
         private Button _compVsCompButton;
         
-        private MenuGameSetupPresenter SetupPresenter => _presenter as MenuGameSetupPresenter;
+        private MenuGameSetupBasePresenter SetupBasePresenter => BasePresenter as MenuGameSetupBasePresenter;
         
         protected override void InitializeVisuals()
         {
             base.InitializeVisuals();
             
             _closeButton = _root.Q<Button>("CloseButton");
-            _closeButton.clicked += SetupPresenter.DisableView;
+            _closeButton.clicked += SetupBasePresenter.DisableView;
             
             _playButton = _root.Q<Button>("PlayButton");
-            _playButton.clicked += SetupPresenter.PlayComp;
+            _playButton.clicked += SetupBasePresenter.PlayComp;
             
             _playCompButton = _root.Q<Button>("PlayCompButton");
-            _playCompButton.clicked += SetupPresenter.PlayComp;
+            _playCompButton.clicked += SetupBasePresenter.PlayComp;
             
             _playFriendButton = _root.Q<Button>("PlayFriendButton");
-            _playFriendButton.clicked += SetupPresenter.PlayFriend;
+            _playFriendButton.clicked += SetupBasePresenter.PlayFriend;
             
             _compVsCompButton = _root.Q<Button>("CompVsCompButton");
-            _compVsCompButton.clicked += SetupPresenter.PlayCompVsComp;
+            _compVsCompButton.clicked += SetupBasePresenter.PlayCompVsComp;
         }
     }
 }

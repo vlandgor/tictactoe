@@ -6,16 +6,16 @@ namespace Runtime.UI.Menu
 {
     public class MenuMediator : IMenuMediator
     {
-        private readonly LazyInject<MenuHudPresenter> _hudPresenter;
-        private readonly LazyInject<MenuSettingsPresenter> _settingsPresenter;
-        private readonly LazyInject<MenuShopPresenter> _shopPresenter;
-        private readonly LazyInject<MenuGameSetupPresenter> _gameSetupPresenter;
+        private readonly LazyInject<MenuHudBasePresenter> _hudPresenter;
+        private readonly LazyInject<MenuSettingsBasePresenter> _settingsPresenter;
+        private readonly LazyInject<MenuShopBasePresenter> _shopPresenter;
+        private readonly LazyInject<MenuGameSetupBasePresenter> _gameSetupPresenter;
 
         public MenuMediator(
-            LazyInject<MenuHudPresenter> hudPresenter, 
-            LazyInject<MenuSettingsPresenter> settingsPresenter,
-            LazyInject<MenuShopPresenter> shopPresenter,
-            LazyInject<MenuGameSetupPresenter> gameSetupPresenter)
+            LazyInject<MenuHudBasePresenter> hudPresenter, 
+            LazyInject<MenuSettingsBasePresenter> settingsPresenter,
+            LazyInject<MenuShopBasePresenter> shopPresenter,
+            LazyInject<MenuGameSetupBasePresenter> gameSetupPresenter)
         {
             _hudPresenter = hudPresenter;
             _settingsPresenter = settingsPresenter;

@@ -4,12 +4,12 @@ using Runtime.LoadingProvider;
 
 namespace Runtime.UI.Game.Models
 {
-    public class GameResultModel : Model
+    public class GameResultBaseModel : BaseModel
     {
         private ILoadingProvider _loadingProvider;
         private IGameplayCoordinator _gameplayCoordinator;
         
-        public GameResultModel(
+        public GameResultBaseModel(
             ILoadingProvider loadingProvider,
             IGameplayCoordinator gameplayCoordinator)
         {

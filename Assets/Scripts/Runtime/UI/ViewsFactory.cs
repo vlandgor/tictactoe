@@ -2,52 +2,53 @@
 using Runtime.UI.Menu.Views;
 using Runtime.Utilities;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Runtime.UI
 {
     [CreateAssetMenu(fileName = "ViewsFactory", menuName = "Playcbo/Factories/Views Factory", order = 0)]
     public class ViewsFactory : GenericFactory
     {
-        [SerializeField] private MenuHudView _menuHudView;
-        [SerializeField] private MenuSettingsView _menuSettingsView;
-        [SerializeField] private MenuShopView _menuShopView;
-        [SerializeField] private MenuGameSetupView _menuGameSetupView;
+        [SerializeField] private MenuHudBaseView menuHudBaseView;
+        [SerializeField] private MenuSettingsBaseView menuSettingsBaseView;
+        [SerializeField] private MenuShopBaseView menuShopBaseView;
+        [SerializeField] private MenuGameSetupBaseView menuGameSetupBaseView;
         
-        [SerializeField] private GameHudView _gameHudView;
-        [SerializeField] private GameResultView _gameResultView;
+        [SerializeField] private GameHudBaseView gameHudBaseView;
+        [SerializeField] private GameResultBaseView gameResultBaseView;
         
-        public T Get<T>() where T : View
+        public T Get<T>() where T : BaseView
         {
-            if(typeof(T) == typeof(MenuHudView))
+            if(typeof(T) == typeof(MenuHudBaseView))
             {
-                return Get(_menuHudView) as T;
+                return Get(menuHudBaseView) as T;
             }
-            if(typeof(T) == typeof(MenuSettingsView))
+            if(typeof(T) == typeof(MenuSettingsBaseView))
             {
-                return Get(_menuSettingsView) as T;
+                return Get(menuSettingsBaseView) as T;
             }
-            if(typeof(T) == typeof(MenuShopView))
+            if(typeof(T) == typeof(MenuShopBaseView))
             {
-                return Get(_menuShopView) as T;
+                return Get(menuShopBaseView) as T;
             }
-            if(typeof(T) == typeof(MenuGameSetupView))
+            if(typeof(T) == typeof(MenuGameSetupBaseView))
             {
-                return Get(_menuGameSetupView) as T;
+                return Get(menuGameSetupBaseView) as T;
             }
             
-            if(typeof(T) == typeof(GameHudView))
+            if(typeof(T) == typeof(GameHudBaseView))
             {
-                return Get(_gameHudView) as T;
+                return Get(gameHudBaseView) as T;
             }
-            if(typeof(T) == typeof(GameResultView))
+            if(typeof(T) == typeof(GameResultBaseView))
             {
-                return Get(_gameResultView) as T;
+                return Get(gameResultBaseView) as T;
             }
             
             return null;
         }
         
-        private T Get<T>(T prefab) where T : View
+        private T Get<T>(T prefab) where T : BaseView
         {
             T instance = Instantiate(prefab);
             MoveToFactoryScene(instance.gameObject);

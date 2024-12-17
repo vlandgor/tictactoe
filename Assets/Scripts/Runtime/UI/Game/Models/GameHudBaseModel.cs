@@ -1,6 +1,6 @@
 ﻿namespace Runtime.UI.Game.Models
 {
-    public class GameHudModel : Model
+    public class GameHudBaseModel : BaseModel
     {
         
     }

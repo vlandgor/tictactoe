@@ -1,6 +1,6 @@
 ﻿namespace Runtime.UI
 {
-    public abstract class Model
+    public abstract class BaseModel
     {
         
     }

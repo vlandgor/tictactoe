@@ -1,4 +1,5 @@
-﻿using Runtime.UI.Game.Models;
+﻿using Runtime.Extensions;
+using Runtime.UI.Game.Models;
 using Runtime.UI.Game.Presenters;
 using Runtime.UI.Game.Views;
 using UnityEngine;
@@ -28,28 +29,12 @@ namespace Runtime.UI.Game
 
         private void BindGameHud()
         {
-            GameHudModel model = Container.Instantiate<GameHudModel>();
-            GameHudView view = _viewsFactory.Get<GameHudView>();
-            
-            Container
-                .Bind<GameHudPresenter>()
-                .AsSingle()
-                .WithArguments(model, view);
-            
-            view.Initialize(Container.Resolve<GameHudPresenter>());
+            Container.BindUIPresenter<GameHudBasePresenter, GameHudBaseModel, GameHudBaseView>(_viewsFactory);
         }
         
         private void BindGameResult()
         {
-            GameResultModel model = Container.Instantiate<GameResultModel>();
-            GameResultView view = _viewsFactory.Get<GameResultView>();
-            
-            Container
-                .Bind<GameResultPresenter>()
-                .AsSingle()
-                .WithArguments(model, view);
-            
-            view.Initialize(Container.Resolve<GameResultPresenter>());
+            Container.BindUIPresenter<GameResultBasePresenter, GameResultBaseModel, GameResultBaseView>(_viewsFactory);
         }
     }
 }

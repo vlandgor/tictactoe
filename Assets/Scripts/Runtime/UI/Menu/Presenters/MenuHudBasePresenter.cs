@@ -3,16 +3,16 @@ using Runtime.UI.Menu.Views;
 
 namespace Runtime.UI.Menu.Presenters
 {
-    public class MenuHudPresenter : Presenter
+    public class MenuHudBasePresenter : BasePresenter
     {
         private MenuHudModel _model;
-        private MenuHudView _view;
+        private MenuHudBaseView _baseView;
         private IMenuMediator _mediator;
 
-        public MenuHudPresenter(MenuHudModel model, MenuHudView view, IMenuMediator mediator)
+        public MenuHudBasePresenter(MenuHudModel model, MenuHudBaseView baseView, IMenuMediator mediator)
         {
             _model = model;
-            _view = view;
+            _baseView = baseView;
             _mediator = mediator;
         }
 
@@ -24,13 +24,13 @@ namespace Runtime.UI.Menu.Presenters
         public void PrevGameMode()
         {
             _model.PrevGameMode();
-            _view.UpdateGameModePanel((int)_model.CurrentMatchMode);
+            _baseView.UpdateGameModePanel((int)_model.CurrentMatchMode);
         }
         
         public void NextGameMode()
         {
             _model.NextGameMode();
-            _view.UpdateGameModePanel((int)_model.CurrentMatchMode);
+            _baseView.UpdateGameModePanel((int)_model.CurrentMatchMode);
         }
 
         public override void EnableView()

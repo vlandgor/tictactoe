@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Runtime.UI.Menu.Views
 {
-    public class MenuShopView : View
+    public class MenuShopBaseView : BaseView
     {
         [SerializeField] private VisualTreeAsset shopItemTemplate;
 
@@ -16,11 +16,11 @@ namespace Runtime.UI.Menu.Views
         
         private ShopItemVisual[] _shopItemVisuals;
         
-        private MenuShopPresenter MenuShopPresenter => _presenter as MenuShopPresenter;
+        private MenuShopBasePresenter MenuShopBasePresenter => BasePresenter as MenuShopBasePresenter;
         
         public void OnDestroy()
         {
-            _closeButton.clicked -= MenuShopPresenter.DisableView;
+            _closeButton.clicked -= MenuShopBasePresenter.DisableView;
 
             ClearItems();
         }
@@ -32,7 +32,7 @@ namespace Runtime.UI.Menu.Views
             _contentPanel = _root.Q<ScrollView>("ContentPanel");
 
             _closeButton = _root.Q<Button>("CloseButton");
-            _closeButton.clicked += MenuShopPresenter.DisableView;
+            _closeButton.clicked += MenuShopBasePresenter.DisableView;
         }
 
         public void InitializeItems(ShopItem[] items)

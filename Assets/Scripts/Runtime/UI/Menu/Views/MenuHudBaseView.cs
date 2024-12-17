@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Runtime.UI.Menu.Views
 {
-    public class MenuHudView : View
+    public class MenuHudBaseView : BaseView
     {
         private VisualElement _standardModePanel;
         private VisualElement _fallingTokensModePanel;
@@ -17,7 +17,7 @@ namespace Runtime.UI.Menu.Views
         private Button _playButton;
         private Button _nextButton;
         
-        private MenuHudPresenter MenuHudPresenter => _presenter as MenuHudPresenter;
+        private MenuHudBasePresenter MenuHudBasePresenter => BasePresenter as MenuHudBasePresenter;
         
         protected override void InitializeVisuals()
         {
@@ -37,13 +37,13 @@ namespace Runtime.UI.Menu.Views
             };
             
             _playButton = _root.Q<Button>("PlayButton");
-            _playButton.clicked += MenuHudPresenter.EnableGameSetup;
+            _playButton.clicked += MenuHudBasePresenter.EnableGameSetup;
             
             _prevButton = _root.Q<Button>("PrevButton");
-            _prevButton.clicked += MenuHudPresenter.PrevGameMode;
+            _prevButton.clicked += MenuHudBasePresenter.PrevGameMode;
             
             _nextButton = _root.Q<Button>("NextButton");
-            _nextButton.clicked += MenuHudPresenter.NextGameMode;
+            _nextButton.clicked += MenuHudBasePresenter.NextGameMode;
             
             UpdateGameModePanel(0);
         }

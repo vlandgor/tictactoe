@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UIElements;
+using Zenject;
 
 namespace Runtime.UI
 {
-    public abstract class View : MonoBehaviour
+    public abstract class BaseView : MonoBehaviour
     {
         [SerializeField] private bool enableOnStart;
         
@@ -13,11 +14,11 @@ namespace Runtime.UI
         protected VisualElement _root;
         protected VisualElement _visual;
         
-        protected Presenter _presenter;
-
-        public void Initialize(Presenter presenter)
+        protected BasePresenter BasePresenter;
+        
+        public void Initialize(BasePresenter basePresenter)
         {
-            _presenter = presenter;
+            BasePresenter = basePresenter;
             InitializeVisuals();
         }
 

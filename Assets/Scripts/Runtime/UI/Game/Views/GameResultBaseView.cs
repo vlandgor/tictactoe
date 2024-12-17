@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Runtime.UI.Game.Views
 {
-    public class GameResultView : View
+    public class GameResultBaseView : BaseView
     {
         private VisualElement _youWonPanel;
         private VisualElement _youLostPanel;
@@ -19,7 +19,7 @@ namespace Runtime.UI.Game.Views
         private Button _restartButton;
         private Button _leaveButton;
         
-        private GameResultPresenter GameResultPresenter => _presenter as GameResultPresenter;
+        private GameResultBasePresenter GameResultBasePresenter => BasePresenter as GameResultBasePresenter;
         
         protected override void InitializeVisuals()
         {
@@ -34,13 +34,13 @@ namespace Runtime.UI.Game.Views
             _drawPanel = _visual.Q<VisualElement>("DrawPanel");
             
             _settingsButton = _visual.Q<Button>("SettingsButton");
-            _settingsButton.clicked += GameResultPresenter.SettingsButtonPressed;
+            _settingsButton.clicked += GameResultBasePresenter.SettingsButtonPressed;
             
             _restartButton = _visual.Q<Button>("RestartButton");
-            _restartButton.clicked += GameResultPresenter.RestartButtonPressed;
+            _restartButton.clicked += GameResultBasePresenter.RestartButtonPressed;
             
             _leaveButton = _visual.Q<Button>("LeaveButton");
-            _leaveButton.clicked += GameResultPresenter.LeaveButtonPressed;
+            _leaveButton.clicked += GameResultBasePresenter.LeaveButtonPressed;
         }
         
         public void ShowYouWon()

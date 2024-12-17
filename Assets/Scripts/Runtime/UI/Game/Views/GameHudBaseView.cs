@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 namespace Runtime.UI.Game.Views
 {
-    public class GameHudView : View
+    public class GameHudBaseView : BaseView
     {
         private Label _turnLabel;
 

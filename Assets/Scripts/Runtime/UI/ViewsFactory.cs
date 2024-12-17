@@ -1,4 +1,5 @@
-﻿using Runtime.UI.GameHud;
+﻿using Runtime.UI.BootAuthentication;
+using Runtime.UI.GameHud;
 using Runtime.UI.GameResult;
 using Runtime.UI.MenuHud;
 using Runtime.UI.MenuMatchSetup;
@@ -13,6 +14,7 @@ namespace Runtime.UI
     public class ViewsFactory : GenericFactory
     {
         [Header("Boot Views")]
+        [SerializeField] private BootAuthenticationView bootAuthenticationView;
         
         [Header("Menu Views")]
         [SerializeField] private MenuHudView menuHudView;
@@ -27,6 +29,10 @@ namespace Runtime.UI
         public T Get<T>() where T : BaseView
         {
             // Boot Views
+            if(typeof(T) == typeof(BootAuthenticationView))
+            {
+                return Get(bootAuthenticationView) as T;
+            }
             
             // Menu Views
             if(typeof(T) == typeof(MenuHudView))

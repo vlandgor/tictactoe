@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2e15c86cce4c25a42f5d1f99b24baf, type: 3}
   m_Name: ViewsFactory
   m_EditorClassIdentifier: 
+  bootAuthenticationView: {fileID: 1222711655682458746, guid: ae6451a7a359aac4aa2db28408b7b40f, type: 3}
   menuHudView: {fileID: 7340167221419172276, guid: 360a323c87429cf40bbd3af427c101ad, type: 3}
   menuSettingsView: {fileID: -8302393291850137859, guid: d1e1710377f19f24e972d59687d5e4fc, type: 3}
   menuShopView: {fileID: 5533418541672977332, guid: 202536a1af0676e4d9fc0b5b563df281, type: 3}

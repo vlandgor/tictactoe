@@ -22,6 +22,7 @@ namespace Runtime.LoadingProvider
         public async UniTask LoadApp()
         {
             Queue<ILoadingOperation> loadingOperation = new Queue<ILoadingOperation>();
+            loadingOperation.Enqueue(new AuthenticationOperation());
             loadingOperation.Enqueue(new LoadSceneOperation(MENU_SCENE_NAME));
             
             await _loadingCurtain.ShowCurtain();

@@ -14,10 +14,10 @@ namespace Runtime.UI.BootAuthentication
             base.InitializeVisuals();
             
             _loginWithUnityButton = _visual.Q<Button>("LoginWithUnityButton");
-            _loginWithUnityButton.clicked += BootAuthenticationPresenter.LoginWithUnity;
+            _loginWithUnityButton.clicked += BootAuthenticationPresenter.SignInWithUnity;
             
             _loginAsGuestButton = _visual.Q<Button>("LoginAsGuestButton");
-            _loginAsGuestButton.clicked += BootAuthenticationPresenter.LoginAsGuest;
+            _loginAsGuestButton.clicked += BootAuthenticationPresenter.SignInAsGuest;
         }
     }
 }

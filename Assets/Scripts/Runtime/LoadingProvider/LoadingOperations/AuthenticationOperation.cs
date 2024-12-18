@@ -1,5 +1,6 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using Runtime.Authentication;
 using Runtime.Extensions;
 using Runtime.UI.Boot;
 using Zenject;
@@ -17,15 +18,14 @@ namespace Runtime.LoadingProvider.LoadingOperations
             onProgress?.Invoke(10);
             
             SceneContext sceneContext = LoadingExtensions.FindSceneContext(BOOT_SCENE_NAME);
+            
             IBootMediator bootMediator = sceneContext.Container.Resolve<IBootMediator>();
+            bootMediator.ShowAuthentication();
             
             onProgress?.Invoke(50);
-            
-            bootMediator.ShowAuthentication();
 
-            //I need here to wait for sign in to be completed
-            
-            await UniTask.Delay(10000);
+            IAuthenticationService authenticationService = sceneContext.Container.Resolve<IAuthenticationService>();
+            await authenticationService.SignInCompletionSource.Task;
             
             onProgress?.Invoke(100);
         }

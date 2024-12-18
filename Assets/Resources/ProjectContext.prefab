@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 9007078456309483039}
   - component: {fileID: 6129418270768338828}
   m_Layer: 0
-  m_Name: AuthenticationProviderInstaller
+  m_Name: AuthenticationInstaller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

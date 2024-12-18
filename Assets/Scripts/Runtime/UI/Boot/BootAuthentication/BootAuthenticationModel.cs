@@ -1,24 +1,19 @@
-﻿using Runtime.AuthenticationProvider;
+﻿using Runtime.Authentication;
 
 namespace Runtime.UI.BootAuthentication
 {
     public class BootAuthenticationModel : BaseModel
     {
-        private readonly IAuthenticationProvider _authenticationProvider;
+        private readonly IAuthenticationService _authenticationService;
         
-        public BootAuthenticationModel(IAuthenticationProvider authenticationProvider)
+        public BootAuthenticationModel(IAuthenticationService authenticationService)
         {
-            _authenticationProvider = authenticationProvider;
+            _authenticationService = authenticationService;
         }
         
-        public void LoginWithUnity()
+        public void SignIn(AuthenticationProvider provider)
         {
-            _authenticationProvider.LoginWithUnity();
-        }
-        
-        public void LoginAsGuest()
-        {
-            _authenticationProvider.LoginAsGuest();
+            _authenticationService.SignIn(provider);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Runtime.UI.Boot;
+﻿using Runtime.Authentication;
+using Runtime.UI.Boot;
 
 namespace Runtime.UI.BootAuthentication
 {
@@ -17,24 +18,10 @@ namespace Runtime.UI.BootAuthentication
             _view = view;
         }
         
-        public override void EnableView()
-        {
-            _view.Show();
-        }
+        public override void EnableView() => _view.Show();
+        public override void DisableView() => _view.Hide();
 
-        public override void DisableView()
-        {
-            _view.Hide();
-        }
-        
-        public void LoginWithUnity()
-        {
-            _model.LoginWithUnity();
-        }
-        
-        public void LoginAsGuest()
-        {
-            _model.LoginAsGuest();
-        }
+        public void SignInAsGuest() => _model.SignIn(AuthenticationProvider.Guest);
+        public void SignInWithUnity() => _model.SignIn(AuthenticationProvider.Unity);
     }
 }

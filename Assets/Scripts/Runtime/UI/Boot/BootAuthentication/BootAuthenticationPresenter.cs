@@ -1,5 +1,4 @@
 ﻿using Runtime.UI.Boot;
-using UnityEngine;
 
 namespace Runtime.UI.BootAuthentication
 {
@@ -20,12 +19,22 @@ namespace Runtime.UI.BootAuthentication
         
         public override void EnableView()
         {
-            Debug.Log("EnableView");
+            _view.Show();
         }
 
         public override void DisableView()
         {
-            Debug.Log("DisableView");
+            _view.Hide();
+        }
+        
+        public void LoginWithUnity()
+        {
+            _model.LoginWithUnity();
+        }
+        
+        public void LoginAsGuest()
+        {
+            _model.LoginAsGuest();
         }
     }
 }

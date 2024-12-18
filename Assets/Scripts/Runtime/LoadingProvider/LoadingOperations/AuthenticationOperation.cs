@@ -22,6 +22,10 @@ namespace Runtime.LoadingProvider.LoadingOperations
             onProgress?.Invoke(50);
             
             bootMediator.ShowAuthentication();
+
+            //I need here to wait for sign in to be completed
+            
+            await UniTask.Delay(10000);
             
             onProgress?.Invoke(100);
         }

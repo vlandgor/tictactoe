@@ -1,0 +1,42 @@
+.login-button {
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    height: 168px;
+    padding-bottom: 7px;
+    margin-bottom: 0;
+    margin-top: 28px;
+    -unity-font-definition: url("project://database/Assets/Fonts/LilitaOne-Regular.ttf?fileID=12800000&guid=9e85cee314c38b24ca27fdac2b487b74&type=3#LilitaOne-Regular");
+    -unity-text-align: middle-center;
+    font-size: 56px;
+    color: rgb(255, 255, 255);
+    -unity-text-outline-width: 2px;
+    -unity-text-outline-color: rgb(0, 0, 0);
+}
+
+.login-button:active {
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    height: 168px;
+    padding-bottom: 7px;
+    margin-bottom: 0;
+    margin-top: 28px;
+    -unity-font-definition: url("project://database/Assets/Fonts/LilitaOne-Regular.ttf?fileID=12800000&guid=9e85cee314c38b24ca27fdac2b487b74&type=3#LilitaOne-Regular");
+    -unity-text-align: middle-center;
+    font-size: 56px;
+    color: rgb(255, 255, 255);
+    -unity-text-outline-width: 2px;
+    -unity-text-outline-color: rgb(0, 0, 0);
+    scale: 0.9 0.9;
+}

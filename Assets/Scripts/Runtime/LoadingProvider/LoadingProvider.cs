@@ -24,6 +24,7 @@ namespace Runtime.LoadingProvider
             Queue<ILoadingOperation> loadingOperation = new Queue<ILoadingOperation>();
             loadingOperation.Enqueue(new AuthenticationOperation());
             loadingOperation.Enqueue(new LoadSceneOperation(MENU_SCENE_NAME));
+            loadingOperation.Enqueue(new InitializePlayerOperation());
             
             await _loadingCurtain.ShowCurtain();
             await _loadingCurtain.Load(loadingOperation);

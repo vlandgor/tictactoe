@@ -4,6 +4,9 @@ namespace Runtime.UI.MenuHud
 {
     public class MenuHudView : BaseView
     {
+        private Label _playerNameLabel;
+        private Label _playerIdLabel;
+        
         private VisualElement _standardModePanel;
         private VisualElement _fallingTokensModePanel;
         private VisualElement _buildingTokensModePanel;
@@ -15,11 +18,19 @@ namespace Runtime.UI.MenuHud
         private Button _playButton;
         private Button _nextButton;
         
+        private Button _storeMenuButton;
+        private Button _piecesMenuButton;
+        private Button _questsMenuButton;
+        private Button _settingsMenuButton;
+        
         private MenuHudPresenter MenuHudPresenter => BasePresenter as MenuHudPresenter;
         
         protected override void InitializeVisuals()
         {
             base.InitializeVisuals();
+            
+            _playerNameLabel = _root.Q<Label>("PlayerNameLabel");
+            _playerIdLabel = _root.Q<Label>("PlayerIdLabel");
             
             _standardModePanel = _root.Q<VisualElement>("StandardModePanel");
             _fallingTokensModePanel = _root.Q<VisualElement>("FallingTokensModePanel");
@@ -43,6 +54,18 @@ namespace Runtime.UI.MenuHud
             _nextButton = _root.Q<Button>("NextButton");
             _nextButton.clicked += MenuHudPresenter.NextGameMode;
             
+            _storeMenuButton = _root.Q<Button>("StoreMenuButton");
+            _storeMenuButton.clicked += MenuHudPresenter.EnableStoreMenu;
+            
+            _piecesMenuButton = _root.Q<Button>("PiecesMenuButton");
+            _piecesMenuButton.clicked += MenuHudPresenter.EnablePiecesesMenu;
+            
+            _questsMenuButton = _root.Q<Button>("QuestsMenuButton");
+            _questsMenuButton.clicked += MenuHudPresenter.EnableQuestsMenu;
+            
+            _settingsMenuButton = _root.Q<Button>("SettingsMenuButton");
+            _settingsMenuButton.clicked += MenuHudPresenter.EnableSettingsMenu;
+            
             UpdateGameModePanel(0);
         }
         
@@ -50,6 +73,11 @@ namespace Runtime.UI.MenuHud
         {
             HileAllGameModePanels();
             _gameModePanels[index].style.display = DisplayStyle.Flex;
+        }
+        
+        public void SetPlayerInfo(string playerName)
+        {
+            _playerNameLabel.text = playerName;
         }
         
         private void HileAllGameModePanels()

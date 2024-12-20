@@ -1,17 +1,46 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <engine:Template name="TitlePanel" src="project://database/Assets/UI/Standart/TitlePanel/TitlePanel.uxml?fileID=9197481963319205126&amp;guid=b0c65ee1ab59e60478bda61c4fecf484&amp;type=3#TitlePanel" />
-    <engine:Template name="CloseButton" src="project://database/Assets/UI/Standart/ClosePanel/ClosePanel.uxml?fileID=9197481963319205126&amp;guid=eee8f314e392c19478e1e09047524846&amp;type=3#ClosePanel" />
+    <engine:Template name="MenuTopPanel" src="project://database/Assets/UI/Standart/MenuTopPanel/MenuTopPanel.uxml?fileID=9197481963319205126&amp;guid=4844fd6cd8226264c947e2a7fdc65198&amp;type=3#MenuTopPanel" />
     <Style src="project://database/Assets/UI/Menu/MenuShop/MenuShop.uss?fileID=7433441132597879392&amp;guid=12503012f2c15f74cbc7fa135528dd00&amp;type=3#MenuShop" />
     <Style src="project://database/Assets/UI/Standart/ClosePanel/ClosePanel.uss?fileID=7433441132597879392&amp;guid=2bd863255bd31c240adecf6764864eec&amp;type=3#ClosePanel" />
     <engine:VisualElement name="Visual" style="flex-grow: 1; background-color: rgba(255, 255, 255, 0); background-image: url(&quot;project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Demo/Demo_Background/Background_06.png?fileID=21300000&amp;guid=96274b6f4982041558dfdc5471747076&amp;type=3#Background_06&quot;);">
-        <engine:VisualElement style="flex-grow: 1; align-items: stretch; justify-content: center; align-self: stretch; align-content: auto;">
-            <engine:Instance template="TitlePanel" name="TitlePanel" />
-            <engine:VisualElement name="MiddlePanel" style="flex-grow: 1; align-items: center; justify-content: center; align-content: auto; align-self: stretch; flex-direction: row;">
-                <engine:ScrollView horizontal-scroller-visibility="Hidden" focusable="true" vertical-scroller-visibility="Hidden" touch-scroll-type="Elastic" name="ContentPanel" style="align-items: flex-start; justify-content: center; flex-direction: row; flex-grow: 1; flex-shrink: 0; align-self: stretch; align-content: auto; max-width: 1668px; min-width: 720px; margin-top: 56px; margin-right: 56px; margin-bottom: 56px; margin-left: 56px; padding-top: 84px; padding-right: 84px; padding-bottom: 84px; padding-left: 84px; background-image: url(&quot;project://database/Assets/Plugins/FlatCartoonGUI/png/window/window3_2_red.png?fileID=21300000&amp;guid=5509248ca9975dd47ab2572bc9518b37&amp;type=3#window3_2_red&quot;); background-color: rgba(255, 255, 255, 0);" />
-            </engine:VisualElement>
-            <engine:Instance template="CloseButton" name="ClosePanel" style="min-height: 420px;">
-                <AttributeOverrides element-name="CloseButton" text="Close" />
+        <engine:VisualElement style="flex-grow: 1; align-items: stretch; justify-content: flex-start; align-self: stretch; align-content: auto;">
+            <engine:Instance template="MenuTopPanel">
+                <AttributeOverrides element-name="TitleLabel" text="Shop" />
             </engine:Instance>
+            <engine:VisualElement name="HeadMenuPanel" style="background-image: url(&quot;project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Frame/PanelFrame03_Topbar.png?fileID=21300000&amp;guid=30b1a3b4a6f4749c5ad29bdce9aee4c6&amp;type=3#PanelFrame03_Topbar&quot;); -unity-background-image-tint-color: rgb(0, 43, 85); height: 112px;">
+                <engine:Label text="ALL" style="flex-grow: 1; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; -unity-text-align: middle-center; color: rgb(255, 255, 255); -unity-font-definition: url(&quot;project://database/Assets/Fonts/LilitaOne-Regular.ttf?fileID=12800000&amp;guid=9e85cee314c38b24ca27fdac2b487b74&amp;type=3#LilitaOne-Regular&quot;); font-size: 42px;" />
+            </engine:VisualElement>
+            <engine:VisualElement name="ItemsPanel" style="flex-grow: 1; padding-top: 56px; padding-right: 56px; padding-bottom: 0; padding-left: 56px;">
+                <engine:ScrollView vertical-scroller-visibility="Hidden">
+                    <engine:Button text="Button" name="SpecialItemButton" class="spetial-item">
+                        <engine:Label text="Get immunity for 30 days" name="SpecialItemHeaderLabel" style="height: 84px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; -unity-font-definition: url(&quot;project://database/Assets/Fonts/LilitaOne-Regular.ttf?fileID=12800000&amp;guid=9e85cee314c38b24ca27fdac2b487b74&amp;type=3#LilitaOne-Regular&quot;); color: rgb(255, 255, 255); -unity-text-align: middle-center; font-size: 42px; -unity-text-outline-width: 2px; -unity-text-outline-color: rgb(0, 0, 0);" />
+                        <engine:VisualElement style="flex-grow: 1; align-items: center; justify-content: center;">
+                            <engine:VisualElement name="ParticleEffect" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Frame/CardFrame02_Glow.png?fileID=21300000&amp;guid=ab8b4e9252d8046669fd49c6a09df4e0&amp;type=3#CardFrame02_Glow&quot;); position: absolute; width: 320px; height: 320px; overflow: visible; -unity-background-image-tint-color: rgb(184, 112, 255);" />
+                            <engine:VisualElement style="flex-grow: 0; width: 224px; height: 224px; background-image: url(&quot;project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Icon_ItemIcons/256/Icon_Friends.png?fileID=21300000&amp;guid=abf098e1f89c04088baf609dd3618fe1&amp;type=3#Icon_Friends&quot;);" />
+                        </engine:VisualElement>
+                        <engine:Label text="US $ 2.99" style="padding-top: 0; padding-right: 0; padding-bottom: 23px; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; height: 144px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/LilitaOne-Regular.ttf?fileID=12800000&amp;guid=9e85cee314c38b24ca27fdac2b487b74&amp;type=3#LilitaOne-Regular&quot;); color: rgb(255, 255, 255); -unity-text-align: middle-center; font-size: 84px; -unity-text-outline-width: 5px; -unity-text-outline-color: rgb(0, 0, 0);" />
+                    </engine:Button>
+                    <engine:VisualElement name="ChestsPanel" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Frame/PanelFrame01_Round_Bg.png?fileID=21300000&amp;guid=5908892b8c8314bba9b29d850192f786&amp;type=3#PanelFrame01_Round_Bg&quot;); -unity-background-image-tint-color: rgba(9, 53, 96, 0.4); height: 630px; margin-bottom: 56px;">
+                        <engine:Label text="CHEST" name="PanelName" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; height: 84px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/LilitaOne-Regular.ttf?fileID=12800000&amp;guid=9e85cee314c38b24ca27fdac2b487b74&amp;type=3#LilitaOne-Regular&quot;); color: rgb(202, 202, 202); font-size: 42px; -unity-text-align: middle-center; -unity-text-outline-width: 2px; -unity-text-outline-color: rgb(0, 0, 0); -unity-font-style: bold;" />
+                        <engine:VisualElement name="ChestsContainer" style="flex-grow: 1; flex-direction: row; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; justify-content: space-evenly; margin-bottom: 42px; margin-top: 14px;">
+                            <engine:Button name="LuckyChestButton" class="container-item">
+                                <engine:VisualElement style="flex-grow: 1; align-items: center; justify-content: flex-start; padding-top: 28px;">
+                                    <engine:Label text="Lucky Chest" name="ChestName" class="container-item__name" />
+                                    <engine:VisualElement style="flex-grow: 0; flex-shrink: 0; width: 224px; height: 196px; background-image: url(&quot;project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/IconMisc/Icon_ChestIcon_Blue02_m.png?fileID=21300000&amp;guid=9416cda36695646258360b3882365668&amp;type=3#Icon_ChestIcon_Blue02_m&quot;);" />
+                                </engine:VisualElement>
+                                <engine:Label text="$ 3.99" name="ChestPrice" class="container-item__price" />
+                            </engine:Button>
+                            <engine:Button text="Button" name="EpicChestButton" class="container-item">
+                                <engine:VisualElement style="flex-grow: 1; align-items: center; justify-content: flex-start; padding-top: 28px;">
+                                    <engine:Label text="Epic Chest" name="ChestName" class="container-item__name" />
+                                    <engine:VisualElement style="flex-grow: 0; flex-shrink: 0; width: 224px; height: 196px; background-image: url(&quot;project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/IconMisc/Icon_ChestIcon_Gold01_s.png?fileID=21300000&amp;guid=dad74013a0ec24e3ca38d2b98cfa5f62&amp;type=3#Icon_ChestIcon_Gold01_s&quot;);" />
+                                </engine:VisualElement>
+                                <engine:Label text="$ 7.99" name="ChestPrice" class="container-item__price" />
+                            </engine:Button>
+                        </engine:VisualElement>
+                    </engine:VisualElement>
+                </engine:ScrollView>
+            </engine:VisualElement>
         </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>

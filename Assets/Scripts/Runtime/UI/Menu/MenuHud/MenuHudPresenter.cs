@@ -14,6 +14,11 @@ namespace Runtime.UI.MenuHud
             _view = view;
             _mediator = mediator;
         }
+        
+        public void SetPlayerInfo(string playerName)
+        {
+            _view.SetPlayerInfo(playerName);
+        }
 
         public void EnableGameSetup()
         {
@@ -30,6 +35,26 @@ namespace Runtime.UI.MenuHud
         {
             _model.NextGameMode();
             _view.UpdateGameModePanel((int)_model.CurrentMatchMode);
+        }
+        
+        public void EnableStoreMenu()
+        {
+            _mediator.ShowShop();
+        }
+        
+        public void EnablePiecesesMenu()
+        {
+            _mediator.ShowPieces();
+        }
+        
+        public void EnableQuestsMenu()
+        {
+            _mediator.ShowQuests();
+        }
+        
+        public void EnableSettingsMenu()
+        {
+            _mediator.ShowSettings();
         }
 
         public override void EnableView()

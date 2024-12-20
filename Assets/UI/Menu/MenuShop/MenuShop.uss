@@ -1,11 +1,119 @@
-.unity-scroll-view {
-    flex-direction: row;
-    flex-wrap: wrap;
+.spetial-item {
+    height: 560px;
+    background-image: url("project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Frame/CardFrame05_Bg_Purple.png?fileID=21300000&guid=1ffbcf81a1b5446ab98ee6e3cfce8293&type=3#CardFrame05_Bg_Purple");
+    margin-bottom: 56px;
+    background-color: rgba(0, 0, 0, 0);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
 }
 
-.unity-scroll-view__content-container {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
+.spetial-item:active {
+    height: 560px;
+    background-image: url("project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Frame/CardFrame05_Bg_Purple.png?fileID=21300000&guid=1ffbcf81a1b5446ab98ee6e3cfce8293&type=3#CardFrame05_Bg_Purple");
+    margin-bottom: 56px;
+    background-color: rgba(0, 0, 0, 0);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    scale: 0.9 0.9;
+}
+
+.container-item {
+    background-image: url("project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Frame/CardFrame06_Bg_Blue.png?fileID=21300000&guid=a4594cf46cc344df2bc8dbbdfd0847c0&type=3#CardFrame06_Bg_Blue");
+    width: 420px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    background-color: rgba(0, 0, 0, 0);
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+}
+
+.container-item:active {
+    background-image: url("project://database/Assets/Layer%20Lab/GUI%20Pro-CasualGame/ResourcesData/Sprites/Components/Frame/CardFrame06_Bg_Blue.png?fileID=21300000&guid=a4594cf46cc344df2bc8dbbdfd0847c0&type=3#CardFrame06_Bg_Blue");
+    width: 420px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    background-color: rgba(0, 0, 0, 0);
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    scale: 0.9 0.9;
+}
+
+.container-item__name {
+    color: rgb(255, 255, 255);
+    -unity-font-definition: url("project://database/Assets/Fonts/LilitaOne-Regular.ttf?fileID=12800000&guid=9e85cee314c38b24ca27fdac2b487b74&type=3#LilitaOne-Regular");
+    font-size: 56px;
+    -unity-text-align: middle-center;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    height: 84px;
+    -unity-text-outline-width: 3px;
+    -unity-text-outline-color: rgb(0, 0, 0);
+    letter-spacing: -5px;
+}
+
+.container-item__price {
+    height: 122px;
+    -unity-text-align: middle-center;
+    color: rgb(255, 255, 255);
+    -unity-font-definition: url("project://database/Assets/Fonts/LilitaOne-Regular.ttf?fileID=12800000&guid=9e85cee314c38b24ca27fdac2b487b74&type=3#LilitaOne-Regular");
+    font-size: 84px;
+    -unity-text-outline-width: 5px;
+    -unity-text-outline-color: rgb(0, 0, 0);
+    padding-bottom: 23px;
 }

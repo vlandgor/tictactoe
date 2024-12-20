@@ -42,6 +42,7 @@ namespace Runtime.Authentication
                 await UAS.Instance.SignInWithUnityAsync(PlayerAccountService.Instance.AccessToken);
                 
                 string name = await UAS.Instance.GetPlayerNameAsync();
+                string id = PlayerAccountService.Instance.IdToken;
                 Debug.Log($"Name : {name}");
                 
                 _signInTaskCompletionSource.SetResult(true);

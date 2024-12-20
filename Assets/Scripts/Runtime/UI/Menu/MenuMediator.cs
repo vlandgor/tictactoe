@@ -25,8 +25,20 @@ namespace Runtime.UI.Menu
             _shopPresenter = shopPresenter;
             _matchSetupPresenter = matchSetupPresenter;
         }
+        
+        public void SetPlayerInfo(string playerName) => _hudPresenter.Value.SetPlayerInfo(playerName);
 
         public void ShowShop() => _shopPresenter.Value.EnableView();
+
+        public void ShowPieces()
+        {
+            
+        }
+
+        public void ShowQuests()
+        {
+            
+        }
         public void ShowSettings() => _settingsPresenter.Value.EnableView();
         public void ShowGameSetup(MatchMode matchMode) => _matchSetupPresenter.Value.StartSetup(matchMode);
     }

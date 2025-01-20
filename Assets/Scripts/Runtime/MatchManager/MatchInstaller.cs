@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System;
+using Cysharp.Threading.Tasks;
 using Runtime.BoardManager;
 using UnityEngine;
 using Zenject;
@@ -7,8 +8,13 @@ namespace Runtime.MatchManager
 {
     public class MatchInstaller : MonoInstaller
     {
+        [Header("Match Managers")]
         [SerializeField] private LocalMatchManager localMatchManager;
         [SerializeField] private NetworkMatchManager networkMatchManager;
+
+        [Header("Board Managers")]
+        [SerializeField] private LocalBoardManager localBoardManager;
+        [SerializeField] private NetworkBoardManager networkBoardManager;
 
         public async UniTask Initialize(IMatchData matchData, IBoardData boardData)
         {
@@ -19,41 +25,48 @@ namespace Runtime.MatchManager
 
         private async UniTask InitializeMatchManager(IMatchData matchData)
         {
-            var matchManagerType = matchData switch
+            // Resolve the appropriate match manager instance
+            IMatchManager matchManager = matchData switch
             {
-                LocalMatchData => typeof(LocalMatchManager),
-                NetworkMatchData => typeof(NetworkMatchManager)
+                LocalMatchData => localMatchManager,
+                NetworkMatchData => networkMatchManager,
+                _ => throw new InvalidOperationException($"Unsupported match data type: {matchData.GetType()}")
             };
-            
+
+            // Bind and resolve the match manager
             Container
                 .Bind<IMatchManager>()
-                .To(matchManagerType)
+                .To(matchManager.GetType())
+                .FromInstance(matchManager)
                 .AsSingle();
-            
-            var matchManager = Container.Resolve<IMatchManager>();
+
             await matchManager.Initialize(matchData);
         }
-        
+
         private async UniTask InitializeBoardManager(IMatchData matchData, IBoardData boardData)
         {
-            var boardManagerType = matchData switch
+            // Resolve the appropriate board manager instance
+            IBoardManager boardManager = matchData switch
             {
-                LocalMatchData => typeof(LocalBoardManager),
-                NetworkMatchData => typeof(NetworkBoardManager)
+                LocalMatchData => localBoardManager,
+                NetworkMatchData => networkBoardManager,
+                _ => throw new InvalidOperationException($"Unsupported match data type: {matchData.GetType()}")
             };
 
+            // Bind and resolve the board manager
             Container
                 .Bind<IBoardManager>()
-                .To(boardManagerType)
+                .To(boardManager.GetType())
+                .FromInstance(boardManager)
                 .AsSingle();
 
-            var boardManager = Container.Resolve<IBoardManager>();
             await boardManager.Initialize(boardData);
         }
-        
+
         private async UniTask InitializeRoundManager(IMatchData matchData)
         {
-            
+            // Implement round manager initialization logic if necessary
+            await UniTask.CompletedTask;
         }
     }
 }

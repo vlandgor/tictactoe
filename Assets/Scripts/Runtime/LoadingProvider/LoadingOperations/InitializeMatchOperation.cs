@@ -1,7 +1,9 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using Runtime.BoardManager;
 using Runtime.Extensions;
 using Runtime.GameplayCoordinator;
+using Runtime.MatchManager;
 using Runtime.MatchService;
 using Runtime.Utilities;
 using Zenject;
@@ -12,13 +14,15 @@ namespace Runtime.LoadingProvider.LoadingOperations
     {
         private const string GAME_SCENE_NAME = "Game_Scene";
         
-        private Match _match;
+        private IMatchData _matchData;
+        private IBoardData _boardData;
         
         public string Description => "Initializing Match";
 
-        public InitializeMatchOperation(Match match)
+        public InitializeMatchOperation(IMatchData matchData, IBoardData boardData)
         {
-            _match = match;
+            _matchData = matchData;
+            _boardData = boardData;
         }
         
         public async UniTask Load(Action<float> onProgress)
@@ -26,11 +30,12 @@ namespace Runtime.LoadingProvider.LoadingOperations
             onProgress?.Invoke(10);
             
             SceneContext sceneContext = LoadingExtensions.FindSceneContext(GAME_SCENE_NAME);
-            IGameplayCoordinator gameplayCoordinator = sceneContext.Container.Resolve<IGameplayCoordinator>();
+            
+            MatchInstaller matchInstaller = sceneContext.Container.Resolve<MatchInstaller>();
             
             onProgress?.Invoke(50);
             
-            await gameplayCoordinator.InitializeMatch(_match);
+            await matchInstaller.Initialize(_matchData, _boardData);
             
             onProgress?.Invoke(100);
         }

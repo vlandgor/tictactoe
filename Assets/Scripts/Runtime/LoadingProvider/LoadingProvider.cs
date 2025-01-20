@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Runtime.BoardManager;
 using Runtime.LoadingProvider.LoadingOperations;
+using Runtime.MatchManager;
 using Runtime.MatchService;
 using Zenject;
 
@@ -41,12 +43,11 @@ namespace Runtime.LoadingProvider
             await _loadingCurtain.HideCurtain();
         }
         
-        public async UniTask LoadGame(Match match)
+        public async UniTask LoadGame(IMatchData matchData, IBoardData boardData)
         {
             Queue<ILoadingOperation> loadingOperation = new Queue<ILoadingOperation>();
             loadingOperation.Enqueue(new LoadSceneOperation(GAME_SCENE_NAME));
-            loadingOperation.Enqueue(new GenerateGameBoardOperation(match.Board));
-            loadingOperation.Enqueue(new InitializeMatchOperation(match));
+            loadingOperation.Enqueue(new InitializeMatchOperation(matchData, boardData));
             
             await _loadingCurtain.ShowCurtain();
             await _loadingCurtain.Load(loadingOperation);

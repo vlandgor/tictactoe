@@ -1,12 +1,17 @@
 ﻿using Cysharp.Threading.Tasks;
 using Runtime.AudioService;
+using Runtime.BoardManager;
 using Runtime.BotService;
 using Runtime.ConfigProvider;
 using Runtime.GameBoard;
+using Runtime.GameModes.ClassicMode.Board;
 using Runtime.GamePlayer;
 using Runtime.LoadingProvider;
-using Runtime.MatchService;
+using Runtime.MatchManager;
 using Runtime.Tokens;
+using UnityEngine;
+using MatchMode = Runtime.MatchService.MatchMode;
+using MatchType = Runtime.MatchService.MatchType;
 
 namespace Runtime.UI.MenuMatchSetup
 {
@@ -41,11 +46,11 @@ namespace Runtime.UI.MenuMatchSetup
         public void StartGame(MatchType matchType, bool IsRanked)
         {
             IPlayer[] players = GetPlayers(matchType);
+
+            IMatchData matchData = new LocalMatchData(MatchManager.MatchType.Local, MatchManager.MatchMode.Classic, players);
+            IBoardData boardData = new ClassicBoardData(new Vector2Int(3, 3));
             
-            MatchData matchData = new MatchData(matchType, _matchMode, players, IsRanked, GameBoardConfig.BoardSize);
-            Match match = new Match(matchData);
-            
-            _loadingProvider.LoadGame(match).Forget();
+            _loadingProvider.LoadGame(matchData, boardData).Forget();
         }
         
         private IPlayer[] GetPlayers(MatchType matchType)

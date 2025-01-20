@@ -1,4 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
+using Runtime.BoardManager;
+using Runtime.MatchManager;
 using Runtime.MatchService;
 
 namespace Runtime.LoadingProvider
@@ -7,6 +9,6 @@ namespace Runtime.LoadingProvider
     {
         public UniTask LoadApp();
         public UniTask LoadMenu();
-        public UniTask LoadGame(Match match);
+        public UniTask LoadGame(IMatchData matchData, IBoardData boardData);
     }
 }

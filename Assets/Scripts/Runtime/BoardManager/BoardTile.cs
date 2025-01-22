@@ -13,5 +13,11 @@ namespace Runtime.BoardManager
         {
             this.coordinates = coordinates;
         }
+
+        private void OnMouseDown()
+        {
+            TileClicked?.Invoke(coordinates);
+            Debug.Log($"Tile: {coordinates} was clicked");
+        }
     }
 }

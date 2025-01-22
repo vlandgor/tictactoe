@@ -15,8 +15,9 @@ namespace Runtime.GameModes.ClassicMode.Board
             {
                 for (int y = 0; y < boardSize.y; y++)
                 {
-                    tiles[x, y] = getTile();
-                    tiles[x, y].transform.position = new Vector3(x, 0, y);
+                    BoardTile tile = tiles[x, y] = getTile();
+                    tile.transform.position = new Vector3(x, 0, y);
+                    tile.SetCoordinates(new Vector2Int(x, y));
                 }
             }
             

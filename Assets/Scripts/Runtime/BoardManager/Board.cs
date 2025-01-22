@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Runtime.BoardManager
 {
-    public abstract class MatchBoard
+    public abstract class Board
     {
         protected IBoardData boardData;
         
@@ -11,7 +11,7 @@ namespace Runtime.BoardManager
         
         public Vector2Int BoardSize => boardData.Size;
 
-        public MatchBoard(IBoardData boardData)
+        public Board(IBoardData boardData)
         {
             this.boardData = boardData;
             

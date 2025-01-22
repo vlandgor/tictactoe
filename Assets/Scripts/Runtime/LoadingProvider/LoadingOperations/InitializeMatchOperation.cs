@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Runtime.BoardManager;
 using Runtime.Extensions;
@@ -8,6 +9,7 @@ using Runtime.MatchService;
 using Runtime.Utilities;
 using UnityEngine;
 using Zenject;
+using MatchType = Runtime.MatchManager.MatchType;
 
 namespace Runtime.LoadingProvider.LoadingOperations
 {
@@ -32,15 +34,19 @@ namespace Runtime.LoadingProvider.LoadingOperations
             
             SceneContext sceneContext = LoadingExtensions.FindSceneContext(GAME_SCENE_NAME);
             
-            MatchInstaller matchInstaller = sceneContext.Container.Resolve<MatchInstaller>();
+            Debug.Log("Initializing Match...");
             
-            onProgress?.Invoke(50);
-            
-            Debug.Log("Initializing Match");
-            
-            await matchInstaller.Initialize(_matchData, _boardData);
+            IMatchManager matchManager = sceneContext.Container.ResolveId<IMatchManager>(MatchType.Local);
+            matchManager.Initialize(_matchData);
             
             Debug.Log("Match Initialized");
+            
+            Debug.Log("Initializing Board...");
+            
+            IBoardManager boardManager = sceneContext.Container.ResolveId<IBoardManager>(MatchType.Local);
+            boardManager.Initialize(_boardData);
+            
+            Debug.Log("Board Initialized");
             
             onProgress?.Invoke(100);
         }

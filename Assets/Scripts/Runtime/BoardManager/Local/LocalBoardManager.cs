@@ -8,7 +8,7 @@ namespace Runtime.BoardManager
     {
         [SerializeField] private LocalTilesFactory localTilesFactory;
         
-        private MatchBoard matchBoard;
+        private Board _board;
         
         
         
@@ -22,7 +22,7 @@ namespace Runtime.BoardManager
             switch (boardData)
             {
                 case ClassicBoardData classicBoardData:
-                    matchBoard = new ClassicBoard(classicBoardData);
+                    _board = new ClassicBoard(classicBoardData);
                     break;
             }
         }

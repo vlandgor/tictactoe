@@ -2,7 +2,7 @@
 
 namespace Runtime.GameModes.ClassicMode.Board
 {
-    public class ClassicBoard : MatchBoard
+    public class ClassicBoard : BoardManager.Board
     {
         public ClassicBoard(ClassicBoardData boardData) : base(boardData)
         {

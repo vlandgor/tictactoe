@@ -7,13 +7,12 @@ namespace Runtime.MatchManager
 {
     public class LocalMatchManager : MonoBehaviour, IMatchManager
     {
-        private IRoundManager _roundManager;
         private IBoardManager _boardManager;
         
         private LocalMatchData _matchData;
 
         [Inject]
-        public void Construct(IRoundManager roundManager, IBoardManager boardManager)
+        public void Construct(IBoardManager boardManager)
         {
             _boardManager = boardManager;
         }

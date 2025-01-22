@@ -4,6 +4,6 @@ namespace Runtime.BoardManager
 {
     public interface IBoardManager
     {
-        public UniTask Initialize(IBoardData boardData);
+        public UniTask Initialize(IBoard board, IBoardVisual boardVisual, IBoardData boardData);
     }
 }

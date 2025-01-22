@@ -165,8 +165,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   localMatchManager: {fileID: 7834103785465560668, guid: 6b4b4d0e613bb0843a0fe8ca1b55c98d, type: 3}
   networkMatchManager: {fileID: 1753426635954119496, guid: d81895014f8086549b3d404e2ad40265, type: 3}
+--- !u!1 &1303490436
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1303490438}
+  - component: {fileID: 1303490437}
+  m_Layer: 0
+  m_Name: BoardInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1303490437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1303490436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20eca6cf0d0249f3a93855ae8536ac02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   localBoardManager: {fileID: 2059768218948331707, guid: 84626bf0f89617d4695465ed6719aa75, type: 3}
   networkBoardManager: {fileID: 6952404635854796119, guid: cfabcaedc09db664e91911f7680abe79, type: 3}
+  classicBoardVisual: {fileID: 7680101678649009310, guid: 79f35bc11a2421f43add6bbba121ec66, type: 3}
+--- !u!4 &1303490438
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1303490436}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1372812008}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1372812006
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,6 +243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
   _monoInstallers:
+  - {fileID: 1303490437}
   - {fileID: 649561659}
   _installerPrefabs: []
   _autoRun: 1
@@ -229,6 +275,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1303490438}
   - {fileID: 649561658}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

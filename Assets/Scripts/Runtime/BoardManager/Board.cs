@@ -1,9 +1,10 @@
-﻿using Runtime.GamePlayer;
+﻿using Cysharp.Threading.Tasks;
+using Runtime.GamePlayer;
 using UnityEngine;
 
 namespace Runtime.BoardManager
 {
-    public abstract class Board
+    public abstract class Board : IBoard
     {
         protected IBoardData boardData;
         
@@ -11,7 +12,7 @@ namespace Runtime.BoardManager
         
         public Vector2Int BoardSize => boardData.Size;
 
-        public Board(IBoardData boardData)
+        public async UniTask Initialize(IBoardData boardData)
         {
             this.boardData = boardData;
             

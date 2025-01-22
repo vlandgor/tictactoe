@@ -5,9 +5,9 @@ namespace Runtime.BoardManager
 {
     public class NetworkBoardManager : MonoBehaviour, IBoardManager
     {
-        public async UniTask Initialize(IBoardData boardData)
+        public UniTask Initialize(IBoard board, IBoardVisual boardVisual, IBoardData boardData)
         {
-            
+            throw new System.NotImplementedException();
         }
     }
 }

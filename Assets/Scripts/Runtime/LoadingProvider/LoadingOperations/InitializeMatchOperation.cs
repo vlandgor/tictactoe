@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Runtime.BoardManager;
 using Runtime.Extensions;
-using Runtime.GameplayCoordinator;
 using Runtime.MatchManager;
-using Runtime.MatchService;
-using Runtime.Utilities;
 using UnityEngine;
 using Zenject;
 using MatchType = Runtime.MatchManager.MatchType;
@@ -43,8 +39,10 @@ namespace Runtime.LoadingProvider.LoadingOperations
             
             Debug.Log("Initializing Board...");
             
+            IBoard board = sceneContext.Container.ResolveId<IBoard>(MatchMode.Classic);
+            IBoardVisual boardVisual = sceneContext.Container.ResolveId<IBoardVisual>(MatchMode.Classic);
             IBoardManager boardManager = sceneContext.Container.ResolveId<IBoardManager>(MatchType.Local);
-            boardManager.Initialize(_boardData);
+            boardManager.Initialize(board, boardVisual, _boardData);
             
             Debug.Log("Board Initialized");
             

@@ -1,26 +1,13 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Runtime.BoardManager
 {
-    public class BoardVisual : MonoBehaviour
+    public abstract class BoardVisual : MonoBehaviour, IBoardVisual
     {
-        private BoardTile[,] tiles;
-        
-        public async UniTask GenerateBoardVisual(Vector2Int boardSize)
-        {
-            tiles = new BoardTile[boardSize.x, boardSize.y];
-            
-            for (int x = 0; x < boardSize.x; x++)
-            {
-                for (int y = 0; y < boardSize.y; y++)
-                {
-                    // tiles[x, y] = localTilesFactory.Get<ClassicBoardTile>();
-                    // tiles[x, y].transform.position = new Vector3(x, 0, y);
-                }
-            }
-            
-            await UniTask.Yield();
-        }
+        protected BoardTile[,] tiles;
+
+        public abstract UniTask GenerateBoardVisual(Vector2Int boardSize, Func<BoardTile> getTile);
     }
 }

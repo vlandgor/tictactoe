@@ -7,24 +7,26 @@ namespace Runtime.BoardManager
     public class LocalBoardManager : MonoBehaviour, IBoardManager
     {
         [SerializeField] private LocalTilesFactory localTilesFactory;
+
+        private IBoardData _boardData;
         
-        private Board _board;
+        private IBoard _board;
+        private IBoardVisual _boardVisual;
         
-        
-        
-        public async UniTask Initialize(IBoardData boardData)
+        public async UniTask Initialize(IBoard board, IBoardVisual boardVisual, IBoardData boardData)
         {
-            await GenerateBoard(boardData);
+            _board = board;
+            _boardVisual = boardVisual;
+            _boardData = boardData;
+
+            board.Initialize(boardData);
+            
+            await GenerateBoard();
         }
 
-        private async UniTask GenerateBoard(IBoardData boardData)
+        private async UniTask GenerateBoard()
         {
-            switch (boardData)
-            {
-                case ClassicBoardData classicBoardData:
-                    _board = new ClassicBoard(classicBoardData);
-                    break;
-            }
+            await _boardVisual.GenerateBoardVisual(_boardData.Size, localTilesFactory.Get<ClassicBoardTile>);
         }
     }
 }

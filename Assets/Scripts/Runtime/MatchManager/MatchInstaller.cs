@@ -1,5 +1,4 @@
-﻿using Runtime.BoardManager;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 namespace Runtime.MatchManager
@@ -10,13 +9,8 @@ namespace Runtime.MatchManager
         [SerializeField] private LocalMatchManager localMatchManager;
         [SerializeField] private NetworkMatchManager networkMatchManager;
 
-        [Header("Board Managers")]
-        [SerializeField] private LocalBoardManager localBoardManager;
-        [SerializeField] private NetworkBoardManager networkBoardManager;
-
         public override void InstallBindings()
         {
-            BindBoardManager();
             BindMatchManager();
         }
 
@@ -36,21 +30,6 @@ namespace Runtime.MatchManager
                 .FromInstance(networkMatchManager)
                 .AsTransient();
         }
-        private void BindBoardManager()
-        {
-            Container
-                .Bind<IBoardManager>()
-                .WithId(MatchType.Local)
-                .To<LocalBoardManager>()
-                .FromInstance(localBoardManager)
-                .AsTransient();
 
-            Container
-                .Bind<IBoardManager>()
-                .WithId(MatchType.Network)
-                .To<NetworkBoardManager>()
-                .FromInstance(networkBoardManager)
-                .AsTransient();
-        }
     }
 }

@@ -6,6 +6,7 @@ using Runtime.GameplayCoordinator;
 using Runtime.MatchManager;
 using Runtime.MatchService;
 using Runtime.Utilities;
+using UnityEngine;
 using Zenject;
 
 namespace Runtime.LoadingProvider.LoadingOperations
@@ -35,7 +36,11 @@ namespace Runtime.LoadingProvider.LoadingOperations
             
             onProgress?.Invoke(50);
             
+            Debug.Log("Initializing Match");
+            
             await matchInstaller.Initialize(_matchData, _boardData);
+            
+            Debug.Log("Match Initialized");
             
             onProgress?.Invoke(100);
         }

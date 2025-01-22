@@ -4,6 +4,7 @@ using Runtime.BoardManager;
 using Runtime.LoadingProvider.LoadingOperations;
 using Runtime.MatchManager;
 using Runtime.MatchService;
+using UnityEngine;
 using Zenject;
 
 namespace Runtime.LoadingProvider
@@ -45,6 +46,8 @@ namespace Runtime.LoadingProvider
         
         public async UniTask LoadGame(IMatchData matchData, IBoardData boardData)
         {
+            Debug.Log("Load Game");
+            
             Queue<ILoadingOperation> loadingOperation = new Queue<ILoadingOperation>();
             loadingOperation.Enqueue(new LoadSceneOperation(GAME_SCENE_NAME));
             loadingOperation.Enqueue(new InitializeMatchOperation(matchData, boardData));

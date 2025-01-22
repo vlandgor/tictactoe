@@ -16,6 +16,11 @@ namespace Runtime.MatchManager
         [SerializeField] private LocalBoardManager localBoardManager;
         [SerializeField] private NetworkBoardManager networkBoardManager;
 
+        public override void InstallBindings()
+        {
+            Container.Bind<MatchInstaller>().FromComponentInHierarchy().AsSingle();
+        }
+        
         public async UniTask Initialize(IMatchData matchData, IBoardData boardData)
         {
             await InitializeRoundManager(matchData);
@@ -25,6 +30,8 @@ namespace Runtime.MatchManager
 
         private async UniTask InitializeMatchManager(IMatchData matchData)
         {
+            Debug.Log("Initializing Match Manager");
+            
             // Resolve the appropriate match manager instance
             IMatchManager matchManager = matchData switch
             {
@@ -45,6 +52,8 @@ namespace Runtime.MatchManager
 
         private async UniTask InitializeBoardManager(IMatchData matchData, IBoardData boardData)
         {
+            Debug.Log("Initializing Board Manager");
+            
             // Resolve the appropriate board manager instance
             IBoardManager boardManager = matchData switch
             {
@@ -65,6 +74,8 @@ namespace Runtime.MatchManager
 
         private async UniTask InitializeRoundManager(IMatchData matchData)
         {
+            Debug.Log("Initializing Turn Manager");
+            
             // Implement round manager initialization logic if necessary
             await UniTask.CompletedTask;
         }

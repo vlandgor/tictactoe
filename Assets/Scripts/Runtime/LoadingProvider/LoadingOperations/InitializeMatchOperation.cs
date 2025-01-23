@@ -30,21 +30,20 @@ namespace Runtime.LoadingProvider.LoadingOperations
             
             SceneContext sceneContext = LoadingExtensions.FindSceneContext(GAME_SCENE_NAME);
             
+            Debug.Log("Initializing Board...");
+            
+            IBoardManager boardManager = sceneContext.Container.ResolveId<IBoardManager>(MatchType.Local);
+            
+            await boardManager.Initialize(_boardData);
+            
+            Debug.Log("Board Initialized");
+            
             Debug.Log("Initializing Match...");
             
             IMatchManager matchManager = sceneContext.Container.ResolveId<IMatchManager>(MatchType.Local);
             matchManager.Initialize(_matchData);
             
             Debug.Log("Match Initialized");
-            
-            Debug.Log("Initializing Board...");
-            
-            IBoard board = sceneContext.Container.ResolveId<IBoard>(MatchMode.Classic);
-            IBoardVisual boardVisual = sceneContext.Container.ResolveId<IBoardVisual>(MatchMode.Classic);
-            IBoardManager boardManager = sceneContext.Container.ResolveId<IBoardManager>(MatchType.Local);
-            boardManager.Initialize(board, boardVisual, _boardData);
-            
-            Debug.Log("Board Initialized");
             
             onProgress?.Invoke(100);
         }

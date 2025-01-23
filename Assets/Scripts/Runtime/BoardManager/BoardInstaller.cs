@@ -37,6 +37,15 @@ namespace Runtime.BoardManager
                 .FromInstance(networkBoardManager)
                 .AsTransient();
         }
+        
+        private void BindBoard()
+        {
+            Container
+                .Bind<IBoard>()
+                .WithId(MatchMode.Classic)
+                .To<ClassicBoard>()
+                .AsTransient();
+        }
 
         private void BindBoardVisual()
         {
@@ -45,15 +54,6 @@ namespace Runtime.BoardManager
                 .WithId(MatchMode.Classic)
                 .To<ClassicBoardVisual>()
                 .FromInstance(classicBoardVisual)
-                .AsTransient();
-        }
-
-        private void BindBoard()
-        {
-            Container
-                .Bind<IBoard>()
-                .WithId(MatchMode.Classic)
-                .To<ClassicBoard>()
                 .AsTransient();
         }
     }

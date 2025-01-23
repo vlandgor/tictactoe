@@ -1,13 +1,22 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System;
+using Cysharp.Threading.Tasks;
+using Runtime.GamePlayer;
 using UnityEngine;
 
 namespace Runtime.BoardManager
 {
     public class NetworkBoardManager : MonoBehaviour, IBoardManager
     {
-        public UniTask Initialize(IBoard board, IBoardVisual boardVisual, IBoardData boardData)
+        public event Action<Vector2Int> OnTileClicked;
+
+        public async UniTask Initialize(IBoardData boardData)
         {
-            throw new System.NotImplementedException();
+            
+        }
+
+        public async UniTask PlacePiece(IPlayer player, Vector2Int coordinate)
+        {
+            
         }
     }
 }

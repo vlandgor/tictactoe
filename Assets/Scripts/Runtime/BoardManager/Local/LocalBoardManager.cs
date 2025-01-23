@@ -1,32 +1,64 @@
-﻿using Cysharp.Threading.Tasks;
-using Runtime.GameModes.ClassicMode.Board;
+﻿using System;
+using Cysharp.Threading.Tasks;
+using Runtime.GamePlayer;
+using Runtime.MatchManager;
 using UnityEngine;
+using Zenject;
 
 namespace Runtime.BoardManager
 {
     public class LocalBoardManager : MonoBehaviour, IBoardManager
     {
+        public event Action<Vector2Int> OnTileClicked; 
+        
         [SerializeField] private LocalTilesFactory localTilesFactory;
-
+        
         private IBoardData _boardData;
         
-        private IBoard _board;
-        private IBoardVisual _boardVisual;
-        
-        public async UniTask Initialize(IBoard board, IBoardVisual boardVisual, IBoardData boardData)
-        {
-            _board = board;
-            _boardVisual = boardVisual;
-            _boardData = boardData;
+        private Board _board;
+        private BoardVisual _boardVisual;
 
-            board.Initialize(boardData);
+        [Inject]
+        public void Construct(DiContainer container)
+        {
+            _board = (Board)container.ResolveId<IBoard>(MatchMode.Classic);
+            _boardVisual = (BoardVisual)container.ResolveId<IBoardVisual>(MatchMode.Classic);
+        }
+        
+        public async UniTask Initialize(IBoardData boardData)
+        {
+            _boardData = boardData;
             
-            await GenerateBoard();
+            await _board.Initialize(boardData);
+            
+            _boardVisual.SetFactories(localTilesFactory);
+            await _boardVisual.Initialize(boardData);
+            
+            _boardVisual.OnTileClicked += HandleTileClicked;
         }
 
-        private async UniTask GenerateBoard()
+        public async UniTask PlacePiece(IPlayer player, Vector2Int coordinate)
         {
-            await _boardVisual.GenerateBoardVisual(_boardData.Size, localTilesFactory.Get<ClassicBoardTile>);
+            Debug.Log($"LocalBoardManager: place piece");
+            
+            _board.PlacePiece(player, coordinate);
+            await _boardVisual.PlacePiece(player.SetIndex, coordinate);
+        }
+
+        private void OnDestroy()
+        {
+            _boardVisual.OnTileClicked -= HandleTileClicked;
+        }
+        
+        private void HandleTileClicked(Vector2Int coordinate)
+        {
+            Debug.Log("Tile Clicked");
+            
+            if (_board.ValidateInput(coordinate))
+            {
+                Debug.Log("Input correct");
+                OnTileClicked?.Invoke(coordinate);
+            }
         }
     }
 }

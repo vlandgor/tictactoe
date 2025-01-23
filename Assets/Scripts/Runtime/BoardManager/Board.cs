@@ -18,6 +18,19 @@ namespace Runtime.BoardManager
             
             CreateBoard();
         }
+
+        public bool ValidateInput(Vector2Int coordinate)
+        {
+            if (board[coordinate.x, coordinate.y] == null)
+                return true;
+
+            return false;
+        }
+
+        public void PlacePiece(IPlayer player, Vector2Int coordinate)
+        {
+            board[coordinate.x, coordinate.y] = player;
+        }
         
         private void CreateBoard()
         {
@@ -31,7 +44,6 @@ namespace Runtime.BoardManager
                 }
             }
         }
-        
         private void ClearBoard()
         {
             for (int x = 0; x < BoardSize.x; x++)

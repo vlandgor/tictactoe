@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Runtime.BoardManager
 {
     [CreateAssetMenu(fileName = "TilesFactory", menuName = "Playcbo/Factories/Tiles Factory", order = 0)]
-    public class LocalTilesFactory : GenericFactory
+    public class LocalTilesFactory : GenericFactory, ITilesFactory
     {
         [SerializeField] private ClassicBoardTile classicTilePrefab;
         
@@ -18,7 +18,6 @@ namespace Runtime.BoardManager
             
             return null;
         }
-
         
         private T Get<T>(T prefab) where T : BoardTile
         {

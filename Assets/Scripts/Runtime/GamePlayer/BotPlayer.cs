@@ -5,14 +5,13 @@ namespace Runtime.GamePlayer
 {
     public class BotPlayer : IPlayer
     {
-        public string Name => "Bot";   
-        
-        public Token Token { get; }
+        public string Name => "Bot";
+        public int SetIndex { get; }
+
         public BotLevel BotLevel { get; }
         
-        public BotPlayer(Token token, BotLevel botLevel)
+        public BotPlayer(int setIndex, BotLevel botLevel)
         {
-            Token = token;
             BotLevel = botLevel;
         }
     }

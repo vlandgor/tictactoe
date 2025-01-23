@@ -1,5 +1,4 @@
-﻿using System;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using Runtime.BoardManager;
 using UnityEngine;
 
@@ -7,15 +6,19 @@ namespace Runtime.GameModes.ClassicMode.Board
 {
     public class ClassicBoardVisual : BoardVisual
     {
-        public override async UniTask GenerateBoardVisual(Vector2Int boardSize, Func<BoardTile> getTile)
+        private ClassicBoardData ClassicBoardData => _boardData as ClassicBoardData;
+
+        protected override async UniTask GenerateBoardVisual()
         {
-            tiles = new BoardTile[boardSize.x, boardSize.y];
+            Debug.Log("Generate Board Visual");
             
-            for (int x = 0; x < boardSize.x; x++)
+            tiles = new BoardTile[ClassicBoardData.Size.x, ClassicBoardData.Size.y];
+            
+            for (int x = 0; x < ClassicBoardData.Size.x; x++)
             {
-                for (int y = 0; y < boardSize.y; y++)
+                for (int y = 0; y < ClassicBoardData.Size.y; y++)
                 {
-                    BoardTile tile = tiles[x, y] = getTile();
+                    BoardTile tile = tiles[x, y] = _tilesFactory.Get<ClassicBoardTile>();
                     tile.transform.position = new Vector3(x, 0, y);
                     tile.SetCoordinates(new Vector2Int(x, y));
                 }

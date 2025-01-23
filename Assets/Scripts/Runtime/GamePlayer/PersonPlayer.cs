@@ -5,11 +5,11 @@ namespace Runtime.GamePlayer
     public class PersonPlayer : IPlayer
     {
         public string Name { get; }
-        public Token Token { get; }
+        public int SetIndex { get; }
         
-        public PersonPlayer(Token token, string name)
+        public PersonPlayer(int setIndex, string name)
         {
-            Token = token;
+            SetIndex = setIndex;
             Name = name;
         }
     }

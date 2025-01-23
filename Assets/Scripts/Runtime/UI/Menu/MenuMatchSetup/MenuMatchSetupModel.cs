@@ -61,16 +61,16 @@ namespace Runtime.UI.MenuMatchSetup
             switch (matchType)
             {
                 case MatchType.PlayerVsPlayer:
-                    player1 = new PersonPlayer(_tokensProvider.GetRandomMarkSet().XToken,"Player 1");
-                    player2 = new PersonPlayer(_tokensProvider.GetRandomMarkSet().OToken,"Player 2");
+                    player1 = new PersonPlayer(0,"Player 1");
+                    player2 = new PersonPlayer(1,"Player 2");
                     return new []{player1, player2};
                 case MatchType.PlayerVsComp:
-                    player1 = new PersonPlayer(_tokensProvider.GetRandomMarkSet().XToken,"Player 1");
-                    player2 = new BotPlayer(_tokensProvider.GetRandomMarkSet().OToken, BotLevel.Hard);
+                    player1 = new PersonPlayer(0,"Player 1");
+                    player2 = new BotPlayer(1, BotLevel.Hard);
                     return new []{player1, player2};
                 case MatchType.CompVsComp:
-                    player1 = new BotPlayer(_tokensProvider.GetRandomMarkSet().XToken, BotLevel.Easy);
-                    player2 = new BotPlayer(_tokensProvider.GetRandomMarkSet().OToken, BotLevel.Hard);
+                    player1 = new BotPlayer(0, BotLevel.Easy);
+                    player2 = new BotPlayer(1, BotLevel.Hard);
                     return new []{player1, player2};
             }
 

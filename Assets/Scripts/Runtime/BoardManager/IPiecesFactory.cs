@@ -1,6 +1,6 @@
 ﻿namespace Runtime.BoardManager
 {
-    public interface IBoard
+    public interface IPiecesFactory
     {
         
     }

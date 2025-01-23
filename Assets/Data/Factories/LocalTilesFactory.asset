@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fdd5ef74f2074e1aacd96031b3cf46a9, type: 3}
-  m_Name: TilesFactory
+  m_Name: LocalTilesFactory
   m_EditorClassIdentifier: 
   classicTilePrefab: {fileID: -8022646211744379792, guid: 81362197f62c3d94a9962a746246ccad, type: 3}

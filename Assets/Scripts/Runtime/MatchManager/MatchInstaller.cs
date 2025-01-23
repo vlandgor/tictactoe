@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Runtime.Tokens;
+using UnityEngine;
 using Zenject;
 
 namespace Runtime.MatchManager
@@ -16,13 +17,17 @@ namespace Runtime.MatchManager
 
         private void BindMatchManager()
         {
+            Debug.Log("Binding local match manager");
+            
             Container
                 .Bind<IMatchManager>()
                 .WithId(MatchType.Local)
                 .To<LocalMatchManager>()
                 .FromInstance(localMatchManager)
                 .AsTransient();
-
+            
+            Debug.Log("Binding network match manager");
+            
             Container
                 .Bind<IMatchManager>()
                 .WithId(MatchType.Network)
@@ -30,6 +35,5 @@ namespace Runtime.MatchManager
                 .FromInstance(networkMatchManager)
                 .AsTransient();
         }
-
     }
 }

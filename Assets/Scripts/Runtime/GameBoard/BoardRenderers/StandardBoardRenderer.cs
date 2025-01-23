@@ -29,7 +29,7 @@ namespace Runtime.GameBoard.BoardRenderers
 
         private async void HandleTokenPlaced(Crd crd, IPlayer player)
         { 
-            await PlaceToken(crd, player.Token);
+            //await PlaceToken(crd, player.Token);
         }
 
         public override async UniTask PlaceToken(Crd crd, Token tokenPrefab)

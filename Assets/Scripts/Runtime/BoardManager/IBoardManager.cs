@@ -1,9 +1,15 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System;
+using Cysharp.Threading.Tasks;
+using Runtime.GamePlayer;
+using UnityEngine;
 
 namespace Runtime.BoardManager
 {
     public interface IBoardManager
     {
-        public UniTask Initialize(IBoard board, IBoardVisual boardVisual, IBoardData boardData);
+        public event Action<Vector2Int> OnTileClicked; 
+        
+        public UniTask Initialize(IBoardData boardData);
+        public UniTask PlacePiece(IPlayer player, Vector2Int coordinate);
     }
 }

@@ -5,6 +5,6 @@ namespace Runtime.GamePlayer
     public interface IPlayer
     {
         public string Name { get; }
-        public Token Token { get; }
+        public int SetIndex { get; }
     }
 }

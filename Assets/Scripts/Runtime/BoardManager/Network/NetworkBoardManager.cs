@@ -8,15 +8,17 @@ namespace Runtime.BoardManager
     public class NetworkBoardManager : MonoBehaviour, IBoardManager
     {
         public event Action<Vector2Int> OnTileClicked;
+        public event Action<IPlayer> OnWinnerDetected;
+        public event Action OnDrawDetected;
 
         public async UniTask Initialize(IBoardData boardData)
         {
             
         }
 
-        public async UniTask PlacePiece(IPlayer player, Vector2Int coordinate)
+        public UniTask PlacePiece(IPlayer player, Vector2Int coordinate, Action piecePlaced)
         {
-            
+            throw new NotImplementedException();
         }
     }
 }

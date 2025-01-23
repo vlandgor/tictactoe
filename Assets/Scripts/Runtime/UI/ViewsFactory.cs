@@ -1,6 +1,5 @@
 ﻿using Runtime.UI.BootAuthentication;
 using Runtime.UI.GameHud;
-using Runtime.UI.GameResult;
 using Runtime.UI.MenuHud;
 using Runtime.UI.MenuMatchSetup;
 using Runtime.UI.MenuSettings;
@@ -24,7 +23,6 @@ namespace Runtime.UI
         
         [Header("Game Views")]
         [SerializeField] private GameHudView gameHudView;
-        [SerializeField] private GameResultView gameResultView;
         
         public T Get<T>() where T : BaseView
         {
@@ -56,10 +54,6 @@ namespace Runtime.UI
             if(typeof(T) == typeof(GameHudView))
             {
                 return Get(gameHudView) as T;
-            }
-            if(typeof(T) == typeof(GameResultView))
-            {
-                return Get(gameResultView) as T;
             }
             
             return null;

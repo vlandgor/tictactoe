@@ -51,15 +51,12 @@ namespace Runtime.BoardManager
             Piece piece = _piecesFactory.Get(piecePrefab);
             piece.transform.position = new Vector3(coordinate.x, 0, coordinate.y);
             pieces[coordinate.x, coordinate.y] = piece;
-            
-            Debug.Log("Place Piece");
         }
         
         protected abstract UniTask GenerateBoardVisual();
         
         private void HandleTileClicked(Vector2Int coordinate)
         {
-            Debug.Log($"Tile Clicked");
             OnTileClicked?.Invoke(coordinate);
         }
     }

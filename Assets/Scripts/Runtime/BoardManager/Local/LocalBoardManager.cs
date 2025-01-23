@@ -11,7 +11,10 @@ namespace Runtime.BoardManager
 {
     public class LocalBoardManager : MonoBehaviour, IBoardManager
     {
-        public event Action<Vector2Int> OnTileClicked; 
+        public event Action<Vector2Int> OnTileClicked;
+        
+        public event Action<IPlayer> OnWinnerDetected;
+        public event Action OnDrawDetected;
         
         [SerializeField] private LocalTilesFactory localTilesFactory;
         [SerializeField] private LocalPiecesFactory localPiecesFactory;
@@ -42,27 +45,38 @@ namespace Runtime.BoardManager
             
             _boardVisual.OnTileClicked += HandleTileClicked;
         }
-
-        public async UniTask PlacePiece(IPlayer player, Vector2Int coordinate)
-        {
-            Debug.Log($"LocalBoardManager: place piece");
-            
-            _board.PlacePiece(player, coordinate);
-            await _boardVisual.PlacePiece(_pieceProvider.GetPiece(player.SetIndex, PieceType.Cross), coordinate);
-        }
-
+        
         private void OnDestroy()
         {
             _boardVisual.OnTileClicked -= HandleTileClicked;
         }
+
+        public async UniTask PlacePiece(IPlayer player, Vector2Int coordinate, Action piecePlaced)
+        {
+            _board.PlacePiece(player, coordinate);
+            
+            Debug.Log($"PieceProvider : {_pieceProvider == null}. BoardVisual: {_boardVisual == null}. Player: {player == null}");
+            await _boardVisual.PlacePiece(_pieceProvider.GetPiece(player.SetIndex, PieceType.Cross), coordinate);
+
+            if (_board.CheckForWinner(out IPlayer winner))
+            {
+                OnWinnerDetected?.Invoke(winner);
+                return;
+            }
+
+            if (_board.CheckForDraw())
+            {
+                OnDrawDetected?.Invoke();
+                return;
+            }
+            
+            piecePlaced?.Invoke();
+        }
         
         private void HandleTileClicked(Vector2Int coordinate)
         {
-            Debug.Log("Tile Clicked");
-            
             if (_board.ValidateInput(coordinate))
             {
-                Debug.Log("Input correct");
                 OnTileClicked?.Invoke(coordinate);
             }
         }

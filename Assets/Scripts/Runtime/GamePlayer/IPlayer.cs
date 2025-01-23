@@ -1,6 +1,4 @@
-﻿using Runtime.Tokens;
-
-namespace Runtime.GamePlayer
+﻿namespace Runtime.GamePlayer
 {
     public interface IPlayer
     {

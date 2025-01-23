@@ -1,7 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using Runtime.BoardManager;
 using Runtime.MatchManager;
-using Runtime.MatchService;
 
 namespace Runtime.LoadingProvider
 {

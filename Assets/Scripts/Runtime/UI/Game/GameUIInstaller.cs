@@ -1,6 +1,5 @@
 ﻿using Runtime.Extensions;
 using Runtime.UI.GameHud;
-using Runtime.UI.GameResult;
 using UnityEngine;
 using Zenject;
 
@@ -27,7 +26,6 @@ namespace Runtime.UI.Game
         private void BindPresenters()
         {
             Container.BindUIPresenter<GameHudPresenter, GameHudModel, GameHudView>(_viewsFactory);
-            Container.BindUIPresenter<GameResultPresenter, GameResultModel, GameResultView>(_viewsFactory);
         }
     }
 }

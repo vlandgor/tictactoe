@@ -1,4 +1,4 @@
-﻿using Runtime.MatchService;
+﻿using Runtime.MatchManager;
 using Runtime.UI.Menu;
 
 namespace Runtime.UI.MenuMatchSetup
@@ -27,15 +27,15 @@ namespace Runtime.UI.MenuMatchSetup
         
         public void PlayComp()
         {
-            _model.StartGame(MatchType.PlayerVsComp, false);
+            _model.StartGame();
         }
         public void PlayFriend()
         {
-            _model.StartGame(MatchType.PlayerVsPlayer, false);
+            _model.StartGame();
         }
         public void PlayCompVsComp()
         {
-            _model.StartGame(MatchType.CompVsComp,  false);
+            _model.StartGame();
         }
     }
 }

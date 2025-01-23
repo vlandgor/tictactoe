@@ -31,6 +31,9 @@ namespace Runtime.BoardManager
         {
             board[coordinate.x, coordinate.y] = player;
         }
+
+        public abstract bool CheckForWinner(out IPlayer winner);
+        public abstract bool CheckForDraw();
         
         private void CreateBoard()
         {

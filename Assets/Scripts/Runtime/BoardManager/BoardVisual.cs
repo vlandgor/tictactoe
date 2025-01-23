@@ -1,23 +1,27 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using Runtime.GamePieces;
 using UnityEngine;
 
 namespace Runtime.BoardManager
 {
     public abstract class BoardVisual : MonoBehaviour, IBoardVisual
     {
-        [SerializeField] private GameObject piece;
-        
         public event Action<Vector2Int> OnTileClicked;
         
         protected IBoardData _boardData;
         protected ITilesFactory _tilesFactory;
+        protected IPiecesFactory _piecesFactory;
         
         protected BoardTile[,] tiles;
+        protected Piece[,] pieces;
         
         public virtual async UniTask Initialize(IBoardData boardData)
         {
             _boardData = boardData;
+
+            tiles = new BoardTile[boardData.Size.x, boardData.Size.y];
+            pieces = new Piece[boardData.Size.x, boardData.Size.y];
 
             
             await GenerateBoardVisual();
@@ -36,13 +40,18 @@ namespace Runtime.BoardManager
             }
         }
 
-        public void SetFactories(ITilesFactory tilesFactory)
+        public void SetFactories(ITilesFactory tilesFactory, IPiecesFactory piecesFactory)
         {
             _tilesFactory = tilesFactory;
+            _piecesFactory = piecesFactory;
         }
 
-        public async UniTask PlacePiece(int setIndex, Vector2Int coordinate)
+        public async UniTask PlacePiece(Piece piecePrefab, Vector2Int coordinate)
         {
+            Piece piece = _piecesFactory.Get(piecePrefab);
+            piece.transform.position = new Vector3(coordinate.x, 0, coordinate.y);
+            pieces[coordinate.x, coordinate.y] = piece;
+            
             Debug.Log("Place Piece");
         }
         

@@ -648,6 +648,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1565160340}
     m_Modifications:
+    - target: {fileID: 2059768218948331707, guid: 84626bf0f89617d4695465ed6719aa75, type: 3}
+      propertyPath: localPiecesFactory
+      value: 
+      objectReference: {fileID: 11400000, guid: d6de765f14a0be24687221636bf61a0a, type: 2}
     - target: {fileID: 5428085180000455016, guid: 84626bf0f89617d4695465ed6719aa75, type: 3}
       propertyPath: m_Name
       value: LocalBoardManager

@@ -72,6 +72,12 @@ namespace Runtime.BoardManager
             
             piecePlaced?.Invoke();
         }
+
+        public async UniTask ClearBoard()
+        {
+            _board.ClearBoard();
+            await _boardVisual.ClearBoard();
+        }
         
         private void HandleTileClicked(Vector2Int coordinate)
         {

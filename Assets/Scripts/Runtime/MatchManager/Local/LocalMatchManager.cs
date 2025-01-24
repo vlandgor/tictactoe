@@ -14,7 +14,7 @@ namespace Runtime.MatchManager
         private LocalMatchData _matchData;
         private Round[] rounds;
 
-        private int round;
+        private int roundNumber;
 
         [Inject]
         public void Construct(DiContainer container)
@@ -44,12 +44,22 @@ namespace Runtime.MatchManager
 
         public async UniTask StartMatch()
         {
-            _roundManager.StartRound(_matchData.Players[0]);
+            _roundManager.FirstRound(_matchData.Players[0]);
         }
 
         public async UniTask FinishMatch()
         {
             
+        }
+        
+        private void NextRound(IPlayer winner)
+        {
+            _roundManager.FinishRound(winner, out Round round);
+            rounds[roundNumber] = round;
+            roundNumber++;
+
+            _boardManager.ClearBoard();
+            _roundManager.NextRound();
         }
         
         private async void HandleTileClicked(Vector2Int coordinate)
@@ -62,14 +72,12 @@ namespace Runtime.MatchManager
         
         private void HandleWinnerDetected(IPlayer winner)
         {
-            rounds[round] = _roundManager.FinishRound(winner);
-            round++;
+            NextRound(winner);
         }
         
         private void HandleDrawDetected()
         {
-            rounds[round] = _roundManager.FinishRound(null);
-            round++;
+            NextRound(null);
         }
 
         private bool ValidateInput()

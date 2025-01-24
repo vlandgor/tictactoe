@@ -47,7 +47,7 @@ namespace Runtime.BoardManager
                 }
             }
         }
-        private void ClearBoard()
+        public void ClearBoard()
         {
             for (int x = 0; x < BoardSize.x; x++)
             {

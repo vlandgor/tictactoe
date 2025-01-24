@@ -7,6 +7,8 @@ namespace Runtime.MatchManager
     {
         private IPlayer[] players;
         private Queue<PlayerMove> moves = new();
+
+        private IPlayer _firstTurn;
         
         public IPlayer Turn { get; private set; }
 
@@ -15,24 +17,35 @@ namespace Runtime.MatchManager
             players = matchData.Players;
         }
 
-        public void NextTurn()
+        public void FirstRound(IPlayer firstTurn)
         {
-            int currentIndex = System.Array.IndexOf(players, Turn);
-            int nextIndex = (currentIndex + 1) % players.Length;
-
-            Turn = players[nextIndex];
-        }
-
-        public void StartRound(IPlayer first)
-        {
-            Turn = first;
+            _firstTurn = firstTurn;
+            Turn = firstTurn;
         }
         
-        public Round FinishRound(IPlayer winner)
+        public void NextRound()
+        {
+            Turn = GetOpponent(_firstTurn);
+        }
+        
+        public void FinishRound(IPlayer winner, out Round round)
         {
             moves.Clear();
             
-            return new Round(winner, moves);
+            round = new Round(winner, moves);
+        }
+        
+        public void NextTurn()
+        {
+            Turn = GetOpponent(Turn);
+        }
+
+        private IPlayer GetOpponent(IPlayer player)
+        {
+            int currentIndex = System.Array.IndexOf(players, Turn);
+            int opponentIndex = (currentIndex + 1) % players.Length;
+
+            return players[opponentIndex];
         }
     }
 }

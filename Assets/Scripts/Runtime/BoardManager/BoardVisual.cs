@@ -52,6 +52,22 @@ namespace Runtime.BoardManager
             piece.transform.position = new Vector3(coordinate.x, 0, coordinate.y);
             pieces[coordinate.x, coordinate.y] = piece;
         }
+
+        public async UniTask ClearBoard()
+        {
+            if (pieces != null)
+            {
+                foreach (Piece piece in pieces)
+                {
+                    if (piece != null)
+                    {
+                        Destroy(piece.gameObject);
+                    }
+                }
+            }
+
+            pieces = new Piece[_boardData.Size.x, _boardData.Size.y];
+        }
         
         protected abstract UniTask GenerateBoardVisual();
         

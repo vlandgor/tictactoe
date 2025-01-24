@@ -20,5 +20,10 @@ namespace Runtime.BoardManager
         {
             throw new NotImplementedException();
         }
+
+        public async UniTask ClearBoard()
+        {
+            
+        }
     }
 }

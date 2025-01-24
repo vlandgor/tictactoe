@@ -13,5 +13,6 @@ namespace Runtime.BoardManager
         
         public UniTask Initialize(IBoardData boardData);
         public UniTask PlacePiece(IPlayer player, Vector2Int coordinate, Action piecePlaced);
+        public UniTask ClearBoard();
     }
 }

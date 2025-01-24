@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using Runtime.BoardManager;
+using Runtime.BotService;
 using Runtime.GamePlayer;
 using UnityEngine;
 using Zenject;
@@ -82,7 +83,8 @@ namespace Runtime.MatchManager
 
         private bool ValidateInput()
         {
-            //TODO: Add validation
+            if (_roundManager.Turn is BotPlayer)
+                return false;
             
             return true;
         }

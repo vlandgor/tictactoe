@@ -55,7 +55,6 @@ namespace Runtime.BoardManager
         {
             _board.PlacePiece(player, coordinate);
             
-            Debug.Log($"PieceProvider : {_pieceProvider == null}. BoardVisual: {_boardVisual == null}. Player: {player == null}");
             await _boardVisual.PlacePiece(_pieceProvider.GetPiece(player.SetIndex, PieceType.Cross), coordinate);
 
             if (_board.CheckForWinner(out IPlayer winner))

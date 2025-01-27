@@ -27,15 +27,15 @@ namespace Runtime.UI.MenuMatchSetup
         
         public void PlayComp()
         {
-            _model.StartGame();
+            _model.StartNetworkGame();
         }
         public void PlayFriend()
         {
-            _model.StartGame();
+            _model.StartLocalGame();
         }
         public void PlayCompVsComp()
         {
-            _model.StartGame();
+            _model.StartLocalGame();
         }
     }
 }

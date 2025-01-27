@@ -33,7 +33,7 @@ namespace Runtime.UI.MenuMatchSetup
             _matchMode = matchMode;
         }
         
-        public void StartGame()
+        public void StartLocalGame()
         {
             IPlayer[] players =
             {
@@ -42,6 +42,20 @@ namespace Runtime.UI.MenuMatchSetup
             };
             
             IMatchData matchData = new LocalMatchData(MatchType.Local, MatchMode.Classic, players);
+            IBoardData boardData = new ClassicBoardData(new Vector2Int(3, 3));
+            
+            _loadingProvider.LoadGame(matchData, boardData).Forget();
+        }
+        
+        public void StartNetworkGame()
+        {
+            IPlayer[] players =
+            {
+                new PersonPlayer(0,"Player 1"),
+                new PersonPlayer(1,"Player 2")
+            };
+            
+            IMatchData matchData = new LocalMatchData(MatchType.Network, MatchMode.Classic, players);
             IBoardData boardData = new ClassicBoardData(new Vector2Int(3, 3));
             
             _loadingProvider.LoadGame(matchData, boardData).Forget();

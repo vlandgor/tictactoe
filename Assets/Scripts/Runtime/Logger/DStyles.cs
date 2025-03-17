@@ -4,52 +4,43 @@ namespace Runtime.Logger
 {
     public static class DStyles
     {
-        public const string GreenColor = "#00FF00";
-        public const string RedColor = "#FF0000";
-        public const string YellowColor = "#FFFF00";
-        public const string BlueColor = "#0000FF";
-        public const string CyanColor = "#00FFFF";
-        public const string MagentaColor = "#FF00FF";
-        public const string WhiteColor = "#FFFFFF";
-        public const string BlackColor = "#000000";
-        public const string GrayColor = "#808080";
+        public const string WhiteColor = "<color=white>";
+        public const string YellowColor = "<color=yellow>";
+        public const string CyanColor = "<color=cyan>";
+        public const string GreenColor = "<color=green>";
+        public const string RedColor = "<color=red>";
+        public const string BlueColor = "<color=blue>";
+        public const string MagentaColor = "<color=magenta>";
         
         public const string ColorClose = "</color>";
         public const string BoldOpen = "<b>";
         public const string BoldClose = "</b>";
-        
-        public static string Bold(this string value)
-        {
-            if (!Application.isEditor)
-                return value.ToString();
-            
-            return $"{BoldOpen}{value}{BoldClose}";
-        }
-        
-        public static string Green(this string value) => Colored(value, GreenColor);
 
-        public static string Red(this string value) => Colored(value, RedColor);
+        public static string Bold(this string value) =>
+            Application.isEditor ? BoldOpen + value + BoldClose : value.ToString();
+    
+        public static string White(this string value) =>
+            Colored(value, WhiteColor);
 
-        public static string Yellow(this string value) => Colored(value, YellowColor);
+        public static string Yellow(this string value) =>
+            Colored(value, YellowColor);
 
-        public static string Blue(this string value) => Colored(value, BlueColor);
-        
-        public static string Cyan(this string value) => Colored(value, CyanColor);
-        
-        public static string Magenta(this string value) => Colored(value, MagentaColor);
-        
-        public static string White(this string value) => Colored(value, WhiteColor);
-        
-        public static string Black(this string value) => Colored(value, BlackColor);
-        
-        public static string Gray(this string value) => Colored(value, GrayColor);
-        
-        private static string Colored(this string value, string color)
-        {
-            if (!Application.isEditor)
-                return value.ToString();
-            
-            return $"<color={color}>{value}{ColorClose}";
-        }
+        public static string Cyan(this string value) =>
+            Colored(value, CyanColor);
+
+        public static string Green(this string value) =>
+            Colored(value, GreenColor);
+
+        public static string Red(this string value) =>
+            Colored(value, RedColor);
+
+        public static string Blue(this string value) =>
+            Colored(value, BlueColor);
+
+        public static string Magenta(this string value) =>
+            Colored(value, MagentaColor);
+
+        private static string Colored(this string value, string color) =>
+            Application.isEditor ? color + value + ColorClose : value.ToString();
     }
 }

@@ -34,18 +34,18 @@ namespace Runtime.MatchManager
             _roundManager = new RoundManager(matchData);
             rounds = new Round[11];
 
-            _boardManager.OnTileClicked += HandleTileClicked;
-            _boardManager.OnWinnerDetected += HandleWinnerDetected;
-            _boardManager.OnDrawDetected += HandleDrawDetected;
+            _boardManager.OnTileClicked += BoardManager_TileClicked;
+            _boardManager.OnWinnerDetected += BoardManager_WinnerDetected;
+            _boardManager.OnDrawDetected += BoardManager_DrawDetected;
             
             await StartMatch();
         }
         
         private void OnDestroy()
         {
-            _boardManager.OnTileClicked -= HandleTileClicked;
-            _boardManager.OnWinnerDetected -= HandleWinnerDetected;
-            _boardManager.OnDrawDetected -= HandleDrawDetected;
+            _boardManager.OnTileClicked -= BoardManager_TileClicked;
+            _boardManager.OnWinnerDetected -= BoardManager_WinnerDetected;
+            _boardManager.OnDrawDetected -= BoardManager_DrawDetected;
         }
 
         public async UniTask StartMatch()
@@ -68,20 +68,20 @@ namespace Runtime.MatchManager
             _roundManager.NextRound();
         }
         
-        private async void HandleTileClicked(Vector2Int coordinate)
+        private async void BoardManager_TileClicked(Vector2Int coordinate)
         {
             if (!ValidateInput())
                 return;
             
-            //await _boardManager.PlacePiece(_roundManager.Turn, coordinate, () => _roundManager.NextTurn());
+            await _boardManager.PlacePiece(_roundManager.Turn, coordinate, () => _roundManager.NextTurn());
         }
         
-        private void HandleWinnerDetected(IPlayer winner)
+        private void BoardManager_WinnerDetected(IPlayer winner)
         {
             NextRound(winner);
         }
         
-        private void HandleDrawDetected()
+        private void BoardManager_DrawDetected()
         {
             NextRound(null);
         }

@@ -8,7 +8,7 @@ namespace Runtime.Authentication
         public TaskCompletionSource<bool> SignInCompletionSource { get; }
         
         public UniTask Initialize();
-        public UniTask SignIn(AuthenticationProvider provider);
+        public UniTask SignIn(AuthenticationServiceType serviceType);
         public UniTask SignOut();
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Runtime.Authentication
 {
-    public enum AuthenticationProvider
+    public enum AuthenticationServiceType
     {
         Guest,
         Unity

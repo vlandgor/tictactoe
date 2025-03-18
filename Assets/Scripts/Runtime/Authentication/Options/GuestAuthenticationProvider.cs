@@ -29,13 +29,10 @@ namespace Runtime.Authentication
         
         private async UniTask SignInAsGuest()
         {
-            Debug.Log("Attempting to login as Guest...");
-
             try
             {
                 await UAS.Instance.SignInAnonymouslyAsync();
                 _signInTaskCompletionSource.SetResult(true);
-                Debug.Log("Sign-in as Guest successful.");
             }
             catch (AuthenticationException ex)
             {

@@ -3,8 +3,8 @@
     public static class DSenders
     {
         public static readonly DSender Application = new(name: "[Application]".Green());
-        public static readonly DSender Loading = new(name: "[Loading]".White());
-        public static readonly DSender Network = new(name: "[Network]".Magenta());
+        public static readonly DSender UI = new(name: "[Network]".Yellow());
+        public static readonly DSender Network = new(name: "[Network]".Blue());
     }
 
     public class DSender

@@ -21,7 +21,7 @@ namespace Runtime.UI.BootAuthentication
         public override void EnableView() => _view.Show();
         public override void DisableView() => _view.Hide();
 
-        public void SignInAsGuest() => _model.SignIn(AuthenticationProvider.Guest);
-        public void SignInWithUnity() => _model.SignIn(AuthenticationProvider.Unity);
+        public void SignInAsGuest() => _model.SignIn(AuthenticationServiceType.Guest);
+        public void SignInWithUnity() => _model.SignIn(AuthenticationServiceType.Unity);
     }
 }

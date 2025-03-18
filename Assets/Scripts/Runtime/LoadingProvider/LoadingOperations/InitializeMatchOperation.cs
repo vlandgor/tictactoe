@@ -2,6 +2,7 @@
 using Cysharp.Threading.Tasks;
 using Runtime.BoardManager;
 using Runtime.Extensions;
+using Runtime.Logger;
 using Runtime.MatchManager;
 using UnityEngine;
 using Zenject;
@@ -30,20 +31,11 @@ namespace Runtime.LoadingProvider.LoadingOperations
             
             SceneContext sceneContext = LoadingExtensions.FindSceneContext(GAME_SCENE_NAME);
             
-            Debug.Log("Initializing Board...");
-            
-            IBoardManager boardManager = sceneContext.Container.ResolveId<IBoardManager>(MatchType.Local);
-            
+            IBoardManager boardManager = sceneContext.Container.ResolveId<IBoardManager>(_matchData.MatchType);
             await boardManager.Initialize(_boardData);
             
-            Debug.Log("Board Initialized");
-            
-            Debug.Log("Initializing Match...");
-            
-            IMatchManager matchManager = sceneContext.Container.ResolveId<IMatchManager>(MatchType.Local);
-            matchManager.Initialize(_matchData);
-            
-            Debug.Log("Match Initialized");
+            IMatchManager matchManager = sceneContext.Container.ResolveId<IMatchManager>(_matchData.MatchType);
+            await matchManager.Initialize(_matchData);
             
             onProgress?.Invoke(100);
         }

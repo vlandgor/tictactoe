@@ -10,8 +10,6 @@ namespace Runtime.GameModes.ClassicMode.Board
 
         protected override async UniTask GenerateBoardVisual()
         {
-            Debug.Log("Generate Board Visual");
-            
             tiles = new BoardTile[ClassicBoardData.Size.x, ClassicBoardData.Size.y];
             
             for (int x = 0; x < ClassicBoardData.Size.x; x++)

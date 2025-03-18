@@ -43,10 +43,8 @@ namespace Runtime.Authentication
                 
                 string name = await UAS.Instance.GetPlayerNameAsync();
                 string id = PlayerAccountService.Instance.IdToken;
-                Debug.Log($"Name : {name}");
                 
                 _signInTaskCompletionSource.SetResult(true);
-                Debug.Log("Sign-in with Unity successful.");
             }
             catch (AuthenticationException ex)
             {

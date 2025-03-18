@@ -18,16 +18,16 @@ namespace Runtime.Authentication
             await InitializeProviders();
         }
         
-        public async UniTask SignIn(AuthenticationProvider provider)
+        public async UniTask SignIn(AuthenticationServiceType serviceType)
         {
             IAuthenticationProvider authenticationProvider;
             
-            switch (provider)
+            switch (serviceType)
             {
-                case AuthenticationProvider.Guest:
+                case AuthenticationServiceType.Guest:
                     authenticationProvider = _guestAuthenticationProvider;
                     break;
-                case AuthenticationProvider.Unity:
+                case AuthenticationServiceType.Unity:
                     authenticationProvider = _unityAuthenticationProvider;
                     break;
                 
@@ -49,7 +49,6 @@ namespace Runtime.Authentication
             try
             {
                 await UnityServices.InitializeAsync();
-                Debug.Log("Unity services initialized successfully.");
             }
             catch (System.Exception ex)
             {

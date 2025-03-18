@@ -44,7 +44,7 @@ namespace Runtime.UI.MenuMatchSetup
             IMatchData matchData = new LocalMatchData(MatchType.Local, MatchMode.Classic, players);
             IBoardData boardData = new ClassicBoardData(new Vector2Int(3, 3));
             
-            _loadingProvider.LoadGame(matchData, boardData).Forget();
+            _loadingProvider.LoadMatch(matchData, boardData).Forget();
         }
         
         public void StartNetworkGame()
@@ -58,7 +58,7 @@ namespace Runtime.UI.MenuMatchSetup
             IMatchData matchData = new LocalMatchData(MatchType.Network, MatchMode.Classic, players);
             IBoardData boardData = new ClassicBoardData(new Vector2Int(3, 3));
             
-            _loadingProvider.LoadGame(matchData, boardData).Forget();
+            _loadingProvider.LoadMatch(matchData, boardData).Forget();
         }
     }
 }

@@ -11,9 +11,9 @@ namespace Runtime.UI.BootAuthentication
             _authenticationService = authenticationService;
         }
         
-        public void SignIn(AuthenticationProvider provider)
+        public void SignIn(AuthenticationServiceType serviceType)
         {
-            _authenticationService.SignIn(provider);
+            _authenticationService.SignIn(serviceType);
         }
     }
 }

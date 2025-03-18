@@ -8,6 +8,6 @@ namespace Runtime.LoadingProvider
     {
         public UniTask LoadApp();
         public UniTask LoadMenu();
-        public UniTask LoadGame(IMatchData matchData, IBoardData boardData);
+        public UniTask LoadMatch(IMatchData matchData, IBoardData boardData);
     }
 }

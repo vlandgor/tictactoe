@@ -16,7 +16,6 @@ namespace Runtime.BoardManager
 
         private void OnMouseDown()
         {
-            Debug.Log($"Tile: {coordinates} was clicked");
             TileClicked?.Invoke(coordinates);
         }
     }

@@ -39,11 +39,12 @@ namespace Runtime.LoadingProvider
             _visual.style.display = DisplayStyle.Flex;
             IsEnabled = true;
         }
-
         public async UniTask HideCurtain()
         {
             _visual.style.display = DisplayStyle.None;
             IsEnabled = false;
+            
+            ResetFill();
         }
         
         public async UniTask Load(Queue<ILoadingOperation> loadingOperations)
@@ -54,7 +55,7 @@ namespace Runtime.LoadingProvider
             {
                 ResetFill();
                 
-                await operation.Load(OnProgress);
+                await operation.Load((progress) => { _targetProgress = progress; });
                 await WaitForBarToFill();
             }
         }
@@ -71,11 +72,6 @@ namespace Runtime.LoadingProvider
         {
             _targetProgress = 0;
             _progressBar.value = _targetProgress;
-        }
-        
-        private void OnProgress(float progress)
-        {
-            _targetProgress = progress;
         }
         
         private async UniTask WaitForBarToFill()

@@ -1,6 +1,5 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
-using Runtime.Logger;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -23,8 +22,6 @@ namespace Runtime.LoadingProvider.LoadingOperations
 
             AsyncOperation loadOperation = SceneManager.LoadSceneAsync(_sceneName, LoadSceneMode.Single);
             await loadOperation.ToUniTask();
-
-            DLogger.Message(DSenders.Loading).WithText($"Scene {_sceneName.Bold()} was loaded successfully").Log();
             
             onProgress?.Invoke(100);
         }

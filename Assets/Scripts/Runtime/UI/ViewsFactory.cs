@@ -62,7 +62,7 @@ namespace Runtime.UI
         private T Get<T>(T prefab) where T : BaseView
         {
             T instance = Instantiate(prefab);
-            MoveToFactoryScene(instance.gameObject);
+            //MoveToFactoryScene(instance.gameObject);
             return instance;
         }
     }

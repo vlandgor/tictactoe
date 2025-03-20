@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using Runtime.BoardManager.Local;
 using Runtime.GamePlayer;
 using UnityEngine;
 
@@ -19,17 +20,17 @@ namespace Runtime.BoardManager
             CreateBoard();
         }
 
-        public bool ValidateInput(Vector2Int coordinate)
+        public bool ValidateInput(BoardPosition boardPosition)
         {
-            if (board[coordinate.x, coordinate.y] == null)
+            if (board[boardPosition.x, boardPosition.y] == null)
                 return true;
 
             return false;
         }
 
-        public void PlacePiece(IPlayer player, Vector2Int coordinate)
+        public void PlacePiece(IPlayer player, BoardPosition boardPosition)
         {
-            board[coordinate.x, coordinate.y] = player;
+            board[boardPosition.x, boardPosition.y] = player;
         }
 
         public abstract bool CheckForWinner(out IPlayer winner);

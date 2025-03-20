@@ -209,6 +209,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1918822989976754270}
   - {fileID: 9007078456309483039}
   - {fileID: 7957856775823287139}
   - {fileID: 321641319374859336}
@@ -232,6 +233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
   _monoInstallers:
+  - {fileID: 213943714698701535}
   - {fileID: 6129418270768338828}
   - {fileID: 5960110703206467460}
   - {fileID: 5603189299917825710}
@@ -343,6 +345,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _loadingCurtainPrefab: {fileID: 7969804371398743115, guid: 2e35d7d07049a63468fbdc9af6849f55, type: 3}
+--- !u!1 &7509575260252203839
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1918822989976754270}
+  - component: {fileID: 213943714698701535}
+  m_Layer: 0
+  m_Name: FactoryProviderInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1918822989976754270
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7509575260252203839}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6252507361678391361}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &213943714698701535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7509575260252203839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a54bdd494b4a4e8f91e199abcb4ecfb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _factoryProviderPrefab: {fileID: 6228333693430720694, guid: 3abe48476da32794181620888f6ad142, type: 3}
 --- !u!1 &7767621200531477138
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,4 @@
 ﻿using Runtime.LoadingProvider;
-using Runtime.Logger;
 using UnityEngine;
 using Zenject;
 
@@ -17,8 +16,6 @@ namespace Runtime.Boot
 
         private async void Start()
         {
-            DLogger.Message(DSenders.Application).WithText("App started").WithFormat(DFormat.Normal).Log();
-            
             await _loadingProvider.LoadApp();
         }
     }

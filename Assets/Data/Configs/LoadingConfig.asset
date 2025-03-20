@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f6d0be158f8493d81a41d72007dda87, type: 3}
   m_Name: LoadingConfig
   m_EditorClassIdentifier: 
-  _barSpeed: 10
+  _barSpeed: 4
   _delayAfterLoad: 0.8

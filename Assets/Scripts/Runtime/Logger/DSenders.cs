@@ -4,7 +4,7 @@
     {
         public static readonly DSender Application = new(name: "[Application]".Green());
         public static readonly DSender UI = new(name: "[Network]".Yellow());
-        public static readonly DSender Network = new(name: "[Network]".Blue());
+        public static readonly DSender Network = new(name: "[Network]".Cyan());
     }
 
     public class DSender

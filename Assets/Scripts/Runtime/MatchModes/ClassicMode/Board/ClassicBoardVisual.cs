@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using Runtime.BoardManager;
+using Runtime.BoardManager.Local;
 using UnityEngine;
 
 namespace Runtime.GameModes.ClassicMode.Board
@@ -18,7 +19,7 @@ namespace Runtime.GameModes.ClassicMode.Board
                 {
                     BoardTile tile = tiles[x, y] = _tilesFactory.Get<ClassicBoardTile>();
                     tile.transform.position = new Vector3(x, 0, y);
-                    tile.SetCoordinates(new Vector2Int(x, y));
+                    tile.SetCoordinates(new BoardPosition(x, y));
                 }
             }
             

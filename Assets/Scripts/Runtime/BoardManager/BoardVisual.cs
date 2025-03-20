@@ -1,5 +1,6 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using Runtime.BoardManager.Local;
 using Runtime.GamePieces;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ namespace Runtime.BoardManager
 {
     public abstract class BoardVisual : MonoBehaviour, IBoardVisual
     {
-        public event Action<Vector2Int> OnTileClicked;
+        public event Action<BoardPosition> OnTileClicked;
         
         protected IBoardData _boardData;
         protected ITilesFactory _tilesFactory;
@@ -46,11 +47,11 @@ namespace Runtime.BoardManager
             _piecesFactory = piecesFactory;
         }
 
-        public async UniTask PlacePiece(Piece piecePrefab, Vector2Int coordinate)
+        public async UniTask PlacePiece(Piece piecePrefab, BoardPosition boardPosition)
         {
             Piece piece = _piecesFactory.Get(piecePrefab);
-            piece.transform.position = new Vector3(coordinate.x, 0, coordinate.y);
-            pieces[coordinate.x, coordinate.y] = piece;
+            piece.transform.position = new Vector3(boardPosition.x, 0, boardPosition.y);
+            pieces[boardPosition.x, boardPosition.y] = piece;
         }
 
         public async UniTask ClearBoard()
@@ -71,9 +72,9 @@ namespace Runtime.BoardManager
         
         protected abstract UniTask GenerateBoardVisual();
         
-        private void HandleTileClicked(Vector2Int coordinate)
+        private void HandleTileClicked(BoardPosition boardPosition)
         {
-            OnTileClicked?.Invoke(coordinate);
+            OnTileClicked?.Invoke(boardPosition);
         }
     }
 }

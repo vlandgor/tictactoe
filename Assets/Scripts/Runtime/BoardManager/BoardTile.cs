@@ -1,22 +1,23 @@
 ﻿using System;
+using Runtime.BoardManager.Local;
 using UnityEngine;
 
 namespace Runtime.BoardManager
 {
     public class BoardTile : MonoBehaviour
     {
-        public event Action<Vector2Int> TileClicked;
+        public event Action<BoardPosition> TileClicked;
         
-        private Vector2Int coordinates;
+        private BoardPosition boardPosition;
         
-        public void SetCoordinates(Vector2Int coordinates)
+        public void SetCoordinates(BoardPosition boardPosition)
         {
-            this.coordinates = coordinates;
+            this.boardPosition = boardPosition;
         }
 
         private void OnMouseDown()
         {
-            TileClicked?.Invoke(coordinates);
+            TileClicked?.Invoke(boardPosition);
         }
     }
 }

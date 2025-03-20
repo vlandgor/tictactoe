@@ -1,6 +1,8 @@
 ﻿using Cysharp.Threading.Tasks;
 using Runtime.BoardManager;
+using Runtime.BoardManager.Local;
 using Runtime.BotService;
+using Runtime.GamePieces;
 using Runtime.GamePlayer;
 using UnityEngine;
 using Zenject;
@@ -63,12 +65,12 @@ namespace Runtime.MatchManager
             _roundManager.NextRound();
         }
         
-        private async void BoardManager_TileClicked(Vector2Int coordinate)
+        private async void BoardManager_TileClicked(BoardPosition boardPosition)
         {
             if (!ValidateInput())
                 return;
             
-            await _boardManager.PlacePiece(_roundManager.Turn, coordinate, () => _roundManager.NextTurn());
+            await _boardManager.PlacePiece(_roundManager.Turn, boardPosition, PieceType.Cross, () => _roundManager.NextTurn());
         }
         
         private void BoardManager_WinnerDetected(IPlayer winner)

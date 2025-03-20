@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace Runtime.BoardManager
 {
-    [CreateAssetMenu(fileName = "TilesFactory", menuName = "Playcbo/Factories/Tiles Factory", order = 0)]
-    public class LocalTilesFactory : GenericFactory, ITilesFactory
+    [CreateAssetMenu(fileName = "LocalTilesFactory", menuName = "Playcbo/Factories/Local Tiles Factory", order = 0)]
+    public class TilesFactory : GenericFactory, ITilesFactory
     {
         [SerializeField] private ClassicBoardTile classicTilePrefab;
         
@@ -22,7 +22,6 @@ namespace Runtime.BoardManager
         private T Get<T>(T prefab) where T : BoardTile
         {
             T instance = Instantiate(prefab);
-            MoveToFactoryScene(instance.gameObject);
             return instance;
         }
     }

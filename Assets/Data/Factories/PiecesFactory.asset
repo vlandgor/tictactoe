@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a10ef71507248cc8825e92973e387a1, type: 3}
-  m_Name: TokensFactory
+  m_Script: {fileID: 11500000, guid: f9d8370d3c6348aab2da56904f57b9c1, type: 3}
+  m_Name: PiecesFactory
   m_EditorClassIdentifier: 

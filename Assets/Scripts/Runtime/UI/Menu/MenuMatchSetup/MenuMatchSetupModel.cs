@@ -55,7 +55,7 @@ namespace Runtime.UI.MenuMatchSetup
                 new PersonPlayer(1,"Player 2")
             };
             
-            IMatchData matchData = new LocalMatchData(MatchType.Network, MatchMode.Classic, players);
+            IMatchData matchData = new NetworkMatchData(MatchType.Network, MatchMode.Classic, players);
             IBoardData boardData = new ClassicBoardData(new Vector2Int(3, 3));
             
             _loadingProvider.LoadMatch(matchData, boardData).Forget();

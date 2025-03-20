@@ -24,8 +24,6 @@ namespace Runtime.LoadingProvider
 
         public async UniTask LoadApp()
         {
-            DLogger.Message(DSenders.Application).WithText($"Loading App...").Log();
-            
             Queue<ILoadingOperation> loadingOperation = new Queue<ILoadingOperation>();
             loadingOperation.Enqueue(new AuthenticationOperation());
             loadingOperation.Enqueue(new LoadSceneOperation(MENU_SCENE_NAME));
@@ -34,24 +32,24 @@ namespace Runtime.LoadingProvider
             await _loadingCurtain.ShowCurtain();
             await _loadingCurtain.Load(loadingOperation);
             await _loadingCurtain.HideCurtain();
+            
+            DLogger.Message(DSenders.Application).WithText($"Loading app completed.").Log();
         }
         
         public async UniTask LoadMenu()
         {
-            DLogger.Message(DSenders.Application).WithText($"Loading Menu...").Log();
-            
             Queue<ILoadingOperation> loadingOperation = new Queue<ILoadingOperation>();
             loadingOperation.Enqueue(new LoadSceneOperation(MENU_SCENE_NAME));
             
             await _loadingCurtain.ShowCurtain();
             await _loadingCurtain.Load(loadingOperation);
             await _loadingCurtain.HideCurtain();
+            
+            DLogger.Message(DSenders.Application).WithText($"Loading menu completed.").Log();
         }
         
         public async UniTask LoadMatch(IMatchData matchData, IBoardData boardData)
         {
-            DLogger.Message(DSenders.Application).WithText($"Loading Match...").Log();
-            
             Queue<ILoadingOperation> loadingOperation = new Queue<ILoadingOperation>();
             loadingOperation.Enqueue(new LoadSceneOperation(GAME_SCENE_NAME));
             loadingOperation.Enqueue(new InitializeMatchOperation(matchData, boardData));
@@ -60,7 +58,7 @@ namespace Runtime.LoadingProvider
             await _loadingCurtain.Load(loadingOperation);
             await _loadingCurtain.HideCurtain();
             
-            DLogger.Message(DSenders.Application).WithText($"Match Loaded").Log();
+            DLogger.Message(DSenders.Application).WithText($"Loading match completed.").Log();
         }
     }
 }

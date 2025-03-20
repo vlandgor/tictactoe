@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Runtime.GamePieces;
 using Runtime.GamePlayer;
 
 namespace Runtime.MatchManager
@@ -11,6 +12,7 @@ namespace Runtime.MatchManager
         private IPlayer _firstTurn;
         
         public IPlayer Turn { get; private set; }
+        public PieceType TurnType { get; private set; }
 
         public RoundManager(IMatchData matchData)
         {
@@ -21,11 +23,13 @@ namespace Runtime.MatchManager
         {
             _firstTurn = firstTurn;
             Turn = firstTurn;
+            TurnType = PieceType.Cross;
         }
         
         public void NextRound()
         {
             Turn = GetOpponent(_firstTurn);
+            TurnType = PieceType.Cross;
         }
         
         public void FinishRound(IPlayer winner, out Round round)
@@ -38,6 +42,7 @@ namespace Runtime.MatchManager
         public void NextTurn()
         {
             Turn = GetOpponent(Turn);
+            TurnType = TurnType == PieceType.Cross ? PieceType.Circle : PieceType.Cross;
         }
 
         private IPlayer GetOpponent(IPlayer player)

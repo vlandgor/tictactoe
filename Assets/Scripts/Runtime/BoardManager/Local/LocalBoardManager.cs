@@ -11,10 +11,7 @@ namespace Runtime.BoardManager
 {
     public class LocalBoardManager : MonoBehaviour, IBoardManager
     {
-        public event Action<BoardPosition> OnTileClicked;
-        
-        public event Action<IPlayer> OnWinnerDetected;
-        public event Action OnDrawDetected;
+        public event Action<BoardPosition> OnMoveRequested;
         
         private IBoardData _boardData;
         private IPieceProvider _pieceProvider;
@@ -44,33 +41,25 @@ namespace Runtime.BoardManager
             _boardVisual.SetFactories(_factoryProvider.TilesFactory, _factoryProvider.PiecesFactory);
             await _boardVisual.Initialize(boardData);
             
-            _boardVisual.OnTileClicked += HandleTileClicked;
+            _boardVisual.OnTileClicked += BoardVisual_OnTileClicked;
         }
         
         private void OnDestroy()
         {
-            _boardVisual.OnTileClicked -= HandleTileClicked;
+            _boardVisual.OnTileClicked -= BoardVisual_OnTileClicked;
         }
 
-        public async UniTask PlacePiece(IPlayer player, BoardPosition boardPosition, PieceType pieceType, Action piecePlaced)
+        public async UniTask PlacePiece(IPlayer player, BoardPosition boardPosition, PieceType pieceType)
         {
             _board.PlacePiece(player, boardPosition);
             
-            await _boardVisual.PlacePiece(_pieceProvider.GetPiece(player.SetIndex, PieceType.Cross), boardPosition);
-
-            if (_board.CheckForWinner(out IPlayer winner))
-            {
-                OnWinnerDetected?.Invoke(winner);
-                return;
-            }
-
-            if (_board.CheckForDraw())
-            {
-                OnDrawDetected?.Invoke();
-                return;
-            }
-            
-            piecePlaced?.Invoke();
+            await _boardVisual.PlacePiece(_pieceProvider.GetPiece(player.SetIndex, pieceType), boardPosition);
+        }
+        
+        public void CheckBoard(out IPlayer winner, out bool draw)
+        {
+            _board.CheckForWinner(out winner); 
+            _board.CheckForDraw(out draw);
         }
 
         public async UniTask ClearBoard()
@@ -79,11 +68,11 @@ namespace Runtime.BoardManager
             await _boardVisual.ClearBoard();
         }
         
-        private void HandleTileClicked(BoardPosition boardPosition)
+        private void BoardVisual_OnTileClicked(BoardPosition boardPosition)
         {
             if (_board.ValidateInput(boardPosition))
             {
-                OnTileClicked?.Invoke(boardPosition);
+                OnMoveRequested?.Invoke(boardPosition);
             }
         }
     }

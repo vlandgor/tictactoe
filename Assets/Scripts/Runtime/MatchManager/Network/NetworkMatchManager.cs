@@ -1,19 +1,17 @@
-﻿using System;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using Runtime.BoardManager;
 using Runtime.BoardManager.Local;
 using Runtime.GamePieces;
 using Runtime.GamePlayer;
 using Runtime.Logger;
 using Unity.Netcode;
-using UnityEngine;
 using Zenject;
 
 namespace Runtime.MatchManager
 {
     public class NetworkMatchManager : NetworkBehaviour, IMatchManager
     {
-        private IBoardManager _boardManager;
+        private NetworkBoardManager _boardManager;
         private RoundManager _roundManager;
         
         private NetworkMatchData _matchData;
@@ -24,9 +22,7 @@ namespace Runtime.MatchManager
         [Inject]
         public void Construct(DiContainer container)
         {
-            _boardManager = container.ResolveId<IBoardManager>(MatchType.Network);
-            
-            Debug.Log($"BoardManager: {_boardManager}");
+            _boardManager = container.ResolveId<IBoardManager>(MatchType.Network) as NetworkBoardManager;
         }
         
         public async UniTask Initialize(IMatchData matchData)
@@ -35,16 +31,16 @@ namespace Runtime.MatchManager
             _roundManager = new RoundManager(matchData);
             rounds = new Round[11];
 
-            _boardManager.OnTileClicked += BoardManager_TileClicked;
-            _boardManager.OnWinnerDetected += BoardManager_WinnerDetected;
-            _boardManager.OnDrawDetected += BoardManager_DrawDetected;
+            _boardManager.OnMoveRequested += BoardManager_MoveRequested;
             
             await StartMatch();
         }
 
         public override void OnNetworkSpawn()
         {
-            DLogger.Message(DSenders.Network).WithText("Network was spawned").Log();
+            DLogger
+                .Message(DSenders.Network).WithText("Network was spawned")
+                .Log();
 
             if (IsServer)
             {
@@ -59,9 +55,7 @@ namespace Runtime.MatchManager
                 NetworkManager.Singleton.OnClientConnectedCallback -= NetworkManager_OnClientConnected;
             }
             
-            _boardManager.OnTileClicked -= BoardManager_TileClicked;
-            _boardManager.OnWinnerDetected -= BoardManager_WinnerDetected;
-            _boardManager.OnDrawDetected -= BoardManager_DrawDetected;
+            _boardManager.OnMoveRequested -= BoardManager_MoveRequested;
             
             base.OnDestroy();
         }
@@ -82,11 +76,11 @@ namespace Runtime.MatchManager
             rounds[roundNumber] = round;
             roundNumber++;
 
-            _boardManager.ClearBoard();
+            _boardManager.ClearBoardRpc();
             _roundManager.NextRound();
         }
         
-        private async void BoardManager_TileClicked(BoardPosition boardPosition)
+        private async void BoardManager_MoveRequested(BoardPosition boardPosition)
         {
             RequestMoveRpc((int)NetworkManager.Singleton.LocalClientId, new NetworkBoardPosition(boardPosition));
         }
@@ -99,36 +93,48 @@ namespace Runtime.MatchManager
                 .WithText($"Received move request. PlayerId: {playerId} at BoardPosition : {networkBoardPosition.Position.ToString()}")
                 .Log();
             
-            if (!ValidateInput())
+            if (!ValidateMoveRequest(playerId))
                 return;
             
-            ConfirmMoveRpc(networkBoardPosition, PieceType.Cross);
+            ConfirmMoveRpc(playerId, networkBoardPosition, _roundManager.TurnType);
         }
 
         [Rpc(SendTo.ClientsAndHost)]
-        private void ConfirmMoveRpc(NetworkBoardPosition networkBoardPosition, PieceType pieceType)
+        private void ConfirmMoveRpc(int playerId, NetworkBoardPosition networkBoardPosition, PieceType pieceType)
+        {
+            ConfirmMoveAsync(playerId, networkBoardPosition, pieceType).Forget();
+        }
+
+        private async UniTaskVoid ConfirmMoveAsync(int playerId, NetworkBoardPosition networkBoardPosition, PieceType pieceType)
         {
             DLogger
                 .Message(DSenders.Network)
-                .WithText($"Received move confirm. BoardPosition: {networkBoardPosition.Position.ToString()} PieceType: {pieceType.ToString()}")
+                .WithText($"Received move confirm. BoardPosition: {networkBoardPosition.Position} PieceType: {pieceType}")
                 .Log();
             
-            _boardManager.PlacePiece(_roundManager.Turn, networkBoardPosition.Position, pieceType, () => _roundManager.NextTurn());
+            await _boardManager.PlacePiece(_matchData.Players[playerId], networkBoardPosition.Position, pieceType);
+
+            if (IsServer)
+            {
+                _boardManager.CheckBoard(out IPlayer winner, out bool draw);
+                if (winner != null || draw)
+                {
+                    NextRound(winner);
+                    return;
+                }   
+                
+                _roundManager.NextTurn();
+            }
         }
         
-        private void BoardManager_WinnerDetected(IPlayer winner)
+        private bool ValidateMoveRequest(int playerId)
         {
-            NextRound(winner);
-        }
-        
-        private void BoardManager_DrawDetected()
-        {
-            NextRound(null);
-        }
-        
-        private bool ValidateInput()
-        {
-            return true;
+            if (_matchData.Players[playerId] == _roundManager.Turn)
+            {
+                return true;
+            }
+            
+            return false;
         }
         
         private void NetworkManager_OnClientConnected(ulong clientId)

@@ -5,17 +5,13 @@ using Runtime.GamePieces;
 using Runtime.GamePlayer;
 using Runtime.MatchManager;
 using Unity.Netcode;
-using UnityEngine;
 using Zenject;
 
 namespace Runtime.BoardManager
 {
     public class NetworkBoardManager : NetworkBehaviour, IBoardManager
     {
-        public event Action<BoardPosition> OnTileClicked;
-        
-        public event Action<IPlayer> OnWinnerDetected;
-        public event Action OnDrawDetected;
+        public event Action<BoardPosition> OnMoveRequested;
         
         private IBoardData _boardData;
         private IPieceProvider _pieceProvider;
@@ -52,28 +48,26 @@ namespace Runtime.BoardManager
         {
             _boardVisual.OnTileClicked -= HandleTileClicked;
         }
-
-        public async UniTask PlacePiece(IPlayer player, BoardPosition boardPosition, PieceType pieceType, Action piecePlaced)
+        
+        public async UniTask PlacePiece(IPlayer player, BoardPosition boardPosition, PieceType pieceType)
         {
             _board.PlacePiece(player, boardPosition);
             
             await _boardVisual.PlacePiece(_pieceProvider.GetPiece(player.SetIndex, pieceType), boardPosition);
-
-            if (_board.CheckForWinner(out IPlayer winner))
-            {
-                OnWinnerDetected?.Invoke(winner);
-                return;
-            }
-
-            if (_board.CheckForDraw())
-            {
-                OnDrawDetected?.Invoke();
-                return;
-            }
-            
-            piecePlaced?.Invoke();
         }
 
+        public void CheckBoard(out IPlayer winner, out bool draw)
+        {
+            _board.CheckForWinner(out winner); 
+            _board.CheckForDraw(out draw);
+        }
+
+        [Rpc(SendTo.ClientsAndHost)]
+        public void ClearBoardRpc()
+        {
+            ClearBoard().Forget();
+        }
+        
         public async UniTask ClearBoard()
         {
             _board.ClearBoard();
@@ -84,7 +78,7 @@ namespace Runtime.BoardManager
         {
             if (_board.ValidateInput(boardPosition))
             {
-                OnTileClicked?.Invoke(boardPosition);
+                OnMoveRequested?.Invoke(boardPosition);
             }
         }
     }

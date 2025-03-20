@@ -49,21 +49,22 @@ namespace Runtime.GameModes.ClassicMode.Board
             winner = null;
             return false;
         }
-        public override bool CheckForDraw()
+        
+        public override bool CheckForDraw(out bool draw)
         {
-            // Check if all cells are filled and there is no winner
             for (int x = 0; x < BoardSize.x; x++)
             {
                 for (int y = 0; y < BoardSize.y; y++)
                 {
                     if (board[x, y] == null)
                     {
-                        return false; // Empty cell found, not a draw
+                        draw = false; // Empty cell found, not a draw
+                        return false;
                     }
                 }
             }
 
-            // If no winner and all cells are filled, it's a draw
+            draw = true; // All cells are filled; it's a draw
             return true;
         }
     }

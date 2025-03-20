@@ -31,18 +31,14 @@ namespace Runtime.MatchManager
             _roundManager = new RoundManager(matchData);
             rounds = new Round[11];
 
-            _boardManager.OnTileClicked += BoardManager_TileClicked;
-            _boardManager.OnWinnerDetected += BoardManager_WinnerDetected;
-            _boardManager.OnDrawDetected += BoardManager_DrawDetected;
+            _boardManager.OnMoveRequested += BoardManager_TileClicked;
 
             await StartMatch();
         }
 
         private void OnDestroy()
         {
-            _boardManager.OnTileClicked -= BoardManager_TileClicked;
-            _boardManager.OnWinnerDetected -= BoardManager_WinnerDetected;
-            _boardManager.OnDrawDetected -= BoardManager_DrawDetected;
+            _boardManager.OnMoveRequested -= BoardManager_TileClicked;
         }
 
         public async UniTask StartMatch()
@@ -70,17 +66,16 @@ namespace Runtime.MatchManager
             if (!ValidateInput())
                 return;
             
-            await _boardManager.PlacePiece(_roundManager.Turn, boardPosition, PieceType.Cross, () => _roundManager.NextTurn());
-        }
-        
-        private void BoardManager_WinnerDetected(IPlayer winner)
-        {
-            NextRound(winner);
-        }
-        
-        private void BoardManager_DrawDetected()
-        {
-            NextRound(null);
+            await _boardManager.PlacePiece(_roundManager.Turn, boardPosition, _roundManager.TurnType);
+            
+            _boardManager.CheckBoard(out IPlayer winner, out bool draw);
+            if (winner != null || draw)
+            {
+                NextRound(winner);
+                return;
+            }   
+                
+            _roundManager.NextTurn();
         }
 
         private bool ValidateInput()

@@ -1,11 +1,11 @@
-﻿using Runtime.GamePlayer;
-using UnityEngine;
+﻿using Runtime.BoardManager.Local;
+using Runtime.GamePlayer;
 
 namespace Runtime.MatchManager
 {
     public class PlayerMove
     {
         public IPlayer player;
-        public Vector2Int move;
+        public BoardPosition move;
     }
 }

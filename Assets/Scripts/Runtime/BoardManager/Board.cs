@@ -34,7 +34,7 @@ namespace Runtime.BoardManager
         }
 
         public abstract bool CheckForWinner(out IPlayer winner);
-        public abstract bool CheckForDraw();
+        public abstract bool CheckForDraw(out bool draw);
         
         private void CreateBoard()
         {

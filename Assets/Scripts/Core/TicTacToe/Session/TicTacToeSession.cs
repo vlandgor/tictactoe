@@ -68,16 +68,12 @@ namespace Core.TicTacToe.Session
         {
             RoundFinished?.Invoke();
 
-            if (pieceType == PieceType.None)
-            {
-                TurnHandler.SwapStartingPlayers();
-                ProcessRoundStart();
-                return;
-            }
+            bool isDraw = pieceType == PieceType.None;
 
-            ScoreTracker.IncrementScore(pieceType);
+            if (!isDraw)
+                ScoreTracker.IncrementScore(pieceType);
 
-            if (ScoreTracker.TryGetWinner(out PieceType gameWinner))
+            if (!isDraw && ScoreTracker.TryGetWinner(out PieceType gameWinner))
             {
                 ProcessGameFinish(gameWinner);
                 return;
@@ -89,14 +85,17 @@ namespace Core.TicTacToe.Session
 
         private void ProcessMove(PieceType pieceType, BoardTile boardTile)
         {
-            if(!ValidateMove(boardTile, pieceType)) 
+            if (!ValidateMove(boardTile, pieceType)) 
                 return;
             
             _ticTacToeBoard.PlacePiece(pieceType, boardTile);
             
-            if (_ticTacToeBoard.TryGetWinnerOrDraw(out PieceType roundWinner))
+            if (_ticTacToeBoard.TryGetWinnerOrDraw(out WinnerInfo winnerInfo))
             {
-                ProcessRoundFinish(roundWinner);
+                if (winnerInfo.Winner != PieceType.None)
+                    _ticTacToeBoard.DrawWinningLine(winnerInfo);
+
+                ProcessRoundFinish(winnerInfo.Winner);
             }
             else
             {

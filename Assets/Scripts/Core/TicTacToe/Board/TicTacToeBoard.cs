@@ -25,12 +25,19 @@ namespace Core.TicTacToe.Board
             _boardVisualBase.PlacePiece(pieceType, boardTile);
         }
         
-        public bool TryGetWinnerOrDraw(out PieceType winner)
+        public bool TryGetWinnerOrDraw(out WinnerInfo winnerInfo)
         {
-            _boardBase.CheckForWinner(out winner);
+            if (_boardBase.CheckForWinner(out winnerInfo))
+                return true;
+
             _boardBase.CheckForDraw(out bool draw);
 
-            return winner != PieceType.None || draw;
+            return draw;
+        }
+        
+        public void DrawWinningLine(WinnerInfo winnerInfo)
+        {
+            _boardVisualBase.DrawWinningLine(winnerInfo);
         }
 
         public void ClearBoard()

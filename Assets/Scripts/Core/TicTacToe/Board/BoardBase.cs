@@ -7,7 +7,7 @@ namespace Core.TicTacToe.Board
     public class BoardBase
     {
         protected IBoardData boardData;
-        protected PieceType[,] board;
+        protected PieceType[,] _board;
         
         protected BoardSize BoardSize => boardData.BoardSize;
         
@@ -16,13 +16,13 @@ namespace Core.TicTacToe.Board
         public void CreateBoard(IBoardData boardData)
         {
             this.boardData = boardData;
-            board = new PieceType[BoardSize.width, BoardSize.height];
+            _board = new PieceType[BoardSize.width, BoardSize.height];
             
             for (int x = 0; x < BoardSize.width; x++)
             {
                 for (int y = 0; y < BoardSize.height; y++)
                 {
-                    board[x, y] = PieceType.None;
+                    _board[x, y] = PieceType.None;
                 }
             }
         }
@@ -33,14 +33,14 @@ namespace Core.TicTacToe.Board
             {
                 for (int y = 0; y < BoardSize.height; y++)
                 {
-                    board[x, y] = PieceType.None;
+                    _board[x, y] = PieceType.None;
                 }
             }
         }
 
         public bool IsTileAvailable(BoardPosition boardPosition)
         {
-            if (board[boardPosition.x, boardPosition.y] == PieceType.None)
+            if (_board[boardPosition.x, boardPosition.y] == PieceType.None)
                 return true;
 
             return false;
@@ -48,58 +48,60 @@ namespace Core.TicTacToe.Board
 
         public void PlacePiece(PieceType pieceType, BoardTile boardTile)
         {
-            board[boardTile.BoardPosition.x, boardTile.BoardPosition.y] = pieceType;
+            _board[boardTile.BoardPosition.x, boardTile.BoardPosition.y] = pieceType;
         }
 
-        public bool CheckForWinner(out PieceType winner)
+        public bool CheckForWinner(out WinnerInfo info)
         {
-            // Check rows
-            for (int y = 0; y < BoardSize.height; y++)
+            // Rows
+            for (int y = 0; y < 3; y++)
             {
-                for (int x = 0; x <= BoardSize.width - WinLength; x++)
+                if (_board[0, y] != PieceType.None &&
+                    _board[0, y] == _board[1, y] &&
+                    _board[1, y] == _board[2, y])
                 {
-                    if (CheckLine(x, y, 1, 0, out winner))
-                        return true;
+                    info = new WinnerInfo(_board[0, y], new BoardPosition(0, y), new BoardPosition(2, y));
+                    return true;
                 }
             }
 
-            // Check columns
-            for (int x = 0; x < BoardSize.width; x++)
+            // Columns
+            for (int x = 0; x < 3; x++)
             {
-                for (int y = 0; y <= BoardSize.height - WinLength; y++)
+                if (_board[x, 0] != PieceType.None &&
+                    _board[x, 0] == _board[x, 1] &&
+                    _board[x, 1] == _board[x, 2])
                 {
-                    if (CheckLine(x, y, 0, 1, out winner))
-                        return true;
+                    info = new WinnerInfo(_board[x, 0], new BoardPosition(x, 0), new BoardPosition(x, 2));
+                    return true;
                 }
             }
 
-            // Check diagonals (top-left to bottom-right)
-            for (int x = 0; x <= BoardSize.width - WinLength; x++)
+            // Diagonal 1
+            if (_board[0, 0] != PieceType.None &&
+                _board[0, 0] == _board[1, 1] &&
+                _board[1, 1] == _board[2, 2])
             {
-                for (int y = 0; y <= BoardSize.height - WinLength; y++)
-                {
-                    if (CheckLine(x, y, 1, 1, out winner))
-                        return true;
-                }
+                info = new WinnerInfo(_board[0, 0], new BoardPosition(0, 0), new BoardPosition(2, 2));
+                return true;
             }
 
-            // Check diagonals (bottom-left to top-right)
-            for (int x = 0; x <= BoardSize.width - WinLength; x++)
+            // Diagonal 2
+            if (_board[2, 0] != PieceType.None &&
+                _board[2, 0] == _board[1, 1] &&
+                _board[1, 1] == _board[0, 2])
             {
-                for (int y = WinLength - 1; y < BoardSize.height; y++)
-                {
-                    if (CheckLine(x, y, 1, -1, out winner))
-                        return true;
-                }
+                info = new WinnerInfo(_board[2, 0], new BoardPosition(2, 0), new BoardPosition(0, 2));
+                return true;
             }
 
-            winner = PieceType.None;
+            info = default;
             return false;
         }
         
         private bool CheckLine(int startX, int startY, int stepX, int stepY, out PieceType winner)
         {
-            PieceType first = board[startX, startY];
+            PieceType first = _board[startX, startY];
             if (first == PieceType.None)
             {
                 winner = PieceType.None;
@@ -111,7 +113,7 @@ namespace Core.TicTacToe.Board
                 int x = startX + i * stepX;
                 int y = startY + i * stepY;
 
-                if (board[x, y] != first)
+                if (_board[x, y] != first)
                 {
                     winner = PieceType.None;
                     return false;
@@ -128,7 +130,7 @@ namespace Core.TicTacToe.Board
             {
                 for (int y = 0; y < BoardSize.height; y++)
                 {
-                    if (board[x, y] == PieceType.None)
+                    if (_board[x, y] == PieceType.None)
                     {
                         draw = false;
                         return false;
@@ -138,6 +140,20 @@ namespace Core.TicTacToe.Board
 
             draw = true;
             return true;
+        }
+    }
+    
+    public struct WinnerInfo
+    {
+        public PieceType Winner;
+        public BoardPosition Start;
+        public BoardPosition End;
+
+        public WinnerInfo(PieceType winner, BoardPosition start, BoardPosition end)
+        {
+            Winner = winner;
+            Start = start;
+            End = end;
         }
     }
 }

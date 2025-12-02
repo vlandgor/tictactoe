@@ -6,7 +6,6 @@ namespace Core.TicTacToe.Board
 {
 public class BoardVisualBase : MonoBehaviour
     {
-        private const float BORDER_THICKNESS = 0.05f;
         private const float LINE_THICKNESS = 0.02f;
         
         [SerializeField] protected TilesFactory _tilesFactory;
@@ -60,6 +59,42 @@ public class BoardVisualBase : MonoBehaviour
             }
 
             pieces = new BoardPiece[_boardData.BoardSize.width, _boardData.BoardSize.height];
+
+            if (_winningLine != null)
+            {
+                Destroy(_winningLine);
+                _winningLine = null;
+            }
+        }
+        
+        public void DrawWinningLine(WinnerInfo info)
+        {
+            if (_winningLine != null)
+                Destroy(_winningLine);
+
+            Vector3 start = GetWorldPosition(info.Start);
+            Vector3 end = GetWorldPosition(info.End);
+            Vector3 dir = (end - start).normalized;
+            float halfCell = 0.25f;
+
+            start -= dir * halfCell;
+            end   += dir * halfCell;
+
+            _winningLine = Instantiate(_linePrefab, _linesParent);
+
+            Vector3 center = (start + end) * 0.5f;
+            _winningLine.transform.position = center;
+
+            float length = Vector3.Distance(start, end);
+
+            _winningLine.transform.localScale = new Vector3(
+                length,
+                LINE_THICKNESS,
+                1f
+            );
+
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            _winningLine.transform.rotation = Quaternion.Euler(0, 0, angle);
         }
 
         protected virtual void GenerateBoard()
@@ -99,36 +134,6 @@ public class BoardVisualBase : MonoBehaviour
                 line.transform.localScale = new Vector3(_boardData.BoardSize.width, LINE_THICKNESS, 1f);
                 line.transform.position = new Vector3(_offset.x + _boardData.BoardSize.width / 2f, _offset.y + y, 0f);
             }
-        }
-        
-        public void DrawWinningLine(WinnerInfo info)
-        {
-            if (_winningLine != null)
-                Destroy(_winningLine);
-
-            Vector3 start = GetWorldPosition(info.Start);
-            Vector3 end = GetWorldPosition(info.End);
-            Vector3 dir = (end - start).normalized;
-            float halfCell = 0.25f;
-
-            start -= dir * halfCell;
-            end   += dir * halfCell;
-
-            _winningLine = Instantiate(_linePrefab, _linesParent);
-
-            Vector3 center = (start + end) * 0.5f;
-            _winningLine.transform.position = center;
-
-            float length = Vector3.Distance(start, end);
-
-            _winningLine.transform.localScale = new Vector3(
-                length,
-                LINE_THICKNESS,
-                1f
-            );
-
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            _winningLine.transform.rotation = Quaternion.Euler(0, 0, angle);
         }
         
         protected BoardTile CreateTile(BoardPosition position)

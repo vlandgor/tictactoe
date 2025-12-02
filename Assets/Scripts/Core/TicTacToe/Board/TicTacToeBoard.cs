@@ -13,7 +13,6 @@ namespace Core.TicTacToe.Board
         public void Initialize(IBoardData boardData)
         {
             _boardBase = new BoardBase();
-            
             _boardBase.CreateBoard(boardData);
             
             _boardVisualBase.Initialize(boardData);

@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using Core.TicTacToe.Board;
 using Core.TicTacToe.Board.Pieces;
 using Core.TicTacToe.Board.Tiles;
@@ -15,9 +16,12 @@ namespace Core.TicTacToe.Session
         public event Action<PieceType> TurnChanged;
 
         [SerializeField] private TicTacToeBoard _ticTacToeBoard;
-        
+        [SerializeField] private float _winningLineDisplayTime = 1f;
+
         public TurnHandler TurnHandler { get; private set; }
         public ScoreTracker ScoreTracker { get; private set; }
+
+        private bool _inputLocked;
 
         public void Initialize()
         {
@@ -33,13 +37,15 @@ namespace Core.TicTacToe.Session
         }
 
         public void FinishGame()
-        {
-            
+        {   
         }
         
         public void RequestMove(PieceType pieceType, BoardTile boardTile)
         {
-            ProcessMove(pieceType, boardTile);
+            if (_inputLocked)
+                return;
+
+            ProcessMove(pieceType, boardTile).Forget();
         }
 
         private void ProcessGameStart()
@@ -55,14 +61,15 @@ namespace Core.TicTacToe.Session
         
         private void ProcessRoundStart()
         {
+            _inputLocked = false;
+
             RoundStarted?.Invoke();
-
             _ticTacToeBoard.ClearBoard();
-            
-            TurnHandler.SetActivePlayer(PieceType.Cross);
 
+            TurnHandler.SetActivePlayer(PieceType.Cross);
             TurnChanged?.Invoke(TurnHandler.ActivePlayer);
         }
+
         
         private void ProcessRoundFinish(PieceType pieceType)
         {
@@ -78,22 +85,31 @@ namespace Core.TicTacToe.Session
                 ProcessGameFinish(gameWinner);
                 return;
             }
-            
+
             TurnHandler.SwapStartingPlayers();
             ProcessRoundStart();
         }
 
-        private void ProcessMove(PieceType pieceType, BoardTile boardTile)
+        private async UniTaskVoid ProcessMove(PieceType pieceType, BoardTile boardTile)
         {
-            if (!ValidateMove(boardTile, pieceType)) 
+            if (!ValidateMove(boardTile, pieceType))
                 return;
-            
+
             _ticTacToeBoard.PlacePiece(pieceType, boardTile);
-            
+    
             if (_ticTacToeBoard.TryGetWinnerOrDraw(out WinnerInfo winnerInfo))
             {
-                if (winnerInfo.Winner != PieceType.None)
+                _inputLocked = true;
+
+                bool isWinner = winnerInfo.Winner != PieceType.None;
+
+                if (isWinner)
                     _ticTacToeBoard.DrawWinningLine(winnerInfo);
+
+                await UniTask.Delay(
+                    TimeSpan.FromSeconds(_winningLineDisplayTime),
+                    cancellationToken: this.GetCancellationTokenOnDestroy()
+                );
 
                 ProcessRoundFinish(winnerInfo.Winner);
             }
@@ -103,7 +119,7 @@ namespace Core.TicTacToe.Session
                 TurnChanged?.Invoke(TurnHandler.ActivePlayer);
             }
         }
-        
+
         private bool ValidateMove(BoardTile boardTile, PieceType pieceType)
         {
             return _ticTacToeBoard.IsTileAvailable(boardTile, pieceType);

@@ -1,7 +1,7 @@
 ﻿using Core.Utilities;
 using UnityEngine;
 
-namespace Core.Game.Board.Pieces
+namespace Core.TicTacToe.Board.Pieces
 {
     [CreateAssetMenu(fileName = "PiecesFactory", menuName = "Vlandgor/Factories/Pieces Factory", order = 0)]
     public class PiecesFactory : GenericFactory

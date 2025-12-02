@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Core.Game.Board.Pieces
+namespace Core.TicTacToe.Board.Pieces
 {
     public class BoardPiece : MonoBehaviour
     {

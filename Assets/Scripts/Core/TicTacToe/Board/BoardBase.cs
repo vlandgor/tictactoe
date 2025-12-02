@@ -1,26 +1,26 @@
-﻿using Core.Game.Board.Pieces;
-using Core.Game.Board.Tiles;
+﻿using Core.TicTacToe.Board.Pieces;
+using Core.TicTacToe.Board.Tiles;
 using UnityEngine;
 
-namespace Core.Game.Board
+namespace Core.TicTacToe.Board
 {
     public class BoardBase
     {
         protected IBoardData boardData;
         protected PieceType[,] board;
         
-        protected Vector2Int BoardSize => boardData.Size;
+        protected BoardSize BoardSize => boardData.BoardSize;
         
-        private int WinLength => Mathf.Min(BoardSize.x, BoardSize.y);
+        private int WinLength => Mathf.Min(BoardSize.width, BoardSize.height);
 
         public void CreateBoard(IBoardData boardData)
         {
             this.boardData = boardData;
-            board = new PieceType[BoardSize.x, BoardSize.y];
+            board = new PieceType[BoardSize.width, BoardSize.height];
             
-            for (int x = 0; x < BoardSize.x; x++)
+            for (int x = 0; x < BoardSize.width; x++)
             {
-                for (int y = 0; y < BoardSize.y; y++)
+                for (int y = 0; y < BoardSize.height; y++)
                 {
                     board[x, y] = PieceType.None;
                 }
@@ -29,9 +29,9 @@ namespace Core.Game.Board
         
         public void ClearBoard()
         {
-            for (int x = 0; x < BoardSize.x; x++)
+            for (int x = 0; x < BoardSize.width; x++)
             {
-                for (int y = 0; y < BoardSize.y; y++)
+                for (int y = 0; y < BoardSize.height; y++)
                 {
                     board[x, y] = PieceType.None;
                 }
@@ -54,9 +54,9 @@ namespace Core.Game.Board
         public bool CheckForWinner(out PieceType winner)
         {
             // Check rows
-            for (int y = 0; y < BoardSize.y; y++)
+            for (int y = 0; y < BoardSize.height; y++)
             {
-                for (int x = 0; x <= BoardSize.x - WinLength; x++)
+                for (int x = 0; x <= BoardSize.width - WinLength; x++)
                 {
                     if (CheckLine(x, y, 1, 0, out winner))
                         return true;
@@ -64,9 +64,9 @@ namespace Core.Game.Board
             }
 
             // Check columns
-            for (int x = 0; x < BoardSize.x; x++)
+            for (int x = 0; x < BoardSize.width; x++)
             {
-                for (int y = 0; y <= BoardSize.y - WinLength; y++)
+                for (int y = 0; y <= BoardSize.height - WinLength; y++)
                 {
                     if (CheckLine(x, y, 0, 1, out winner))
                         return true;
@@ -74,9 +74,9 @@ namespace Core.Game.Board
             }
 
             // Check diagonals (top-left to bottom-right)
-            for (int x = 0; x <= BoardSize.x - WinLength; x++)
+            for (int x = 0; x <= BoardSize.width - WinLength; x++)
             {
-                for (int y = 0; y <= BoardSize.y - WinLength; y++)
+                for (int y = 0; y <= BoardSize.height - WinLength; y++)
                 {
                     if (CheckLine(x, y, 1, 1, out winner))
                         return true;
@@ -84,9 +84,9 @@ namespace Core.Game.Board
             }
 
             // Check diagonals (bottom-left to top-right)
-            for (int x = 0; x <= BoardSize.x - WinLength; x++)
+            for (int x = 0; x <= BoardSize.width - WinLength; x++)
             {
-                for (int y = WinLength - 1; y < BoardSize.y; y++)
+                for (int y = WinLength - 1; y < BoardSize.height; y++)
                 {
                     if (CheckLine(x, y, 1, -1, out winner))
                         return true;
@@ -124,9 +124,9 @@ namespace Core.Game.Board
 
         public bool CheckForDraw(out bool draw)
         {
-            for (int x = 0; x < BoardSize.x; x++)
+            for (int x = 0; x < BoardSize.width; x++)
             {
-                for (int y = 0; y < BoardSize.y; y++)
+                for (int y = 0; y < BoardSize.height; y++)
                 {
                     if (board[x, y] == PieceType.None)
                     {

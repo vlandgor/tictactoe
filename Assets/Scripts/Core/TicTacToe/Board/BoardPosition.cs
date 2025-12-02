@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Core.Game.Board
+namespace Core.TicTacToe.Board
 {
     [Serializable]
     public struct BoardPosition : IEquatable<BoardPosition>

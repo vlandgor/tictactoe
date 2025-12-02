@@ -1,8 +1,8 @@
-﻿using Core.Game.Board.Pieces;
-using Core.Game.Board.Tiles;
+﻿using Core.TicTacToe.Board.Pieces;
+using Core.TicTacToe.Board.Tiles;
 using UnityEngine;
 
-namespace Core.Game.Board
+namespace Core.TicTacToe.Board
 {
 public class BoardVisualBase : MonoBehaviour
     {
@@ -29,10 +29,10 @@ public class BoardVisualBase : MonoBehaviour
         public virtual void Initialize(IBoardData boardData)
         {
             _boardData = boardData;
-            _offset = new Vector2(-_boardData.Size.x / 2f, -_boardData.Size.y / 2f);
+            _offset = new Vector2(-_boardData.BoardSize.width / 2f, -_boardData.BoardSize.height / 2f);
 
-            tiles = new BoardTile[boardData.Size.x, boardData.Size.y];
-            pieces = new BoardPiece[boardData.Size.x, boardData.Size.y];
+            tiles = new BoardTile[boardData.BoardSize.width, boardData.BoardSize.height];
+            pieces = new BoardPiece[boardData.BoardSize.width, boardData.BoardSize.height];
 
             GenerateBoard();
         }
@@ -58,7 +58,7 @@ public class BoardVisualBase : MonoBehaviour
                 }
             }
 
-            pieces = new BoardPiece[_boardData.Size.x, _boardData.Size.y];
+            pieces = new BoardPiece[_boardData.BoardSize.width, _boardData.BoardSize.height];
         }
 
         protected virtual void GenerateBoard()
@@ -69,9 +69,9 @@ public class BoardVisualBase : MonoBehaviour
         
         protected virtual void GenerateTiles()
         {
-            for (int x = 0; x < _boardData.Size.x; x++)
+            for (int x = 0; x < _boardData.BoardSize.width; x++)
             {
-                for (int y = 0; y < _boardData.Size.y; y++)
+                for (int y = 0; y < _boardData.BoardSize.height; y++)
                 {
                     BoardTile tile = tiles[x, y] = CreateTile(new BoardPosition(x, y));
                     tile.transform.SetParent(_tilesParent);
@@ -84,19 +84,19 @@ public class BoardVisualBase : MonoBehaviour
         protected virtual void GenerateLines()
         {
             // Vertical Lines
-            for (int x = 1; x < _boardData.Size.x; x++)
+            for (int x = 1; x < _boardData.BoardSize.width; x++)
             {
                 GameObject line = Instantiate(_linePrefab, _linesParent);
-                line.transform.localScale = new Vector3(LINE_THICKNESS, _boardData.Size.y, 1f);
-                line.transform.position = new Vector3(_offset.x + x, _offset.y + _boardData.Size.y / 2f, 0f);
+                line.transform.localScale = new Vector3(LINE_THICKNESS, _boardData.BoardSize.height, 1f);
+                line.transform.position = new Vector3(_offset.x + x, _offset.y + _boardData.BoardSize.height / 2f, 0f);
             }
 
             // Horizontal Lines
-            for (int y = 1; y < _boardData.Size.y; y++)
+            for (int y = 1; y < _boardData.BoardSize.height; y++)
             {
                 GameObject line = Instantiate(_linePrefab, _linesParent);
-                line.transform.localScale = new Vector3(_boardData.Size.x, LINE_THICKNESS, 1f);
-                line.transform.position = new Vector3(_offset.x + _boardData.Size.x / 2f, _offset.y + y, 0f);
+                line.transform.localScale = new Vector3(_boardData.BoardSize.width, LINE_THICKNESS, 1f);
+                line.transform.position = new Vector3(_offset.x + _boardData.BoardSize.width / 2f, _offset.y + y, 0f);
             }
         }
         

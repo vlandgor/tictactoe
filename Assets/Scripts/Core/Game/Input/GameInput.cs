@@ -1,6 +1,6 @@
 ﻿using System;
-using Core.Game.Board.Tiles;
 using Core.Game.Camera;
+using Core.TicTacToe.Board.Tiles;
 using UnityEngine;
 
 namespace Core.Game.Input
@@ -26,7 +26,6 @@ namespace Core.Game.Input
                     if (clickedTile != null)
                     {
                         TileClicked?.Invoke(clickedTile); 
-                        Debug.Log($"BoardTile: {clickedTile.BoardPosition}");
                     }
                 }
             }

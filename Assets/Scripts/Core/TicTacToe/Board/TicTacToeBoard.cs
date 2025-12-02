@@ -1,21 +1,14 @@
-﻿using System;
-using Core.Game.Board.Pieces;
-using Core.Game.Board.Tiles;
+﻿using Core.TicTacToe.Board.Pieces;
+using Core.TicTacToe.Board.Tiles;
 using UnityEngine;
 
-namespace Core.Game.Board
+namespace Core.TicTacToe.Board
 {
-    public class GameBoard : MonoBehaviour
+    public class TicTacToeBoard : MonoBehaviour
     {
         [SerializeField] private BoardVisualBase _boardVisualBase;
         
         private BoardBase _boardBase;
-
-        private void Start()
-        {
-            IBoardData boardData = new BoardData(new Vector2Int(3, 3));
-            Initialize(boardData);
-        }
 
         public void Initialize(IBoardData boardData)
         {

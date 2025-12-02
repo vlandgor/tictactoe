@@ -1,4 +1,4 @@
-﻿using Core.Game.Board;
+﻿using Core.TicTacToe.Board;
 using UnityEngine;
 
 namespace Core.Game.Camera
@@ -11,7 +11,7 @@ namespace Core.Game.Camera
         
         public void Initialize(IBoardData boardData)
         {
-            _camera.orthographicSize = boardData.Size.x + 0.5f;
+            _camera.orthographicSize = boardData.BoardSize.width + 0.5f;
         }
     }
 }
